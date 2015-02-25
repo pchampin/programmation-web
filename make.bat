@@ -268,4 +268,29 @@ if "%1" == "slides" (
 	goto end
 )
 
+if "%1" == "publishable" (
+	
+	echo.------ Building HTML ------
+	echo.
+	%SPHINXBUILD% -b html %ALLSPHINXOPTS% %BUILDDIR%/html
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Finished: The HTML pages are in %BUILDDIR%/html.
+	echo.
+    echo.------ HTML Build finished ------
+	echo.
+	
+	echo.------ Building SLIDES ------
+	echo.
+	%SPHINXBUILD% -b slides %ALLSPHINXOPTS% %BUILDDIR%/html/slides
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Finished : the HTML slides are in %BUILDDIR%/html/slides.
+	echo.
+    echo.------ SLIDES Build finished ------
+	goto end
+)
+
+echo.ERROR: Build unsucessful; parameter "%1" is unknown.
+
 :end
