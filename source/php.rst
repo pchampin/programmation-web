@@ -535,6 +535,10 @@ Exemple :
   
 Voir le `résultat`__.
   
+.. tip::
+
+   La bouche ``do-while`` existe aussi. Pratique pour s'assurer qu'on rentre au moins une fois dans la boucle.
+  
 __ _static/php/test.php#while
 
 La boucle ``for``
@@ -615,11 +619,129 @@ Voir le `résultat`__.
   
 __ _static/php/test.php#foreach2
   
+Les opérateurs
+++++++++++++++
+
+L'utilisation de variables implique la présence d'opérateurs pour pouvoir les manipuler.
+
+PHP comprent une multitude d'opérateurs pour manipuler les variables numériques, booléennes, ou les chaînes de caractères.
+
+Opérateurs arithmétiques
+------------------------
+
+PHP reconnait tous les `opérateurs arithmétiques`__ classiques :
+
+=========== =============== =======================================================================
+Exemple	    Nom	            Résultat
+=========== =============== =======================================================================
+-$a	        Négation	    Opposé de $a.
+$a + $b	    Addition	    Somme de $a et $b.
+$a - $b	    Soustraction    Différence de $a et $b.
+$a \* $b    Multiplication  Produit de $a et $b.
+$a / $b	    Division	    Quotient de $a et $b.
+$a % $b	    Modulo	        Reste de $a divisé par $b.
+$a \*\* $b  Exponentielle   Résultat de l'élévation de $a à la puissance $b. Introduit en PHP 5.6.
+=========== =============== =======================================================================
+  
+__ http://php.net/manual/fr/language.operators.arithmetic.php
+  
+Opérateurs d'affectation
+------------------------
+
+Il est possible de modifier une variable lors de son affectation :
+
+=============== =============== =======================================  
+Exemple	        Nom	            Résultat
+=============== =============== =======================================  
+$a=3	        Affectation	    $a vaut 3.
+$a += 3	        Addition        $a vaut $a + 3.
+$a -= 3	        Soustraction    $a vaut $a - 3.
+$a \*= 3         Multiplication  $a vaut $a \* 3.
+$a /= 3	        Division        $a vaut $a /3.
+$a %= 3	        Modulo          $a vaut $a % 3.
+$a++ 	        Incrémentation  $a vaut $a + 1. Equivalent à $a += 1.
+$a--	        Décrémentation  $a vaut $a - 1. Equivalent à $a -= 1.
+$b .= "chaine"  Concaténation   $b vaut $b."chaine".
+=============== =============== =======================================  
+
+Opérateurs de comparaison
+-------------------------
+
+Les `comparaisons`__ de variables sont facilités par des opérateurs spécifiques :
+
+============== ================== =======================================================
+Exemple	       Nom	              Résultat
+============== ================== =======================================================
+$a == $b       Egal               TRUE si $a est égal à $b
+$a === $b      Identique          TRUE si $a == $b et qu'ils sont de même type.
+$a != $b       Différent          TRUE si $a est différent de $b
+$a <> $b       Différent          TRUE si $a est différent de $b
+$a !== $b      Différent          TRUE si $a != $b ou types différents.
+$a < $b        Plus petit que     TRUE si $a est strictement plus petit que $b.
+$a > $b        Plus grand         TRUE si $a est strictement plus grand que $b.
+$a <= $b       Inférieur ou égal  TRUE si $a est plus petit ou égal à $b.
+$a >= $b       Supérieur ou égal  TRUE si $a est plus grand ou égal à $b.
+============== ================== =======================================================
+  
+__ http://php.net/manual/fr/language.operators.comparison.php
+  
 Les fonctions
 =============
 
+Définir une fonction
+++++++++++++++++++++
 
+La syntaxe PHP impose l'utilisation du mot-clé ``function`` :
 
+.. code-block:: php
+
+  <?php
+   function MaFonction ($parametre1, $parametre2) {
+	//corps de la fonction
+	return $valeurRetournee
+   }
+  ?>
+	
+.. note:: 
+  
+  Les fonctions peuvent ne rien retourner (pas d'instruction ``return``). Par défaut, c'est la valeur ``NULL`` est retournée.
+
+  
+Appeler une fonction
+++++++++++++++++++++
+
+.. code-block:: php
+
+  <?php
+   MaFonction('1234', 5678);
+  ?>
+
+.. note:: 
+  
+  Comme le langage PHP n'est pas typé, il est possible d'injecter des types de variables incompatibles dans les fonctions. Il faut donc penser à cette éventualité lors de l'écriture de vos fonctions.
+  
+.. tip::
+
+   Une bonne pratique consiste à définir vos fonctions dans des fichiers séparés, puis de les inclure dans vos page grâce à la fonction ``require_once``.
+
+   
+Les fonctions de PHP
+++++++++++++++++++++
+
+PHP propose une multitude de fonctions "toutes prêtes", qui permettent entre autre :
+
+* de manipuler les chaînes de caractères,
+* de déplacer/envoyer des fichiers,
+* de manipuler des images,
+* d'envoyer des e-mail,
+* de crypter les mots de passe,
+* de manipuler les dates, 
+* ...
+
+Le site web de PHP référence `toutes les fonctions`__ par catégorie.
+
+__ http://fr.php.net/manual/fr/funcref.php
+   
 
 
 
