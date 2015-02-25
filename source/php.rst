@@ -159,7 +159,7 @@ Exercice
 
 #. Comparez votre fichier avec la source reçue au niveau du client.
 
-__ _static/php/html5_minimal.php
+__ _static/php/html5_minimal.html
 
 
 Intégrer des fichiers externes
