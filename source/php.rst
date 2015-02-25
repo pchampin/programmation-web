@@ -206,11 +206,13 @@ Exemple
 
   .. container::
   
-    Résultat HTML :
+    `Résultat`__ HTML :
   
     .. code-block:: html
     
 	  Vous avez 21 ans !
+ 
+__ _static/php/test.php#affvariable
   
 Les chaînes de caractères
 +++++++++++++++++++++++++
@@ -242,8 +244,8 @@ La syntaxe est différente suivant les délimiteurs utilisés :
    $mot1="phrase";
    $mot2=8;
    echo("Voici une $mot1 composée de $mot2 mots.\n");
-   echo('Voici une $mot1 composée de $mot2 mots.\n');
-   echo('Voici une '.$mot1.' composée de '.$mot2.' mots.\n');
+   echo('Voici une $mot1 composée de $mot2 mots.'."\n");
+   echo('Voici une '.$mot1.' composée de '.$mot2.' mots.');
   ?>
   
 .. note::
@@ -259,11 +261,152 @@ Résultat
   Voici une $mot1 composée de $mot2 mots.
   Voici une phrase composée de 8 mots.
   
+Voir le `résultat généré`__.
+  
+__ _static/php/test.php#concatenation
   
 Les tableaux
-+++++++++++++++++++++++++
++++++++++++++
+
+Les tableaux sont un type spécial de variable capable de stocker plus d'une valeur.
+
+Il existe deux types de tableaux en PHP : 
+
+* Les tableaux **numérotés** (tableaux simples)
+* Les tableaux **associatifs** (tableaux clé-valeur)
+
+Les tableaux numérotés
+----------------------
+
+Ils contiennent des éléments accessibles via leur indice. Les indices démarrent à 0 en PHP. 
+
+Par exemple, votre tableau pourrait contenir : 
+
+======= ==========================
+Clé     Valeur
+======= ==========================
+  0     François
+  1     Michel
+  2     Nicole
+  3     Véronique
+  4     Benoît
+  ...   ...
+======= ==========================
+
+Affectation
+```````````
+
+* Avec la fonction ``array`` :
+
+.. code-block:: php
+
+  <?php
+   $prenoms = array ('François', 'Michel', 
+   'Nicole', 'Véronique', 'Benoît');
+  ?>
+
+* Depuis les indices :
+
+.. code-block:: php
+
+  <?php
+   $prenoms[0] = 'François';
+   $prenoms[1] = 'Michel';
+   $prenoms[2] = 'Nicole';
+   ...
+  ?>
+
+Affectation implicite
+`````````````````````
+
+* Avec des indices implicite :
+
+.. code-block:: php
+
+  <?php
+   $prenoms[] = 'François';
+   $prenoms[] = 'Michel';
+   $prenoms[] = 'Nicole';
+   ...
+  ?>
+
+Ce code est équivalent au précédent, mais sera moins lisible pour l'accès futur aux éléments du tableau.
+
+Accès aux éléments
+``````````````````
+.. code-block:: php
+
+  <?php
+   $prenoms[0] = 'François';
+   $prenoms[1] = 'Michel';
+
+   echo($prenom[1]."\n");
+   echo($prenom[0]."\n");
+  ?>
+
+
+Voir le `résultat`__.
   
-  TODO
+__ _static/php/test.php#accestableau
+  
+
+Les tableaux associatifs
+------------------------
+
+Ils permettent une représentation plus complexe et détaillée.
+
+Par exemple, votre tableau pourrait contenir : 
+
+========== ==========================
+Clé        Valeur
+========== ==========================
+  prenom   François
+  nom      Dupont
+  adresse  3 rue du Paradis
+  ville    Marseille
+========== ==========================
+
+Cette fois, les notion de "clé" et de "valeur" prennent tout leur sens.
+  
+  
+Affectation
+```````````
+
+* Avec la fonction ``array`` :
+
+.. code-block:: php
+
+  <?php
+   $patronyme = array (
+    'prenom' => 'François',
+    'nom' => 'Dupont');
+  ?>
+
+* En définissant les indices :
+
+.. code-block:: php
+
+  <?php
+   $patronyme['prenom'] = 'François';
+   $patronyme['nom'] = 'Dupont';
+  ?>
+
+Accès aux éléments
+``````````````````
+.. code-block:: php
+
+  <?php
+   $coordonnees['prenom'] = 'François';
+   $coordonnees['nom'] = 'Dupont';
+   $coordonnees['adresse'] = '3 Rue du Paradis';
+   $coordonnees['ville'] = 'Marseille';
+   echo $coordonnees['ville'];
+  ?>
+
+
+Voir le `résultat`__.
+  
+__ _static/php/test.php#accestableauassoc
   
 Les structures de contrôle
 ==========================
@@ -299,19 +442,20 @@ Exemple
   <?php 
   $longeur_mdp = 6;
   if ($longeur_mdp >= 8) { // SI
-    $save_mdp = true;
+   $save_mdp = true;
   } elseif ($longeur_mdp >= 6){ //SINON SI
-    $save_mdp = true;
-	echo "Ce mot de passe n'est pas très sûr !";
+   $save_mdp = true;
+   echo "Ce mot de passe n'est pas très sûr !\n";
   } else { // SINON
-    echo "Ce mot de passe est trop court !";
-    $save_mdp = false;
+   echo "Ce mot de passe est trop court !\n";
+   $save_mdp = false;
   }
-  if($save_mdp){
-   echo "Mot de passe sauvegardé !";
-  }
+  if($save_mdp){ echo "Mot de passe sauvegardé !"; }
   ?>
 
+Voir le `résultat`__.
+  
+__ _static/php/test.php#mdp
 
 Exemple 2
 ---------
@@ -319,7 +463,7 @@ Exemple 2
 .. code-block:: php
   :linenos:
   
-  <?php 
+  <?php couleur
   $couleur = "rouge";
   switch ($longeur_mdp) {
 	case "bleu"  : $r=0;   $g=0;   $b=255; break;
@@ -330,6 +474,10 @@ Exemple 2
   echo "Valeurs RGB pour $couleur : ($r,$g,$b).";
   ?>
 
+Voir le `résultat`__.
+  
+__ _static/php/test.php#switch
+  
 Les conditions multiples
 ++++++++++++++++++++++++
 
@@ -353,8 +501,6 @@ Exemple :
    }
   ?>
   
-
-
 
   
 Les boucles et opérateurs
@@ -381,12 +527,15 @@ Exemple :
   <?php
    $nombre_de_lignes = 1;
 
-   while ($nombre_de_lignes <= 100)
-   {
-    echo 'Ceci est la ligne n°' . $nombre_de_lignes . '\n';
+   while ($nombre_de_lignes <= 10) {
+    echo 'Ceci est la ligne n°' . $nombre_de_lignes . "\n";
     $nombre_de_lignes++;
    }
   ?>
+  
+Voir le `résultat`__.
+  
+__ _static/php/test.php#while
 
 La boucle ``for``
 -------------------
@@ -398,14 +547,18 @@ Exemple :
 .. code-block:: php
 
   <?php
-   for ($nb_lignes = 1; $nb_lignes <= 100; $nb_lignes++)
+   for ($nb_lignes = 1; $nb_lignes <= 10; $nb_lignes++)
    {
-     echo 'Ceci est la ligne n°' . $nb_lignes . '\n';
+     echo 'Ceci est la ligne n°' . $nb_lignes . "\n";
    }
   ?>
 
+Voir le `résultat`__.
+  
+__ _static/php/test.php#for
+  
 La boucle ``foreach``
--------------------
+---------------------
 
 Elle permet de simplifier le parcours des tableaux, en permetant une écriture plus lisible et surtout plus générique que :
 
@@ -415,10 +568,14 @@ Elle permet de simplifier le parcours des tableaux, en permetant une écriture p
    $prenoms = array ('François', 'Michel',
    'Nicole', 'Véronique', 'Benoît');
    for ($numero = 0; $numero < 5; $numero++)
-    echo $prenoms[$numero] . '\n';
+    echo $prenoms[$numero] . "\n";
    }
   ?>
 
+Voir le `résultat`__.
+  
+__ _static/php/test.php#pacrourstableau
+  
 Pour les tableaux simples
 `````````````````````````
 
@@ -428,10 +585,14 @@ Pour les tableaux simples
    $prenoms = array ('François', 'Michel',
    'Nicole', 'Véronique', 'Benoît');
    foreach($prenoms as $element) {
-    echo $element . '\n';
+    echo $element . "\n";
    }
   ?>
 
+Voir le `résultat`__.
+  
+__ _static/php/test.php#foreach
+  
 Pour les tableaux clé-valeur
 ````````````````````````````
   
@@ -446,13 +607,18 @@ Pour les tableaux clé-valeur
 
    foreach($coordonnees as $champ => $element)
    {
-    echo $champ . ' : ' .$element . '\n';
+    echo $champ . ' : ' .$element . "\n";
    }
   ?>
 
+Voir le `résultat`__.
+  
+__ _static/php/test.php#foreach2
+  
+Les fonctions
+=============
 
-Les opérateurs
-++++++++++++++
+
 
 
 
