@@ -10,6 +10,11 @@ body{
   margin: 1em auto;
 }
 
+.exercice > h1{
+	margin: 1em auto;
+	font-size:14pt;
+	font-family:Lucida Console, Times New Roman, Serif;
+}
 
 /* Source code, highlighted thanks to Prettyfy */
 

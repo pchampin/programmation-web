@@ -4,9 +4,9 @@
 		$save_mdp = true;
 	} elseif ($longeur_mdp >= 6){ //SINON SI
 		$save_mdp = true;
-		echo "Ce mot de passe n'est pas très sûr !";
+		echo "Ce mot de passe n'est pas très sûr !\n";
 	} else { // SINON
-		echo "Ce mot de passe est trop court !";
+		echo "Ce mot de passe est trop court !\n";
 		$save_mdp = false;
 	}
 	if($save_mdp){ echo "Mot de passe sauvegardé !"; }
