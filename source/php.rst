@@ -191,7 +191,7 @@ En PHP, il est possible d'utiliser la mémoire du serveur afin d'y stocker des i
    - chaîne de caractères (entre ``"``) ;
    - tableau ;
    - ou même un objet (programmation orientée objet).  
-
+   
 Exemple
 -------
 
@@ -403,10 +403,30 @@ Accès aux éléments
    echo $coordonnees['ville'];
   ?>
 
-
 Voir le `résultat`__.
   
 __ _static/php/test.php#accestableauassoc
+  
+  
+Conversion de type
+++++++++++++++++++
+
+Le "cast" existe en PHP : il est possible de convertir une variable d'un type à un autre type.
+Il suffit de préciser le type après conversion entre parenthèses.
+  
+Par exemple : 
+
+.. code-block:: php
+
+  <?php
+   $a = '5';
+   $b = ((int) $a) + 2;
+   echo $b;
+  ?>  
+  
+Voir le `résultat`__.
+  
+__ _static/php/test.php#cast
   
 Les structures de contrôle
 ==========================
@@ -500,7 +520,6 @@ Exemple :
 	...
    }
   ?>
-  
 
   
 Les boucles et opérateurs

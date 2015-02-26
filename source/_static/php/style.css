@@ -4,10 +4,74 @@ body{
 	margin:   auto;
 }
 
+/* Navigation */
+
+nav {
+	margin: 1em auto;
+	font-size:12pt;
+	font-family:Lucida Console, Times New Roman, Serif;
+}
+
+nav >h1 {
+	font-size:14pt;
+}
+
+nav > ul > li > a {
+	text-decoration:none;
+	color:black;
+	display: block;
+	padding:1em;
+}
+
+nav > ul > li:hover > a{
+	color: #428BCA;
+}
+
+nav > ul > li {
+	
+}
+
+nav > ul {
+	padding:1em;
+	list-style-type:none;
+}
+
 /* Exercice */
 
-.exercice{
+section {
   margin: 1em auto;
+}
+
+/* Hide not targeted sections */
+
+section:not(:target) {
+	display:none;
+}
+
+section:target ~ #navigation {
+	display:none;
+}
+
+#retour {
+	display:none;
+	margin: 1em auto;
+	font-size:12pt;
+	font-family:Lucida Console, Times New Roman, Serif;
+}
+
+section:target  ~ #retour {
+	display:block;
+}
+
+#retour > a{
+	display:inherit;
+	margin: 1em auto;
+	text-decoration:none;
+	color:black;
+}
+
+#retour:hover > a{
+	color:#428BCA;
 }
 
 .exercice > h1{
