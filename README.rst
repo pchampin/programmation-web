@@ -2,29 +2,29 @@ Programmation Web
 =================
 
 Cours de programmation pour le Web dynamique
-enseigné par `Maxime Guériau`_
-au département informatique de l'`IUT de Lyon 1`_.
+enseignÃ© par `Maxime GuÃ©riau`_
+au dÃ©partement informatique de l'`IUT de Lyon 1`_.
 
-Il est publié à http://liris.cnrs.fr/~mgueriau/enseignement/iut_lyon1/programmation_web/ .
+Il est publiÃ© Ã  http://liris.cnrs.fr/~mgueriau/enseignement/iut_lyon1/programmation-web/ .
 
-.. _Maxime Guériau: http://liris.cnrs.fr/~mgueriau
+.. _Maxime GuÃ©riau: http://liris.cnrs.fr/~mgueriau
 .. _IUT de Lyon 1: http://iut.univ-lyon1.fr/
 
 Contribuer
 ++++++++++
 
-Toute contribution à ce cours est la bienvenue.
+Toute contribution Ã  ce cours est la bienvenue.
 
-Pour installer localement les sources et générer les fichiers HTML,
+Pour installer localement les sources et gÃ©nÃ©rer les fichiers HTML,
 vous avez besoin de Sphinx_ et Hieroglyph_ .
-Après avoir cloné ce dépôt,
-vous devez exécuter une fois les commandes suivantes
-afin de récupérer le thème utilisé ::
+AprÃ¨s avoir clonÃ© ce dÃ©pÃ´t,
+vous devez exÃ©cuter une fois les commandes suivantes
+afin de rÃ©cupÃ©rer le thÃ¨me utilisÃ©Â ::
 
   git submodule init
   git submodule update
 
-puis, pour générer les documents ::
+puis, pour gÃ©nÃ©rer les documentsÂ ::
 
   make publishable
 
