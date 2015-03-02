@@ -4,9 +4,10 @@
     <meta charset="utf-8"/>
     <title>Résultat des scripts PHP</title>
 	<script src="run_prettify.js"></script>
+	<script src="section_selector.js"></script>
 	<link rel="stylesheet" type="text/css" href="style.css" />
   </head>
-  <body>
+  <body onload="displaySelectedSection();"> 
 	<section id="affvariable" class="exercice">
 		<h1>Affichage d'une variable</h1>
 		<pre class="prettyprint linenums lang-html"><?php echo(htmlentities(file_get_contents('./resultats/resultat-affvariable.php'))); ?></pre>
@@ -67,7 +68,7 @@
 		<pre class="prettyprint linenums lang-html"><?php echo(htmlentities(file_get_contents('./resultats/resultat-foreach2.php'))); ?></pre>
 		<div class="result"><?php include('./resultats/resultat-foreach2.php'); ?></div>
 	</section>
-	<nav id="navigation">
+	<!-- <nav id="navigation">
 		<h1>Exemples de scripts PHP et leurs résultats :</h1>
 		<ul>
 			<li><a href="#affvariable">Affichage d'une variable</a></li>
@@ -81,7 +82,7 @@
 			<li><a href="#foreach">La boucle foreach pour les tableaux simples</a></li>
 			<li><a href="#foreach2">La boucle foreach pour les tableaux clé-valeur</a></li>
 		</ul>
-	</nav>
+	</nav> -->
 	<div id="retour">
 		<a href="#" onClick="history.go(-1);return true;">Retour</div>
 	</div>

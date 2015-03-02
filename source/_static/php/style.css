@@ -44,13 +44,13 @@ section {
 
 /* Hide not targeted sections */
 
-section:not(:target) {
+/*section:not(:target) {
 	display:none;
 }
 
 section:target ~ #navigation {
 	display:none;
-}
+}*/
 
 #retour {
 	display:none;
