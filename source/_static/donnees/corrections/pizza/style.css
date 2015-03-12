@@ -1,0 +1,60 @@
+body{
+	max-width:750px;
+	min-width:500px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+h1 {
+	text-align:center;
+}
+
+label {
+	display: inline-block;
+	width: 24%;
+}
+
+div{
+	margin-top:1em;
+}
+
+input {
+	width: 73%;
+}
+
+textarea {
+	width: 73%;
+	height: 3.5em;
+	vertical-align: top;
+}
+
+button {
+	margin-left: 45%;
+	margin-right: auto;
+}
+
+div table{
+	width: 73%;
+	display:inline-block;
+	vertical-align:top;
+}
+
+div table td{
+	border:1px solid black;
+	padding:0.1em;
+	height:3.5em;
+}
+
+table tr td input{
+	text-align:right;
+	display:block;
+	width:100%;
+	height:100%;
+	padding:0px;
+	margin:0;
+}
+
+table tr td.qte{
+	border:none;
+	width:5%;
+}
