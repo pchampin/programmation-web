@@ -161,18 +161,7 @@ Exercice
 
 __ _static/php/html5_minimal.html
 
-
-Intégrer des fichiers externes
-++++++++++++++++++++++++++++++
-
-* PHP a été pensé pour la conception d'applications Web
-* PHP permet de définir des "briques de base" réutilisables
-* Il existe plusieurs fonctions d'intégration :
- 
-  - ``include("page.php");`` qui permet d'intégrer le contenu de "page.php". Un message warning s'affiche si la ressource est manquante.
-  - ``require("page.php");`` qui fait la même chose mais une erreur fatale est retournée si la ressource est manquante (arrêt du script).
-  - ``include_once("page.php");`` et ``require_once("page.php");`` intègrent en plus un test pour empêcher une intégration multiple.
-  
+.. _exo_premierepagephp:
 
 Les variables
 ==============
@@ -252,8 +241,7 @@ La syntaxe est différente suivant les délimiteurs utilisés :
 
   Le caractère ``\n`` correspond à un retour à la ligne. A ne pas confondre avec la balise ``<br />`` !
   
-Résultat
-````````
+.. nextslide::
 
 .. code-block:: html
 
@@ -316,10 +304,9 @@ Affectation
    ...
   ?>
 
-Affectation implicite
-`````````````````````
+.. nextslide::
 
-* Avec des indices implicite :
+* Avec des indices implicites :
 
 .. code-block:: php
 
@@ -454,8 +441,9 @@ Symbole Signification
 
   Le ``==`` de la comparaison est à distinguer du symbole d'affectation ``=``.
 
-Exemple
--------
+Exemple : ``if ... else``
+-------------------------
+
 .. code-block:: php
   :linenos:
   
@@ -472,13 +460,22 @@ Exemple
   }
   if($save_mdp){ echo "Mot de passe sauvegardé !"; }
   ?>
-
+  
 Voir le `résultat`__.
   
 __ _static/php/test.php#mdp
 
-Exemple 2
----------
+
+.. nextslide::
+
+.. tip::
+
+   PHP tolère aussi l'écriture condensée (nommée opérateur ternaire) : ``$variable = $condition ? valeurSiVrai : valeurSiFaux``.
+   Comparée au ``if``, cette écriture permet de réduire le nombre de lignes de code, au détriment de sa lisibilité.
+   
+
+Exemple : ``switch``
+--------------------
 
 .. code-block:: php
   :linenos:
@@ -553,7 +550,9 @@ Exemple :
   ?>
   
 Voir le `résultat`__.
-  
+
+.. nextslide::  
+
 .. tip::
 
    La bouche ``do-while`` existe aussi. Pratique pour s'assurer qu'on rentre au moins une fois dans la boucle.
@@ -565,7 +564,7 @@ La boucle ``for``
 
 Elle est très semblable à la boucle ``while`` mais permet cette fois de regrouper les conditions initiales, d'arrêt et l'incrémentation.
 
-Exemple : 
+Exemple :
   
 .. code-block:: php
 
@@ -579,6 +578,17 @@ Exemple :
 Voir le `résultat`__.
   
 __ _static/php/test.php#for
+  
+.. _exo_for:
+  
+Exercice
+````````
+
+#. Créez une nouvelle page PHP (ou reprenez votre `votre première page PHP <exo_premierepagephp>`:ref:).
+
+#. Afficher grâce à un script une liste composée de 10 "Hello World !".
+
+
   
 La boucle ``foreach``
 ---------------------
@@ -637,7 +647,7 @@ Pour les tableaux clé-valeur
 Voir le `résultat`__.
   
 __ _static/php/test.php#foreach2
-  
+
 Les opérateurs
 ++++++++++++++
 
@@ -762,8 +772,36 @@ Le site web de PHP référence `toutes les fonctions`__ par catégorie.
 __ http://fr.php.net/manual/fr/funcref.php
    
 
+Intégrer des fichiers externes
+------------------------------
 
+* PHP a été pensé pour la conception d'applications Web
+* PHP permet de définir des "briques de base" réutilisables
+* Il existe plusieurs fonctions d'intégration :
+ 
+  - ``include("page.php");`` qui permet d'intégrer le contenu de "page.php". Un message warning s'affiche si la ressource est manquante.
+  - ``require("page.php");`` qui fait la même chose mais une erreur fatale est retournée si la ressource est manquante (arrêt du script).
+  - ``include_once("page.php");`` et ``require_once("page.php");`` intègrent en plus un test pour empêcher une intégration multiple.
+  
 
+Afficher les erreurs
+--------------------
 
+Il est possible d'utiliser PHP en mode débogage lors de la phase de conception de vos scripts.
+
+Pour cela, deux fonctions doivent être appelées dans le script :
+
+.. code-block:: php
+
+  <?php 
+   ini_set(’display_errors’,’1’) ;
+   error_reporting(E_ALL) ;
+   ... // instructions du script
+  ?>
+
+.. tip::
+
+   Il est aussi possible de configurer l'affichage des erreurs dans le fichier de configuration ``php.ini``
+  
 
 
