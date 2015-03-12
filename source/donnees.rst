@@ -188,7 +188,7 @@ __ _static/donnees/corrections/pizza/
 
 .. TODO::
   
-  Envoyer des fichiers
+  Envoyer des fichiers (http://openclassrooms.com/courses/concevez-votre-site-web-avec-php-et-mysql/transmettre-des-donnees-avec-les-formulaires#2481477)
   
 
   
@@ -196,6 +196,10 @@ __ _static/donnees/corrections/pizza/
   
 Créer et manipuler les sessions
 ================================
+
+.. TODO::
+  
+  Gestion des sessions : http://openclassrooms.com/courses/concevez-votre-site-web-avec-php-et-mysql/variables-superglobales-sessions-et-cookies
 
 Lire et écrire dans un fichier
 ==============================
