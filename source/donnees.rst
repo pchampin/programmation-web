@@ -177,7 +177,7 @@ Exercice
 #. Téléchargez `l'archive`__ contenant des pages permettant de commander des pizzas en ligne.
 #. Créez une page nommée "prix.php" contenant un tableau simple dont chaque élément est un tableau clé-valeur comprenant les clés "pizza", "ingredients" et "prix". 
 #. Modifiez la page PHP du formulaire pour inclure le tableau et mettre à jour la liste des pizzas depuis les valeurs du tableau.
-#. Modifiez la page "recap_commande.php" qui sera la cible du formulaire et affichera un récapitulatif de la commande sous la forme d'un tableau, avec calcul du total.
+#. Modifiez la page "recap_commande.php" qui sera la cible du formulaire et affichera un récapitulatif de la commande sous la forme d'un tableau, avec calcul du total (aidez-vous des fonctions définies dans un `précédent exercice<exo_include>`:ref:).
 #. En utilisant les fonction d'inclusion, faire en sorte que l'utilisateur reste en permanence sur la page principale et adaptez son contenu en fonction des données transmises (ou l'absence de données transmises).
 
 Voir le `résultat`__.
@@ -185,10 +185,22 @@ Voir le `résultat`__.
 __ _static/donnees/exercices/pizza.zip
 __ _static/donnees/corrections/pizza/
   
+
+.. TODO::
+  
+  Envoyer des fichiers
+  
+
+  
+
+  
 Créer et manipuler les sessions
 ================================
 
 Lire et écrire dans un fichier
 ==============================
 
-
+.. TODO::
+	
+	Exercice depuis le formulaire des pizzas amélioré avec BDD : donner un fichier texte très complet avec plein de pizzas.
+	L'étudiant doit lire le fichier, récupérer les données et les enregistrer dans une base de données

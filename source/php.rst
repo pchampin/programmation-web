@@ -586,7 +586,7 @@ Exercice
 
 #. Créez une nouvelle page PHP (ou reprenez votre `votre première page PHP <exo_premierepagephp>`:ref:).
 
-#. Afficher grâce à un script une liste composée de 10 "Hello World !".
+#. Affichez grâce à un script une liste composée de 10 "Hello World !".
 
 
   
@@ -647,6 +647,15 @@ Pour les tableaux clé-valeur
 Voir le `résultat`__.
   
 __ _static/php/test.php#foreach2
+
+.. _exo_tableau:
+
+Exercice
+````````
+
+#. Créez un nouveau fichier PHP vide.
+#. Créez et initialisez un tableau clé-valeur dont les clés seront "prix_unitaire" et "quantite".
+#. Réalisez un affichage basique en parcourant votre tableau.
 
 Les opérateurs
 ++++++++++++++
@@ -753,7 +762,16 @@ Appeler une fonction
 
    Une bonne pratique consiste à définir vos fonctions dans des fichiers séparés, puis de les inclure dans vos page grâce à la fonction ``require_once``.
 
+
+.. _exo_fonction:
    
+Exercice
+--------
+
+#. Créez un fichier "calcul_prix.php" qui contient une fonction ``Prix`` permettant de calculer un prix total à partir d'un prix unitaire et d'une quantité.
+#. Ajoutez une seconde fonction ``Total`` qui calcule le prix total correspondant aux données de prix et de quantités contenues dans une copie de votre tableau de l'`exercice précédent<exo_tableau>`:ref:.
+#. Affichez et vérifiez le résultat en modifiant les valeurs stockées dans le tableau.
+
 Les fonctions de PHP
 ++++++++++++++++++++
 
@@ -783,7 +801,15 @@ Intégrer des fichiers externes
   - ``require("page.php");`` qui fait la même chose mais une erreur fatale est retournée si la ressource est manquante (arrêt du script).
   - ``include_once("page.php");`` et ``require_once("page.php");`` intègrent en plus un test pour empêcher une intégration multiple.
   
+.. _exo_include:
+  
+Exercice
+````````
 
+#. Reprenez le code de vos fonctions écrit pour l'`exercice précédent<exo_fonction>`:ref:.
+#. Séparez le tableau de données dans un fichier "donnees.php" et les fonctions dans un fichier "calcul_prix.php".
+#. Créez une page générale qui contient un squelette de page HTML et affiche le résultat de la fonction ``Total``. 
+  
 Afficher les erreurs
 --------------------
 
