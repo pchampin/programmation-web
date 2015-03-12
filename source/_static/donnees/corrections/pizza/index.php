@@ -7,10 +7,25 @@
 		<title>Commande pizza</title>
 	</head>
 	<body>
+	
+		<?php
+			ini_set(’display_errors’,’1’) ;
+		
+			include("prix.php");
+		?>
+	
+		<?php
+		
+			if(isset($_POST) AND count($_POST)>0){
+				include("recap_commande.php");
+			} else {
+				
+		?>
+	
 		<section id="commande">
 			<h1>Commande de pizza en ligne</h1>
 		
-			<form action="#">
+			<form action="#" method="post">
 				
 				<div><label for="nom">Nom</label><input type="text" id="nom" name="nom" /></div>
 				<div><label for="tel">N. Telephone</label><input type="text" id="tel" name="tel" /></div>
@@ -26,42 +41,20 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>
-									Margherita
-								</td>
-								<td>
-									Tomate, Jambon, Mozzarella
-								</td>
-								<td>
-									8€
-								</td>
-								<td class="qte"><input type="text" name="mar_qte" value="0" /></td>
-							</tr>
-							<tr>
-								<td>
-									Reine
-								</td>
-								<td>
-									Tomate, Jambon, Champignons, Mozzarella
-								</td>
-								<td>
-									9€
-								</td>
-								<td class="qte"><input type="text" name="rei_qte" value="0" /></td>
-							</tr>
-							<tr>
-								<td>
-									3 Fromages
-								</td>
-								<td>
-									Crème, Oignons, Emmental, Chèvre, Mozzarella
-								</td>
-								<td>
-									12€
-								</td>
-								<td class="qte"><input type="text" name="from_qte" value="0" /></td>
-							</tr>
+							<?php
+							
+								$number=0;
+								foreach($pizzas as $pizza){
+									echo "<tr>";
+										echo "<td>".$pizza['pizza']."</td>";
+										echo "<td>".$pizza['ingredients']."</td>";
+										echo "<td>".$pizza['prix']."€</td>";
+										$number++;
+										echo "<td class=\"qte\"><input type=\"text\" name=\"pizza".$number."\" value=\"0\" /></td>";
+									echo "</tr>";
+								}
+								
+							?>
 						</tbody>
 					</table>
 				</div>	
@@ -70,5 +63,9 @@
 				</div>
 			</form>
 		</section>
+		
+		<?php 
+			} // else
+		?>
 	</body>
 </html>
