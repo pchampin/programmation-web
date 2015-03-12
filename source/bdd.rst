@@ -108,11 +108,11 @@ L'interface PhpMyAdmin
 Pour faciliter les opérations de gestion des bases de données, il existe un outil nommé **PhpMyAdmin**,
 qui propose une interface de gestion Web des BDD sous la forme de pages PHP permettant (entre autres) :
 
-- la création/suppression de bases de données
-- la création/modification/suppresion de tables
-- la création/modification/suppresion de champs
-- la création/modification/suppresion d'enregistrements
-- la visualisation des données enregistrées
+- la création/suppression de bases de données;
+- la création/modification/suppresion de tables;
+- la création/modification/suppresion de champs;
+- la création/modification/suppresion d'enregistrements;
+- la visualisation des données enregistrées;
 - l'importation/exportation de bases de données (complètes ou partielles).
  
 Accéder à PhpMyAdmin
@@ -133,6 +133,7 @@ Accéder à PhpMyAdmin
 Exercice
 ````````
 L'objectif de cet exercice est de se familiariser avec l'interface PhpMyAdmin.
+
 Instructions :
 
 #. Créez une base de données nommée "bdd_pizzas".
@@ -146,6 +147,156 @@ Interroger une base de données
 Se connecter à une base de donnnées
 +++++++++++++++++++++++++++++++++++
 
+Avant de pouvoir lire ou écrire dans une base de données, il est nécessaire de s'y connecter.
+
+La connexion à une base de données est un processus d'authentification qui permet de s'assurer que seuls les utilisateurs autorisés peuvent accéder aux données et/ou les modifier.
+
+Les SGBD utilisent un vocabulaire spécifique relatif au processus de connexion :
+
+* **l'hôte** est l'adresse du serveur qui héberge la base de données;
+* **la base** est le nom de la base de donnée à laquelle on souhaite se connecter
+* **user** est l'identifiant de l'utilisateur
+* **password** est le mot de passe de cet utilisateur (connexion sécurisée).
+
+Type de connexion
+-----------------
+
+PHP propose plusieurs fonctionnalités intégrées pour se connecter à une base de données via un SGBD.
+Les évolutions successives de PHP explique l'existance de 3 exentions :
+
+* ``mysql_`` : les fonctions dont le nom commence par cette extension permettent d'accéder à une BDD gérée par MySQL;
+* ``mysqli_`` : propose des fonctionalités améliorées pour MySQL;
+* ``PDO`` : constitue la concrétisation d'un effort d'unification entre les différents SGBD.
+
+En conclusion, ``PDO`` est une solution générique qui permettra d'utiliser le même code pour dialoguer avec les différents SGBD.
+C'est aussi une version optimisée qui utilise les fonctionnalités avancées des dernières versions de PHP (nottament la programmation orientée objet).
+
+
+Se connecter en PHP
+-------------------
+
+Fonction de connexion :
+
+.. code-block:: php
+
+  <?php
+   function Connect_db(){
+	$host="localhost"; // ou sql.hebergeur.com
+	$user="root";      // ou login
+	$password="";      // ou xxxxxx
+	$dbname="nom_bdd";
+    try {
+	 $bdd=new PDO('mysql:host='.$host.';dbname='.$dbname.
+	              ';charset=utf8',$user,$password);
+    } catch (Exception $e) {
+	 die('Erreur : '.$e->getMessage());
+    }
+   }
+  ?>
+  
+Faire une requête sur une base de données
++++++++++++++++++++++++++++++++++++++++++
+  
+Après s'être connecté à une base de données, il est possible d'accéder à son contenu, en suivant le protocole suivant :
+
+#. On **interroge** une base de données grâce à une **requête**. Une requête constitue une instruction qui spécifie quelle(s) donnée(s) de quelle(s) tables on souhaite récupérer.
+#. Le SGBD se charge de **filtrer** et **trier** les données correspondantes à la requête et les **collecte** dans une structure de données exploitable en PHP (c'est à dire, un tableau).
+
+Ecrire une requête
+------------------
+
+Les requêtes sont interprétées par le SGBD, elles sont dont formulées dans le langage qu'il manipule, c'est à dire le SQL.
+
+Le langage SQL est dédié à l'écriture de requêtes. Sa syntaxe, sous forme de chaîne de caractères, permet de créer des requêtes complexes à partir de quelques mots clés.
+
+Les instructions SQL
+````````````````````
+
+Le langage SQL est articulé autour de mots-clés facilement interprétables, exemple :
+
+* ``SELECT`` : sélection des champs
+* ``FROM`` : choix de la table
+* ``WHERE`` : condition (peut être composée avec ``AND``/``OR``)
+* ``ORDER BY`` : règle de tri (par champ)
+* ``LIMIT`` : limite du nombre d'enregistrements
+* ``INSERT INTO`` : insertion d'un enregistrement
+* ``VALUES`` : précise les valeurs à enregistrer
+* ``UPDATE`` : mise à jour d'un enregistrement
+* ``DELETE`` : suppression d'un enregistrement
+  
+.. note:
+
+	Cette liste n'est pas exhaustive : il est possible de tout faire avec des requêtes SQL (y compris création/suppresion de table et même de BDD).
+ 
+Requête de lecture
+``````````````````
+
+L'ordre des mots-clés est figé, mais il n'est pas obligatoire de tous les utiliser.
+
+Un exemple d'une requête de lecture complète pourrait être :
+
+.. code-block:: sql
+
+  SELECT champ1, champ2, champ3
+  FROM table 
+  WHERE champ1='valeur'
+  AND champ2 < 20
+  OR champ 3 > 0
+  ORDER BY champ2 DESC, champ3 ASC
+  LIMIT 0,5
+
+.. tip::
+
+  Le sélecteur ``*`` permet de sélectionner tous les champs d'une table : ``SELECT *``.
+  
+.. nextslide::
+
+* Il est possible de ne sélectionner qu'une partie des champs d'une table.
+* Il est possible de sélectionner les champs de plusieurs tables. Dans ce cas, il faut écrire ``table.champ`` après le ``SELECT`` (pas obligatoire si les noms des champs différent).
+* ``WHERE`` indique le début des conditions qu'il est possible de combiner avec les opérateurs ``AND`` et ``OR`` en plus des parenthèses.
+* Le tri peut se faire sur plusieurs champs, par ordre d'apparition après ``ORDER BY``. C'est l'ordre alphabétique qui s'applique sur un champs texte. 
+* La limite du nombre d'enregistrement s'écrit : ``LIMIT indice_debut, indice_fin`` ; il y aura donc ``indice_fin - indice_debut`` enregistrements sélectionnés. Si un seul indice est précisé, la requête renverra ce nombre d'enregistrements à partir du premier (**dans l'ordre définie par le tri**). 
+
+Requête d'écriture
+``````````````````
+
+D'autres mots-clés permettent d'ajouter un enregistrement dans une table.
+
+Exemple :
+
+.. code-block:: sql
+
+  INSERT INTO table(champ1,champ2, champ3)
+  VALUES (valeur1, valeur2, valeur3);
+ 
+.. warning::
+
+  Les SGBD sont très sécurisés au niveau des requêtes d'insertion. Aussi, la requête se traduira systématiquement par
+  un échec dans le cas d'oubli d'un des champs ou de types de paramètres incompatibles.
+  
+  Toutes les vérifications devront êtres faites côté PHP avant génération de la requête SQL.
+ 
+.. note::
+
+  Si un champ de la table à été déclaré comme une clé primaire (identifiant) avec la propriété ``auto_increment``,
+  il n'est pas nécessaire de faire apparaître ce champ ni sa valeur dans une requête d'insertion.
+ 
+.. _exo_sql:
+ 
+Exercice
+````````
+
+Depuis PhpMyAdmin, il est possible de taper directement des requêtes SQL et d'afficher le résultat retourné.
+
+#. Accédez à votre base de données de l'`exercice précédent<exo_phpmyadmin>`:ref:.
+#. Depuis le formulaire de requêtes de PhpMyAdmin, écrire une requête pour récupérer le nom de toutes les pizzas.
+#. Ecrire une requête permettant de récupérer les 5 pizzas les moins chères (<=10€).
+#. Récupérez le nom et le prix de toutes les pizzas et triez le résultat par prix (croissant).
+#. Ajouter une nouvelle pizza nommée "Cannibale", qui coûte 20€, et contient du Fromage, de la Tomate, de la Viande Hachée, du Poulet, du Chorizo, du Canard, et du Jambon.
+
+ 
+Lire les données d'une base de donnnées
++++++++++++++++++++++++++++++++++++++++
 
 
 .. TODO::
@@ -157,3 +308,7 @@ Se connecter à une base de donnnées
 	Exercice sur les jointures : faire concevoir une  base avec une table pizzas et une table ingredients
 	Puis ajouter une table pizza_ingredients
 	Obtenir le même résultat que pour l'exercice précédent.
+	
+
+Ecrire des données dans une base de donnnées
+++++++++++++++++++++++++++++++++++++++++++++
