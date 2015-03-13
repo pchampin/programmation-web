@@ -138,7 +138,7 @@ Instructions :
 
 #. Créez une base de données nommée "bdd_pizzas".
 #. Créez une table nommée "pizzas" avec les champs "id_pizza" (entier, clé primaire), "nom_pizza" (chaîne de caractères), "ingredients_pizza" (chaîne de caractères) et "prix_pizza" (nombre flottant).
-#. Remplissez vos tables avec quelques données.
+#. Remplissez vos tables avec quelques données (5-10 pizzas).
 
 
 Interroger une base de données
@@ -252,7 +252,7 @@ Un exemple d'une requête de lecture complète pourrait être :
 .. nextslide::
 
 * Il est possible de ne sélectionner qu'une partie des champs d'une table.
-* Il est possible de sélectionner les champs de plusieurs tables. Dans ce cas, il faut écrire ``table.champ`` après le ``SELECT`` (pas obligatoire si les noms des champs différent).
+* Il est possible de sélectionner les champs de plusieurs tables. Dans ce cas, il faut écrire ``table.champ`` après le ``SELECT`` (pas obligatoire si les noms des champs diffèrent).
 * ``WHERE`` indique le début des conditions qu'il est possible de combiner avec les opérateurs ``AND`` et ``OR`` en plus des parenthèses.
 * Le tri peut se faire sur plusieurs champs, par ordre d'apparition après ``ORDER BY``. C'est l'ordre alphabétique qui s'applique sur un champs texte. 
 * La limite du nombre d'enregistrement s'écrit : ``LIMIT indice_debut, indice_fin`` ; il y aura donc ``indice_fin - indice_debut`` enregistrements sélectionnés. Si un seul indice est précisé, la requête renverra ce nombre d'enregistrements à partir du premier (**dans l'ordre définie par le tri**). 
@@ -290,25 +290,73 @@ Depuis PhpMyAdmin, il est possible de taper directement des requêtes SQL et d'a
 
 #. Accédez à votre base de données de l'`exercice précédent<exo_phpmyadmin>`:ref:.
 #. Depuis le formulaire de requêtes de PhpMyAdmin, écrire une requête pour récupérer le nom de toutes les pizzas.
-#. Ecrire une requête permettant de récupérer les 5 pizzas les moins chères (<=10€).
+#. Ecrire une requête permettant de récupérer au plus 5 pizzas parmi les moins chères (<=10€).
 #. Récupérez le nom et le prix de toutes les pizzas et triez le résultat par prix (croissant).
 #. Ajouter une nouvelle pizza nommée "Cannibale", qui coûte 20€, et contient du Fromage, de la Tomate, de la Viande Hachée, du Poulet, du Chorizo, du Canard, et du Jambon.
 
  
 Lire les données d'une base de donnnées
-+++++++++++++++++++++++++++++++++++++++
+---------------------------------------
 
+La lecture de données depuis une BDD s'éxecute suivant ce protocole :
+
+#. Connexion à la BDD
+#. Interrogation de la BDD via une requête SQL
+#. Récupération de la réponse complète
+#. Lecture enregistrement par enregistrement
+#. Fin de la lecture et libération de la ressource
+
+.. nextslide::
+
+Exemple: 
+
+.. code-block:: php
+  :linenos:
+  
+  <?php
+   Connect_db(); //connexion à la BDD
+   $query = '...'; // requête SQL
+   $answer = $bdd->query($query); // requête et réponse
+   
+   while($data = $answer->fetch()) { // lecture par ligne
+      ... // traitement de l'enregistrement
+   } // fin des données
+   
+   $answer->closeCursor();
+  ?>
+
+.. note::
+  
+  La fonction ``fetch()`` retourne un tableau associatif dont les clés correspondent aux champs sélectionnés par la requête.
+  
+  La lecture s'arrête lorsque l'affectation de l'enregistrement échoue : il n'y a plus de données à lire.
+  
+  La fonction ``closeCursor()`` permet de libérer la ressource lorqu'on a fini les traitements sur les données retournées par le SGBD.
+
+  
+Exercice
+````````
+
+#. Reprenez votre formulaire de commande de pizzas de l'`exercice précédent<exo_post>`:ref:.
+#. Créez une page contenant la fonction de connexion à la BDD pizzas.
+#. Modifiez la page "prix.php" pour que la construction du tableau soit faite depuis les données de la BDD.	
+
+Ecrire des données dans une base de donnnées
+--------------------------------------------
 
 .. TODO::
 	
 	Exercice depuis le formulaire des pizzas : la page "prix.php" va désormais intérroger une BDD
 	(donner un exemple minimal .sql qui contient les infos sur les pizzas.
 	Les étudiants doivent construire le tableau depuis les données de la BDD.
+
+
 	
+Les requêtes de jointure
+------------------------
+
+.. TODO::
+
 	Exercice sur les jointures : faire concevoir une  base avec une table pizzas et une table ingredients
 	Puis ajouter une table pizza_ingredients
 	Obtenir le même résultat que pour l'exercice précédent.
-	
-
-Ecrire des données dans une base de donnnées
-++++++++++++++++++++++++++++++++++++++++++++

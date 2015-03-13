@@ -171,6 +171,8 @@ __ http://php.net/manual/fr/function.htmlentities.php
 	}
   ?>
 
+.. _exo_post:
+  
 Exercice
 ````````
 
