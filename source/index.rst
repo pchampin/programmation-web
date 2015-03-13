@@ -8,6 +8,8 @@
 Programmation Web
 ===================
 
+.. include:: credits.rst.inc
+
 .. toctree::
    :maxdepth: 1
 
@@ -16,7 +18,12 @@ Programmation Web
    bdd
    avance
    
+
+.. toctree::
+   :maxdepth: 1
+   
    seances
+   annexe
 
 
 .. rubric:: Remerciements
