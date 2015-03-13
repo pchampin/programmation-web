@@ -22,6 +22,7 @@ Programmation Web
 .. rubric:: Remerciements
 
 Le thème utilisé dans ce support est celui de `Pierre-Antoine Champin`__ que je remercie.
+
 Ce support est très largement inspiré des supports d'Isabelle Gonçalves à qui j'adresse mes remerciements.
 
 __ http://www.champin.net
