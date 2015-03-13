@@ -260,14 +260,14 @@ Un exemple d'une requête de lecture complète pourrait être :
 Requête d'écriture
 ``````````````````
 
-D'autres mots-clés permettent d'ajouter un enregistrement dans une table.
+D'autres mots-clés permettent d'ajouter/modifier/supprimer un enregistrement dans une table.
 
-Exemple :
+Exemple d'**insertion** :
 
 .. code-block:: sql
 
   INSERT INTO table(champ1,champ2, champ3)
-  VALUES (valeur1, valeur2, valeur3);
+  VALUES (valeur1, valeur2, valeur3)
  
 .. warning::
 
@@ -280,6 +280,40 @@ Exemple :
 
   Si un champ de la table à été déclaré comme une clé primaire (identifiant) avec la propriété ``auto_increment``,
   il n'est pas nécessaire de faire apparaître ce champ ni sa valeur dans une requête d'insertion.
+ 
+ 
+.. nextslide::
+
+Exemple de **modification** :
+
+.. code-block:: sql
+
+  UPDATE table SET champ2 = valeur2, champ3 = valeur3 
+  WHERE champ1 = valeur1
+  
+.. warning:: 
+
+  Les requêtes de modifications utilisent aussi une partie sélection.
+  
+  La requête n'aboutiera pas si la condition du ``WHERE`` n'est pas satisfaisable.
+  
+.. note::
+  
+  Il est possible de modifier plusieurs enregistrements en une seule requête : c'est la condition de sélection qui fait la différence.
+ 
+.. nextslide::
+
+Exemple de **suppression** :
+
+.. code-block:: sql
+
+  DELETE FROM table WHERE champ1=valeur1
+
+.. warning::
+
+  Les suppressions ne sont **pas annulables**.
+  
+  Attention : sans la condition ``WHERE`` tous les enregistrements de la table seront supprimés !
  
 .. _exo_sql:
  
@@ -298,41 +332,100 @@ Depuis PhpMyAdmin, il est possible de taper directement des requêtes SQL et d'a
 Lire les données d'une base de donnnées
 ---------------------------------------
 
-La lecture de données depuis une BDD s'éxecute suivant ce protocole :
+La lecture de données depuis une BDD s'exécute suivant ce protocole :
 
-#. Connexion à la BDD
-#. Interrogation de la BDD via une requête SQL
-#. Récupération de la réponse complète
-#. Lecture enregistrement par enregistrement
-#. Fin de la lecture et libération de la ressource
+#. Connexion à la BDD,
+#. Préparation de la requête,
+#. Interrogation de la BDD via une requête SQL,
+#. Récupération de la réponse complète,
+#. Lecture enregistrement par enregistrement,
+#. Fin de la lecture et libération de la ressource.
 
-.. nextslide::
 
-Exemple: 
+Exemple générique
+````````````````` 
 
 .. code-block:: php
   :linenos:
   
   <?php
    Connect_db(); //connexion à la BDD
-   $query = '...'; // requête SQL
-   $answer = $bdd->query($query); // requête et réponse
-   
-   while($data = $answer->fetch()) { // lecture par ligne
+   $query = $bdd->prepare('...'); // requête SQL
+   $query->execute(...); // paramètres et exécution
+   while($data = $query->fetch()) { // lecture par ligne
       ... // traitement de l'enregistrement
    } // fin des données
    
-   $answer->closeCursor();
+   $query->closeCursor();
   ?>
 
-.. note::
+.. nextslide::
   
-  La fonction ``fetch()`` retourne un tableau associatif dont les clés correspondent aux champs sélectionnés par la requête.
+Quelques remarques :
   
-  La lecture s'arrête lorsque l'affectation de l'enregistrement échoue : il n'y a plus de données à lire.
-  
-  La fonction ``closeCursor()`` permet de libérer la ressource lorqu'on a fini les traitements sur les données retournées par le SGBD.
+* Dans la requête, si on veut injecter des paramètres, il faut le spécifier par le caractère anonyme ``?`` ou un identifiant précédé par ``:``.
+* La fonction ``execute()`` exécute la requête avec les paramètres fournis sous la forme d'un tableau simple (paramètres anonymes) ou associatif (paramètres identifés). Il n'est pas nécessaire de préciser de paramètres si la requête SQL n'en comporte pas.
+* La fonction ``fetch()`` retourne un tableau associatif dont les clés correspondent aux champs sélectionnés par la requête.
+* La lecture s'arrête lorsque l'affectation de l'enregistrement échoue : il n'y a plus de données à lire.
+* La fonction ``closeCursor()`` permet de libérer la ressource lorqu'on a fini les traitements sur les données retournées par le SGBD.
 
+
+Requête sans paramètres
+```````````````````````
+
+.. code-block:: php
+  :linenos:
+  
+  <?php
+   ...
+   $query=$bdd->prepare('SELECT * from table');
+   $query->execute();
+   ...
+  ?>
+  
+.. note::
+
+  Pour gagner du temps, il est aussi possible d'utiliser la fonction ``exec()`` qui prend en paramètre une requête, et s'applique sur l'objet BDD :
+  
+  ``$query=$bdd->exec('...');``.
+
+Requête avec paramètres anonymes
+````````````````````````````````
+
+.. code-block:: php
+  :linenos:
+  
+  <?php
+   ...
+   $query=$bdd->prepare('SELECT champ1, champ2 
+                         FROM table
+	                 WHERE champ1 = ?  
+	                 AND champ3 <= ? 
+	                 ORDER BY champ2');
+   $query->execute(array($valeur1, $valeur2));
+   ...
+  ?>
+
+
+Requête avec paramètres identifiés
+``````````````````````````````````
+  
+.. code-block:: php
+  :linenos:
+  
+  <?php
+   ...
+   $query=$bdd->prepare('SELECT champ1, champ2 
+                         FROM table
+	                 WHERE champ1 = :valeur1  
+	                 AND champ3 <= :valeur2 
+	                 ORDER BY champ2');
+   $query->execute(array('valeur1' => $valeur1,
+                         'valeur2' => $valeur2));
+   ...
+  ?>
+  
+.. _exo_requete:
   
 Exercice
 ````````
@@ -344,14 +437,54 @@ Exercice
 Ecrire des données dans une base de donnnées
 --------------------------------------------
 
-.. TODO::
-	
-	Exercice depuis le formulaire des pizzas : la page "prix.php" va désormais intérroger une BDD
-	(donner un exemple minimal .sql qui contient les infos sur les pizzas.
-	Les étudiants doivent construire le tableau depuis les données de la BDD.
+L'écriture de données dans une BDD se fait en suivant les étapes suivantes :
 
+#. Connexion à la BDD,
+#. Préparation de la requête,
+#. Exécution de la requête.
 
-	
+Trois actions sont possibles pour l'écriture : insertion, modification ou suppression d'un enregistrement.
+
+Exemple générique
+`````````````````
+Avec paramètres :
+
+.. code-block:: php
+  :linenos:
+  
+  <?php
+   Connect_db(); //connexion à la BDD
+   $query = $bdd->prepare('...'); // requête SQL
+   $query->execute(...); // paramètres et exécution
+  ?>
+
+Sans paramètres :
+
+.. code-block:: php
+  :linenos:
+  
+  <?php
+   Connect_db(); //connexion à la BDD
+   $query = $bdd->exec('...'); // requête SQL
+  ?>
+  
+.. note::
+
+  Pour effectuer chacune des opérations (ajout, modification, suppression), il suffit de choisir la bonne requête (``INSERT INTO, UPDATE SET, DELETE FROM``);
+
+  
+.. _exo_ecriture:
+  
+Exercice
+````````
+
+#. Récupérez `la page "ajout_pizza.php"`__ qui permet d'afficher un formulaire.
+#. Modifiez la pour que, lorsque des données sont envoyées, elles soient insérées dans la table pizzas de votre BDD.
+#. Ajoutez tous les tests nécessaires au traitement des données entrées.
+#. Si l'utilisateur entre un nom de pizza déja existant dans la table, appliquer une requête de modification avec les nouvelles données (empêchez la création de doublons).
+
+__ _static/bdd/exercices/ajout_pizza.zip
+
 Les requêtes de jointure
 ------------------------
 
