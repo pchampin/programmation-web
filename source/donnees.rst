@@ -247,7 +247,7 @@ Variable Signification             Signification
 Vérifier le fichier reçu
 ------------------------
 
-Généralement, côté serveur, le type de fichier attendu est établi à priori et on préfère limiter la taille des fichiers.
+Généralement, côté serveur, le type de fichier attendu ainsi que sa taille limite sont établis à priori.
 Exemple de script PHP permettant d'effectuer toutes ces vérifications :
 
 .. code-block:: php
