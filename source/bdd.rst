@@ -458,6 +458,8 @@ Avec paramètres :
    $query->execute(...); // paramètres et exécution
   ?>
 
+.. nextslide::
+  
 Sans paramètres :
 
 .. code-block:: php
@@ -488,13 +490,106 @@ __ _static/bdd/exercices/ajout_pizza.zip
 Les requêtes de jointure
 ------------------------
 
+Un des intérêts majeurs des BDD est de pouvoir lier des données entre-elles afin de leur donner une sémantique plus forte.
 
+L'utilisation d'identifiants uniques (**clés primaires**) pour chaque enregistrement, permet leur réutilisation dans d'autres tables.
+On les appelle alors des **clés secondaires** (ou **clés étrangères**).
+
+Exemple, table "Films":
+
+============ =========== =========== =========== 
+ID_FILM      TITRE_FILM  ANNEE_FILM      ...
+============ =========== =========== =========== 
+  1          Titanic      1997        ...
+  2          Star Wars    1977        ...
+  3          Braveheart   1995        ...
+  ...        ...          ...         ...
+============ =========== =========== =========== 
+
+.. nextslide::
+
+Exemple, table "Acteurs":
+
+============ =========== =============== =========== 
+ID_ACTEUR    NOM_ACTEUR  PRENOM_ACTEUR      ...
+============ =========== =============== =========== 
+  1          Di Caprio    Leonardo        ...
+  2          Winslet      Kate            ...
+  3          Gibson       Mel             ...
+  ...        ...          ...             ...
+============ =========== =============== =========== 
+
+Les champs ``ID_FILM`` et ``ID_ACTEUR`` sont les clés primaires de leurs tables respectives.
+
+.. nextslide::
+
+Exemple de table de jointure, table "Casting" :
+
+============ ===========
+ID_FILM      ID_ACTEUR 
+============ ===========
+  1           1  
+  1           2    
+  2           3     
+  ...         ...         
+============ ===========
+
+Ici, les champs ``ID_FILM`` et ``ID_ACTEUR`` deviennent clés étrangères et permettent de lier les tables "Acteurs" et "Films".
+
+Pour pouvoir accéder aux données présentes dans des tables jointes de la sorte, il faut utiliser les **requêtes de jointure**.
+
+
+Aller plus loin avec les requêtes SQL
+`````````````````````````````````````
+
+**Les alias :**
+
+Pour écrire une requête qui intervenant sur plusieurs tables jointes, il est possible de simplifier l'écriture en définissant des **alias**.
+
+Deux écritures sont possibles après la clause ``FORM`` :
+
+.. code-block:: sql
+
+	SELECT * 
+	FROM table AS alias
+ 
+Ou 
+
+.. code-block:: sql
+
+	SELECT * 
+	FROM table t
+ 
+.. note::
+
+  La première version reste la plus lisible.
+
+  Notez que par convention, les noms des tables s'écrivent en minuscules. Une bonne pratique est de conserver ce format mais de réduire leur taille en utilisant des alias.  
+ 
+.. nextslide::
+
+**Les requêtes de jointure** s'écrivent en utilisant le mot clé ``INNER JOIN ... ON``. La clause ``ON`` permet de définir la condition de la jointure (c'est à dire la correspondance entre les clés primaires/étrangères).
+
+Exemple :
+
+.. code-block:: sql
+
+  SELECT * 
+  FROM table1
+  INNER JOIN table2
+  ON table1.ID_CHAMP1 = table2.ID_CHAMP2
+
+  
+.. tip::
+
+  On peut bien sûr imbriquer plusieurs jointures lorsque plus de deux tables sont liées.
+  Pour cela, il suffit de préciser les conditions de jointures les unes après les autres (``INNER JOIN ... ON ... INNER JOIN ... ON``).
 
 Exercice
 ````````
 
-.. TODO::
+* Reprenez et réalisez une copie du formulaire de commande de pizzas réalisé pour un `exercice ultérieur<exo_post>`:ref:.
+* Téléchargez et importez (dans PhpMyAdmin) la nouvelle `BDD de pizzas`__ qui utilise une table de jointure.
+* Modifiez vos pages PHP et actualisez vos requêtes pour obtenir le même résultat (chargement des infos dans le tableau associatif).
 
-	Exercice sur les jointures : faire concevoir une  base avec une table pizzas et une table ingredients
-	Puis ajouter une table pizza_ingredients
-	Obtenir le même résultat que pour l'exercice précédent.
+__ _static/bdd/exercices/pizzas_db.sql

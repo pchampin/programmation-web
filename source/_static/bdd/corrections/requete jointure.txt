@@ -1,0 +1,7 @@
+SELECT i.LABEL_INGREDIENT
+  FROM ingredients i
+  INNER JOIN pizzas_ingredients pi
+  ON i.ID_INGREDIENT = pi.ID_INGREDIENT
+  INNER JOIN pizzas p
+  ON p.ID_PIZZA = pi.ID_PIZZA
+  WHERE p.NAME_PIZZA = 'Chef'
