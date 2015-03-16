@@ -7,6 +7,9 @@
 Les expressions régulières
 ==========================
 
+Sécuriser des pages PHP
+=======================
+
 Programmation Orientée Objet
 ============================
 
