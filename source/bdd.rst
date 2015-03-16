@@ -488,6 +488,11 @@ __ _static/bdd/exercices/ajout_pizza.zip
 Les requêtes de jointure
 ------------------------
 
+
+
+Exercice
+````````
+
 .. TODO::
 
 	Exercice sur les jointures : faire concevoir une  base avec une table pizzas et une table ingredients
