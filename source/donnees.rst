@@ -126,7 +126,7 @@ Exercice
 
 __ http://php.net/manual/fr/function.is-int.php
   
-Transmettre des données dans une requète
+Transmettre des données dans une requête
 ++++++++++++++++++++++++++++++++++++++++
 
 La méthode d'envoi Post doit être spécifiée dans le formulaire si l'on souhaite transmettre des données dans une requête :
@@ -188,20 +188,203 @@ __ _static/donnees/exercices/pizza.zip
 __ _static/donnees/corrections/pizza/
   
 
-.. TODO::
-  
-  Envoyer des fichiers (http://openclassrooms.com/courses/concevez-votre-site-web-avec-php-et-mysql/transmettre-des-donnees-avec-les-formulaires#2481477)
-  
 
-  
+Envoyer des fichiers 
+++++++++++++++++++++
 
+Grâce à PHP, il est possible pour l'utilisateur de transmettre un fichier au serveur par l'intermédiaire des formulaires.
+
+Au moment de l'envoi du formulaire (soumission via ``submit``); le fichier est téléchargé par le serveur (on parle d'un "upload" côté client).
+
+Le serveur peut ensuite manipuler le fichier puis l'enregistrer.
+
+Formulaire d'envoi de fichier
+-----------------------------
+
+Il est possible, dans les formulaires HTML, de définir un champ de type fichier (``<input type="file" />``) permettant de transmettre des fichiers au serveur.
+
+Le formulaire devra simplement comporter l'attribut d'encodage indiquant l'envoi de fichier(s).
+
+Exemple :
+
+.. code-block:: html
+
+  <form action="traitement.php" method="post"
+        enctype="multipart/form-data">
+        ...
+	<input type="file" name="fichier" />
+	...
+  </form>
+
+.. note::
+
+  Du fait du format et du volume des données, l'envoi de fichiers n'est possible qu'en ``Post``.
+
+
+Sauvegarder un fichier sur le serveur
+-------------------------------------
+
+Les fichiers envoyés depuis un formulaires sont stockées dans une variable différente de ``$_GET`` ou ``$_POST``: il s'agit de la variable ``$_FILES``
+
+Les fichiers sont stockés sous la forme d'un tableau à deux dimensions. L'accès fichier par fichier se fait en utilisant la valeur de l'attribut ``name`` définit dans le formulaire.
+
+Exemple : 
+
+================================= ==================================================
+Variable Signification             Signification
+================================= ==================================================
+ $_FILES['fichier']['name']        Nom du fichier envoyé
+ $_FILES['fichier']['type']        Type du fichier (ex: image/png)
+ $_FILES['fichier']['size']        Taille du fichier en octets
+ $_FILES['fichier']['tmp_name']    Emplacement temporaire du fichier sur le serveur
+ $_FILES['fichier']['error']       Code d'erreur (0 si pas d'erreur)
+================================= ==================================================
+
+Vérifier le fichier reçu
+------------------------
+
+Généralement, côté serveur, le type de fichier attendu est établi à priori et on préfère limiter la taille des fichiers.
+Exemple de script PHP permettant d'effectuer toutes ces vérifications :
+
+.. code-block:: php
   
-Créer et manipuler les sessions
-================================
+  <?php
+   if (isset($_FILES['fichier'])
+    AND $_FILES['fichier']['error'] == 0)
+    AND $_FILES['fichier']['size'] <= 1048576) {  // 1Mo 
+     $infosfichier = pathinfo($_FILES['fichier']['name']);
+     $ext_upload = $infosfichier['extension'];
+     $ext_autorisees = array('jpg', 'jpeg', 'gif', 'png');
+     if (in_array($ext_upload, $ext_autorisees)) {
+      move_uploaded_file($_FILES['fichier']['tmp_name'],
+       'destination/' . basename($_FILES['fichier']['name']));
+     }
+    }
+   ?>
+
+.. note::
+
+	N'hésitez pas à consulter la documentation PHP pour les fonctions `pathinfo()`__ et `move_uploaded_file()`__.
+	
+__ http://php.net/manual/fr/function.pathinfo.php
+__ http://php.net/manual/fr/function.move-uploaded-file.php
+
+Les variables superglobales
+===========================
+
+Liste des variables superglobales
++++++++++++++++++++++++++++++++++
+
+Les variables superglobales sont des variables créées et instantiées par PHP.
+
+Parmi les variables superglobales, on retrouve :
+
+* ``$_GET`` : données envoyées en paramètres dans l'URL
+* ``$_POST`` : données envoyées dans la requête HTTP
+* ``$_FILES`` : fichiers envoyés par un formulaire
+* ``$_SERVER`` : variables d'exécution du serveur
+* ``$_ENV`` : variables d'environnement du serveur
+* ``$_SESSION`` : variables de session
+* ``$_COOKIE`` : valeurs des cookies enregistrés sur le client
+
+.. note::
+
+  Un exemple utile de variable serveur : ``$SERVER['REMOTE_ADDR']`` contient l'adresse IP du client qui cherche à consulter la page.
+
+Les sessions
+++++++++++++
+
+L'intérêt des sessions est de pouvoir manipuler dans une variable de page en page.
+
+Les variables de type session sont conçues pour garder en mémoire des informations relatives au client.
+
+Fonctionnement des sessions :
+
+#. Création d'une session.
+#. Création des variables session.
+#. Manipulation des variables.
+#. Fermeture de la session.
+
+.. note::
+
+  La fermeture de la session peut être explicitement demandée où s'exécute automatiquement à la fermeture du navigateur, ou après un **délai d'expiration** ("timeout").
+
+
+Création d'une session
+----------------------
+
+La variable session ``$_SESSION`` est accessible n'importe où dans le code à condition qu'on aie préalablement fait appel à la fonction ``session_start()``.
+Les variables de session s'instantient comme des champs du tableau associatif ``$_SESSION``. Exemple :
+
+.. code-block:: php
+
+  <?php
+    session_start();
+    ...
+    $_SESSION['champ1'] = 'Valeur1';
+    $_SESSION['champ2'] = valeur2;
+  ?>
+  
+.. warning::
+
+  La fonction ``session_start()`` doit être appellée sur chacune des pages avant toute écriture de code HTML.
+  
+Utilisation des variables de session
+------------------------------------
+
+Toutes les variables de session qui ont prélablement été intitialisées dans des pages consultées par le client sont accessibles sur les autres pages.
+Il suffit de faire appel à la fonction de démarrage de la session.
+
+Exemple :
+
+
+.. code-block:: php
+
+  <?php
+    session_start();
+    ...
+    echo $_SESSION['champ1'];
+  ?>
+  
+.. tip::
+
+  Les variables de session sont utiles en complément d'un système d'authentification, afin de stocker des informations de connexion de l'utilisateur.
+  
+Fermeture d'une session
+-----------------------
+
+La variable ``$_SESSION`` est automatiquement détruite après un délai d'expiration, ou à la fermeture du client.
+
+Dans certains cas, il est nécessaire de fermer la session depuis le code (c'est le cas par exemple d'un bouton "Déconnexion" pour des pages à accès restreints).
+
+La fermeture de la session s'effectue comme suit :
+
+.. code-block:: php
+
+  <?php
+    ...
+    session_destroy();
+  ?>
+
+
+.. _exo_sessions:
+  
+Exercice
+--------
+
+#. Reprenez les pages de l'`exercice précédent<exo_ecriture>`:ref: sur le formulaire d'ajout de pizza.
+#. Créez une page d'authentification "authentification.php" qui affiche un formulaire avec un champ "login" et un champ "mot de passe" dont la cible est le formulaire d'ajout de pizza.
+#. Grâce aux sessions, réalisez un mini-contrôle d'accès à la page d'ajout aux seuls utilisateurs connectés (indiquez le login et mot de passe attendu en dur dans la page "authentification.php").
+#. Pour aller plus loin, grâce aux fonctions d'inclusion, s'assurer que l'on demande systématiquement les informations d'authentification lorsque l'on souhaite accèder à la page d'ajout, sauf si elles ont déjà été renseignées (et donc stockées dans des variables de session).
 
 .. TODO::
   
   Gestion des sessions : http://openclassrooms.com/courses/concevez-votre-site-web-avec-php-et-mysql/variables-superglobales-sessions-et-cookies
+
+Les cookies
++++++++++++
+
+ 
 
 Lire et écrire dans un fichier
 ==============================
