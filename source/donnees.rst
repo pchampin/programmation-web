@@ -212,6 +212,8 @@ Exemple :
   <form action="traitement.php" method="post"
         enctype="multipart/form-data">
         ...
+	<input type="hidden"
+		name="MAX_FILE_SIZE" value="1048576" />
 	<input type="file" name="fichier" />
 	...
   </form>
@@ -219,6 +221,8 @@ Exemple :
 .. note::
 
   Du fait du format et du volume des données, l'envoi de fichiers n'est possible qu'en ``Post``.
+  
+  Le champ ``<input type="hidden" />`` permet de spécifier une taille maximale de fichier.
 
 
 Sauvegarder un fichier sur le serveur
@@ -377,15 +381,95 @@ Exercice
 #. Grâce aux sessions, réalisez un mini-contrôle d'accès à la page d'ajout aux seuls utilisateurs connectés (indiquez le login et mot de passe attendu en dur dans la page "authentification.php").
 #. Pour aller plus loin, grâce aux fonctions d'inclusion, s'assurer que l'on demande systématiquement les informations d'authentification lorsque l'on souhaite accèder à la page d'ajout, sauf si elles ont déjà été renseignées (et donc stockées dans des variables de session).
 
-.. TODO::
-  
-  Gestion des sessions : http://openclassrooms.com/courses/concevez-votre-site-web-avec-php-et-mysql/variables-superglobales-sessions-et-cookies
 
 Les cookies
 +++++++++++
 
- 
+Contrairement aux sessions où les données sont stockées côté serveur, les cookies sont des fichiers qui contiennent des donénes et sont enregistrés côté client.
 
+L'utilité des cookies est de sauvegarder des données relatives au client et dont la portée dépasse celle des sessions.
+
+L'utilisation des cookies se fait en deux temps :
+
+#. Création et enregistrement du cookie
+#. Consultation des données contenues dans le cookie
+
+Création d'un cookie
+--------------------
+
+Pour créer un cookie, il suffit d'utiliser la fonction
+
+``setcookie($name, $value, $expire, $path, $domain, $secure, $httponly)`` (voir la `documentation`__) dont les paramètres sont :
+
+* ``$name`` : le nom du cookie
+* ``$value`` : sa valeur
+* ``$expire`` : le délai d'expiration (timestamp Unix)
+* ``$path`` : la portée du cookie (par défaut, toutes les pages)
+* ``$domain`` : le domaine où le cookie est accessible
+* ``$secure`` : indique si le protocole HTTPS est obligatoire
+* ``$httponly`` : limite l'accès au protocole HTTP
+
+__ http://php.net/manual/fr/function.setcookie.php
+
+Exemple
+```````
+
+Création d'un cookie (qui expire au bout d'une heure): 
+
+.. code-block:: php
+
+  <?php
+     setcookie("NomDuCookie",
+               'valeurDuCookie',
+               time()+3600,
+               null,
+	       null,
+ 	       false,
+	       true );
+  ?>
+
+.. warning::
+
+  Le mode "httponly" permet de s'assurer qu'aucun script (JavaScript) ne modifie le cookie.
+  
+.. note::
+  
+  Pour modifier un cookie existant, il suffit de faire appel à la même fonction, avec un nom de cookie existant.
+  
+  
+Affichage d'un cookie
+---------------------
+
+Les données stockées dans un cookie sont accessibles dans la variable superglobale ``$_COOKIE`` qui est un tableau associatif dont les clés correspondent aux noms des cookies enregistrés.
+
+Exemple :
+
+.. code-block:: php
+
+  <?php
+   ...
+   echo $_COOKIE['NomDuCookie'];
+  ?>
+
+.. warning::
+
+  Contrairement aux variables de session, les données des variables des cookies peuvent avoir été modifiées par l'utilisateur.
+  Il faut donc leur appliquer un contrôle très strict.
+
+
+.. _exo_cookies:
+  
+Exercice
+--------
+
+#. Reprenez votre `exercice sur les sessions<exo_sessions>`:ref:.
+#. Créez un cookie pour sauvegarder la date de la dernière connexion de l'utilisateur sous la forme d'un timestamp (indice : fonction `time()`__).
+#. Afficher cette date au format "Dernière connexion le JJ/MM/AAAA à HH:mm" sur la page d'ajout de pizza (indice : fonction `date()`__).
+
+__ http://php.net/manual/fr/function.time.php
+__ http://php.net/manual/fr/function.date.php
+
+  
 Lire et écrire dans un fichier
 ==============================
 
