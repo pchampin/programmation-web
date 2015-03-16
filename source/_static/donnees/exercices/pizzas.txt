@@ -1,0 +1,6 @@
+5 Fromages;	18€;	Crème, Oignons, Reblochon, Comté, Chèvre, Mozzarella, Emmental;
+Sud-ouest;	17€;	Tomate, Oignons, Poivrons, Canard, Piment d'espelette, Mozzarella;
+Toulousaine;	21€;	Tomate, Oignons, Foie Gras, Cassoulet;
+Bretonnne;	16€;	Crème, Jambon, Emmental, Oeuf, Galette de Sarazin;
+Napolitaine;	12€;	Tomate, Anchois, Olives, Mozzarella;
+Chinoise;	25€;	Tomate, Pousses de Sola, Nems, Rouleaux de Printemps, Poulet Terryaki, Sauce Soja;

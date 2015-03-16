@@ -273,6 +273,19 @@ Exemple de script PHP permettant d'effectuer toutes ces vérifications :
 __ http://php.net/manual/fr/function.pathinfo.php
 __ http://php.net/manual/fr/function.move-uploaded-file.php
 
+.. _exo_fichierform:
+
+Exercice
+--------
+
+#. Reprenez les pages de l'`exercice précédent<exo_ecriture>`:ref: sur le formulaire d'ajout de pizza.
+#. Ajoutez un champ permettant d'ajouter une image (spécifiez que cela constitue une action optionnelle).
+#. Limitez la taille de l'envoi à 2 Mo, et aux formats .png et .jpg.
+#. Enregistrez l'image (si envoyée) dans un dossier "./images/pizzas/" avec pour nom, le nom de la pizza en minuscules (indice : fonction `strtolower()`__).
+#. Pour aller plus loin : reprendre la page de commande de pizza et ajouter une colonne dans le tableau où sera affichée l'image de chaque pizza (si diponible).
+
+__ http://php.net/manual/en/function.strtolower.php
+
 Les variables superglobales
 ===========================
 
@@ -376,10 +389,10 @@ La fermeture de la session s'effectue comme suit :
 Exercice
 --------
 
-#. Reprenez les pages de l'`exercice précédent<exo_ecriture>`:ref: sur le formulaire d'ajout de pizza.
+#. Reprenez les pages de l'`exercice précédent<exo_fichierform>`:ref: sur le formulaire d'ajout de pizza.
 #. Créez une page d'authentification "authentification.php" qui affiche un formulaire avec un champ "login" et un champ "mot de passe" dont la cible est le formulaire d'ajout de pizza.
 #. Grâce aux sessions, réalisez un mini-contrôle d'accès à la page d'ajout aux seuls utilisateurs connectés (indiquez le login et mot de passe attendu en dur dans la page "authentification.php").
-#. Pour aller plus loin, grâce aux fonctions d'inclusion, s'assurer que l'on demande systématiquement les informations d'authentification lorsque l'on souhaite accèder à la page d'ajout, sauf si elles ont déjà été renseignées (et donc stockées dans des variables de session).
+#. Pour aller plus loin: grâce aux fonctions d'inclusion, s'assurer que l'on demande systématiquement les informations d'authentification lorsque l'on souhaite accèder à la page d'ajout, sauf si elles ont déjà été renseignées (et donc stockées dans des variables de session).
 
 
 Les cookies
@@ -473,7 +486,81 @@ __ http://php.net/manual/fr/function.date.php
 Lire et écrire dans un fichier
 ==============================
 
-.. TODO::
-	
-	Exercice depuis le formulaire des pizzas amélioré avec BDD : donner un fichier texte très complet avec plein de pizzas.
-	L'étudiant doit lire le fichier, récupérer les données et les enregistrer dans une base de données
+Ouvrir et lire un fichier
++++++++++++++++++++++++++
+
+PHP embarque des fonctions très utiles pour ouvrir `fopen()`__, lire `fgetc()`__/`fgets()`__ et fermer `fclose()`__ un fichier.
+
+Le protocole de lecture est en trois étapes :
+
+#. Ouverture du fichier
+#. Lecture
+#. Fermeture
+
+.. warning:: 
+
+  Lors de l'ouverture avec ``fopen()``, PHP bloque l'accès au fichier tant que la fonction ``fclose()`` n'est pas appellée.
+
+__ http://php.net/manual/fr/function.fopen.php
+__ http://php.net/manual/fr/function.fgetc.php
+__ http://php.net/manual/fr/function.fgets.php
+__ http://php.net/manual/fr/function.fclose.php
+
+.. nextslide::
+
+Exemple de lecture ligne par ligne :
+
+.. code-block:: php
+
+  <?php
+   $fichier = fopen('fichier.txt', 'r');
+   if($fichier != NULL){
+    $ligne = fgets($fichier);
+    while($ligne){
+	 ... // traitement de la ligne
+	 $ligne = fgets($fichier);
+    }
+    fclose($fichier);
+   }
+  ?>
+
+.. note:: 
+
+  Le 'r' signifie que le fichier est ouvert en lecture. Voir la `documentation`__ pour les autres modes.
+  
+__ http://php.net/manual/fr/function.fopen.php
+  
+Ecrire dans un fichier
+++++++++++++++++++++++
+
+Pour écrire dans un fichier, il est utile de savoir modifier le curseur. Il indique la position courante de la lecture/écriture dans le fichier.
+
+Le curseur se déplace avec la fonction `fseek()`__ et l'écriture est réalisée par `fputs()`__.
+
+La fonction ``fseek()`` ne fonctionne qu'avec le mode d'écriture 'r+' ou 'w'. Dans le cas du mode 'a+' (lecture seule + pas d'écrasement), les nouvelles données seront toujours écrites à la fin.
+
+__ http://php.net/manual/fr/function.fseek.php
+__ http://php.net/manual/fr/function.fputs.php
+
+Exemple d'écriture au début du fichier :
+
+.. code-block:: php
+
+  <?php
+   $fichier = fopen('fichier.txt', 'r+');
+   if($fichier != NULL){
+    fseek($fichier, 0);
+	fputs($fichier, 'nouvelles données');
+    fclose($fichier);
+   }
+  ?>
+
+Exercice
+++++++++
+
+#. Reprenez votre `exercice ultérieur<exo_jointure>`:ref: avec la BDD incluant la table de jointure.
+#. Téléchargez le fichier `pizzas.txt`__ et enregistrez le dans un dossier du serveur.
+#. Créez une page protégée "maj_bdd.php" permettant de mettre à jour les données de la base depuis le fichier externe fourni (indice : utilisez les expressions régulières pour découper le fichier).
+#. Pour aller plus loin : créez une page "générer_menu.php" qui permet d'extraire toutes les pizzas de la BDD et de les enregistrer dans un fichier téléchargé au chargement de la page sous le format "Pizza (prix €) : Ingrédients, ...".
+
+__ _static/donnees/exercices/pizzas.txt
