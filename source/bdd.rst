@@ -585,10 +585,13 @@ Exemple :
   On peut bien sûr imbriquer plusieurs jointures lorsque plus de deux tables sont liées.
   Pour cela, il suffit de préciser les conditions de jointures les unes après les autres (``INNER JOIN ... ON ... INNER JOIN ... ON``).
 
+  
+.. _exo_jointure:
+  
 Exercice
 ````````
 
-* Reprenez et réalisez une copie du formulaire de commande de pizzas réalisé pour un `exercice ultérieur<exo_post>`:ref:.
+* Reprenez et réalisez une copie du formulaire de commande de pizzas réalisé pour un `exercice ultérieur<exo_requete>`:ref:.
 * Téléchargez et importez (dans PhpMyAdmin) la nouvelle `BDD de pizzas`__ qui utilise une table de jointure.
 * Modifiez vos pages PHP et actualisez vos requêtes pour obtenir le même résultat (chargement des infos dans le tableau associatif).
 
