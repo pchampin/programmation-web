@@ -64,7 +64,7 @@ Il existe des logiciels permettant d'émuler le fonctionnement d'un serveur en l
 
 Suivant votre système d'exploitation : 
 
-* `WAMP`__ (Windows) 
+* `WAMP`__ (Windows)
 * `XAMPP`__ (Linux) 
 * `MAMP`__ (Mac OS)
 
