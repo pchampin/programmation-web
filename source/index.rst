@@ -16,8 +16,6 @@ Programmation Web
    php
    donnees
    bdd
-   avance
-   
 
 .. toctree::
    :maxdepth: 1
