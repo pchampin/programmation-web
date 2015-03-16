@@ -1,7 +1,7 @@
 :tocdepth: 2
 
 ============================
- Le langage PHP
+ Introduction au PHP
 ============================
 
 Le PHP, c'est quoi ?
@@ -830,4 +830,23 @@ Pour cela, deux fonctions doivent être appelées dans le script :
    Il est aussi possible de configurer l'affichage des erreurs dans le fichier de configuration ``php.ini``
   
 
+Redirection
+-----------
 
+PHP permet de rediriger l'utilisateur d'une page à une autre grâce à la fonction ``header()``. Exemple :
+
+.. code-block:: php
+
+  <?php
+   header('Location : urlDeRedirection.php?parametres');
+   exit ();
+  ?>
+
+.. tip::
+  
+  Il est possible de rediriger vers une page via une URL relative ou une URL externe. On peut même faire une redirection vers la même page mais avec des paramètres différents !
+  
+.. warning::
+
+  La fonction ``header()`` doit être exécutée avant toute écriture de texte.
+ 
