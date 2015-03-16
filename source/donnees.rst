@@ -308,6 +308,8 @@ Parmi les variables superglobales, on retrouve :
 
   Un exemple utile de variable serveur : ``$SERVER['REMOTE_ADDR']`` contient l'adresse IP du client qui cherche à consulter la page.
 
+.. _sessions:
+  
 Les sessions
 ++++++++++++
 
