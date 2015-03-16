@@ -10,6 +10,10 @@ Les expressions régulières
 Sécuriser des pages PHP
 =======================
 
+.. TODO::
+  
+  htaccess ...
+
 Programmation Orientée Objet
 ============================
 
