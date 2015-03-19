@@ -592,6 +592,10 @@ Exercice
 
 #. Affichez grâce à un script une liste composée de 10 "Hello World !".
 
+Voir le `résultat`__ attendu.
+
+__ _static/php/corrections/for/
+
 
 .. _boucle_foreach:
   
@@ -661,6 +665,10 @@ Exercice
 #. Créez un nouveau fichier PHP vide.
 #. Créez et initialisez un tableau clé-valeur dont les clés seront "prix_unitaire" et "quantite".
 #. Réalisez un affichage basique en parcourant votre tableau.
+
+Voir le `résultat`__ attendu.
+
+__ _static/php/corrections/tableau/
 
 Les opérateurs
 ++++++++++++++

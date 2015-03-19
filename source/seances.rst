@@ -29,6 +29,7 @@ Séance 2
   - Fonctions
   - `Exercice<exo_fonction>`:ref:
   - Fonctions de PHP
+  - `Exercice<exo_include>`:ref:
  
 
 .. _seance3:
