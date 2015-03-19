@@ -782,8 +782,13 @@ Exercice
 --------
 
 #. Créez un fichier "calcul_prix.php" qui contient une fonction ``Prix`` permettant de calculer un prix total à partir d'un prix unitaire et d'une quantité.
-#. Ajoutez une seconde fonction ``Total`` qui calcule le prix total correspondant aux données de prix et de quantités contenues dans une copie de votre tableau de l'`exercice précédent<exo_tableau>`:ref:.
+#. Ajoutez une seconde fonction ``Total`` qui calcule le prix total correspondant aux données de prix et de quantités contenues dans un tableau composé d'élements correspondant à votre tableau de l'`exercice précédent<exo_tableau>`:ref:.
 #. Affichez et vérifiez le résultat en modifiant les valeurs stockées dans le tableau.
+
+
+Voir le `résultat`__ attendu.
+
+__ _static/php/corrections/fonction/
 
 Les fonctions de PHP
 ++++++++++++++++++++
