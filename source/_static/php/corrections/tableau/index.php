@@ -3,7 +3,7 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <title>Ma première page en PHP !</title>
+    <title>Exercice tableau</title>
   </head>
   <body>
 <?php

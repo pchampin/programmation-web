@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <title>Ma première page en PHP !</title>
+    <title>Exercice boucle for</title>
   </head>
   <body>
 <?php
