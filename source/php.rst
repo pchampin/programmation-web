@@ -161,8 +161,11 @@ Exercice
 
 #. Comparez votre fichier avec la source reçue au niveau du client.
 
+Voir le `résultat`__ attendu.
+
 __ _static/php/html5_minimal.html
 
+__ _static/php/corrections/premierepagephp/
 
 Les variables
 ==============
