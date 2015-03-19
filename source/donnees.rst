@@ -188,7 +188,8 @@ __ _static/donnees/exercices/pizza.zip
 __ _static/donnees/corrections/pizza/
   
 
-
+.. _envoi_fichiers:
+  
 Envoyer des fichiers 
 ++++++++++++++++++++
 
@@ -285,6 +286,8 @@ Exercice
 #. Pour aller plus loin : reprendre la page de commande de pizza et ajouter une colonne dans le tableau où sera affichée l'image de chaque pizza (si diponible).
 
 __ http://php.net/manual/en/function.strtolower.php
+
+.. _variables_superglobales:
 
 Les variables superglobales
 ===========================
@@ -484,6 +487,8 @@ Exercice
 __ http://php.net/manual/fr/function.time.php
 __ http://php.net/manual/fr/function.date.php
 
+
+.. _manipulation_fichiers:
   
 Lire et écrire dans un fichier
 ==============================
@@ -556,6 +561,9 @@ Exemple d'écriture au début du fichier :
     fclose($fichier);
    }
   ?>
+
+  
+.. _exo_donnees_fichiers:   
 
 Exercice
 ++++++++

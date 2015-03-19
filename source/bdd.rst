@@ -98,6 +98,7 @@ Identifiant   Champ1      Champ2      ...
   Le champ identifiant n'est pas obligatoire, mais il permet d'affecter une valeur unique à chaque enregistrement.
   L'utilisation d'identifiants permet aussi de lier les données de plusieurs tables entre-elles.
 
+.. _gestion_bdd:
  
 Créer et gérer une base de données
 ==================================
@@ -329,6 +330,8 @@ Depuis PhpMyAdmin, il est possible de taper directement des requêtes SQL et d'a
 #. Ajouter une nouvelle pizza nommée "Cannibale", qui coûte 20€, et contient du Fromage, de la Tomate, de la Viande Hachée, du Poulet, du Chorizo, du Canard, et du Jambon.
 
  
+.. _lecture_bdd:
+ 
 Lire les données d'une base de donnnées
 ---------------------------------------
 
@@ -486,6 +489,8 @@ Exercice
 #. Si l'utilisateur entre un nom de pizza déja existant dans la table, appliquer une requête de modification avec les nouvelles données (empêchez la création de doublons).
 
 __ _static/bdd/exercices/ajout_pizza.zip
+
+.. _jointure_bdd:
 
 Les requêtes de jointure
 ------------------------

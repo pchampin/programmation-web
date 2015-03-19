@@ -146,6 +146,8 @@ Mais ce fichier ne générera en revanche pas un fichier HTML valide.
 
    Nous verrons par la suite qu'il est possible d'intégrer un fichier PHP dans un autre, ce qui donne tout son intérêt à concevoir des fichiers PHP réduits, mais génériques.
   
+.. _exo_premierepagephp:
+  
 Exercice
 ++++++++
 
@@ -161,7 +163,6 @@ Exercice
 
 __ _static/php/html5_minimal.html
 
-.. _exo_premierepagephp:
 
 Les variables
 ==============
@@ -589,6 +590,7 @@ Exercice
 #. Affichez grâce à un script une liste composée de 10 "Hello World !".
 
 
+.. _boucle_foreach:
   
 La boucle ``foreach``
 ---------------------
@@ -851,6 +853,8 @@ PHP permet de rediriger l'utilisateur d'une page à une autre grâce à la fonct
   La fonction ``header()`` doit être exécutée avant toute écriture de texte.
  
 
+.. _php_avance:
+ 
 Utilisation Avancée de PHP
 ==========================
 
@@ -948,7 +952,7 @@ Programmation Orientée Objet
 A venir.
  
 Gestion des exceptions
-++++++++++++++++++++++
+----------------------
 
 A venir.
 
