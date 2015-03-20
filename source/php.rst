@@ -452,10 +452,10 @@ Exemple : ``if ... else``
   :linenos:
   
   <?php 
-  $longeur_mdp = 6;
-  if ($longeur_mdp >= 8) { // SI
+  $longueur_mdp = 6;
+  if ($longueur_mdp >= 8) { // SI
    $save_mdp = true;
-  } elseif ($longeur_mdp >= 6){ //SINON SI
+  } elseif ($longueur_mdp >= 6){ //SINON SI
    $save_mdp = true;
    echo "Ce mot de passe n'est pas très sûr !\n";
   } else { // SINON
@@ -486,7 +486,7 @@ Exemple : ``switch``
   
   <?php couleur
   $couleur = "rouge";
-  switch ($longeur_mdp) {
+  switch ($couleur) {
 	case "bleu"  : $r=0;   $g=0;   $b=255; break;
 	case "vert"  : $r=0;   $g=255; $b=0;   break;
 	case "rouge" : $r=255; $g=0;   $b=0;   break;
