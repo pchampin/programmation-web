@@ -43,7 +43,7 @@ Séance 3
   - Méthode GET
   - `Exercice GET <exo_get>`:ref:
   - Méthode POST
-  - `Exercice GET <exo_post>`:ref:
+  - `Exercice POST <exo_post>`:ref:
   
 
 .. _seance4:
