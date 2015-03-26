@@ -56,7 +56,7 @@ Les données du formulaire qui sont passées dans l'URL s'écrivent sous la form
 .. raw:: html
 
     <p>Le caractère <font color="green">?</font> sépare le nom de la page des paramètres.</p>
-    <p>Chacun des couples paramètre/valeur s'écrivent sous la forme : <font color="red">nom</font><font color="green">=</font><font color="blue">valeur</font> et sont séparés les uns des autres par le symbole <font color="green">&</font>.</p>
+    <p>Chaque couple paramètre/valeur s'écrit sous la forme : <font color="red">nom</font><font color="green">=</font><font color="blue">valeur</font>; ils sont séparés les uns des autres par le symbole <font color="green">&</font>.</p>
 	
 	
 .. note::
