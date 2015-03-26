@@ -124,7 +124,10 @@ Exercice
 #. Assurez vous que la valeur transmise soit bien de type entier (soit par conversion, ou mieux, avec la ``is_int`` (`documentation`__). 
 
 
+Voir le `résultat`__.
+
 __ http://php.net/manual/fr/function.is-int.php
+__ _static/donnees/corrections/get/
   
 Transmettre des données dans une requête
 ++++++++++++++++++++++++++++++++++++++++

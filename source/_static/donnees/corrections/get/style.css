@@ -1,0 +1,31 @@
+body{
+	max-width:750px;
+	min-width:500px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+ul {
+	list-style-type: none;
+}
+
+ul > li {
+	display: inline-block;
+	width : 100%;
+	height : 1m;
+	vertical-align:center;
+}
+
+ul > li.odd {
+	background: #AAAAAA;
+}
+
+ul > li.even {
+	background: #CCCCCC;
+}
+
+ul > li > span {
+	display : inline-block;
+	width : 2em;
+	margin-right: 0.5em; 
+}
