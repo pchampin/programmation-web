@@ -23,6 +23,11 @@ Programmation Web
    seances
    annexe
 
+   
+.. toctree::
+   :maxdepth: 1
+   
+   projetp2015
 
 .. rubric:: Remerciements
 
