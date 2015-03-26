@@ -773,7 +773,7 @@ Appeler une fonction
   
 .. tip::
 
-   Une bonne pratique consiste à définir vos fonctions dans des fichiers séparés, puis de les inclure dans vos page grâce à la fonction ``require_once``.
+   Une bonne pratique consiste à définir vos fonctions dans des fichiers séparés, puis de les inclure dans vos pages grâce à la fonction ``require_once``.
 
 
 .. _exo_fonction:
