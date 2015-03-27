@@ -675,7 +675,7 @@ Les opérateurs
 
 L'utilisation de variables implique la présence d'opérateurs pour pouvoir les manipuler.
 
-PHP comprent une multitude d'opérateurs pour manipuler les variables numériques, booléennes, ou les chaînes de caractères.
+PHP comprend une multitude d'opérateurs pour manipuler les variables numériques, booléennes, ou les chaînes de caractères.
 
 Opérateurs arithmétiques
 ------------------------
