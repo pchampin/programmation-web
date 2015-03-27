@@ -1,6 +1,6 @@
 <?php
 function liste_hello($nb_hello) {
-    if (isset($nb_hello) and $nb_hello != 0) {
+    if (isset($nb_hello) and $nb_hello != 0 and $nb_hello > 0) {
         if ($nb_hello > 100) {
             $nb_hello = 100;
         }
