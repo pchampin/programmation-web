@@ -1,0 +1,15 @@
+ol {
+    list-style: none;
+}
+
+ol li:nth-child(2n) {
+    background-color: lightgray;
+}
+
+ol li:nth-child(2n + 1) {
+    background-color: darkgray;
+}
+
+ol li:nth-child(10n) {
+    list-style: decimal;
+}

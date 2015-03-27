@@ -749,7 +749,7 @@ La syntaxe PHP impose l'utilisation du mot-clé ``function`` :
   <?php
    function MaFonction ($parametre1, $parametre2) {
 	//corps de la fonction
-	return $valeurRetournee
+	return $valeurRetournee;
    }
   ?>
 	
