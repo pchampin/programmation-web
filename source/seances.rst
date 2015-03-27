@@ -51,45 +51,42 @@ Séance 3
 Séance 4
 ========
 
-* Suite `Manipulation des données<envoi_fichiers>`:ref:
-
-  - Suite formulaires : envoi de fichiers
-  - `Exercice envoi de fichiers<exo_fichierform>`:ref:
-
 * Début `Bases de données<bdd>`:doc:
 
   - Introduction
   - SGBD
   - Structure
+  - PhpMyAdmin
+  - `Exercice<exo_phpmyadmin>`:ref:
+  - Interrogation des BDD
+  - Connexion
   
-
 .. _seance5:
 
 Séance 5
 ========
 
-* Suite `Bases de données<gestion_bdd>`:ref:
+* Suite `Bases de données<requete_bdd>`:ref:
 
-  - PhpMyAdmin
-  - `Exercice<exo_phpmyadmin>`:ref:
-  - Interrogation des BDD
-  - Connexion
   - Requêtes SQL
   - `Exercice<exo_sql>`:ref:
-  
+  - Lecture des données
+  - `Exercice<exo_requete>`:ref:
 
 .. _seance6:
 
 Séance 6
 ========
 
-* Suite `Bases de données<lecture_bdd>`:ref:
+* Suite `Bases de données<ecriture_bdd>`:ref:
 
-  - Lecture des données
-  - `Exercice<exo_requete>`:ref:
   - Ecriture des données
   - `Exercice<exo_ecriture>`:ref:
 
+* Suite `Manipulation des données<envoi_fichiers>`:ref:
+
+  - Suite formulaires : envoi de fichiers
+  - `Exercice envoi de fichiers<exo_fichierform>`:ref:
   
 .. _seance7:
 

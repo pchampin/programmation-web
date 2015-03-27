@@ -195,6 +195,8 @@ Fonction de connexion :
    }
   ?>
   
+.. _requete_bdd:
+  
 Faire une requête sur une base de données
 +++++++++++++++++++++++++++++++++++++++++
   
@@ -436,6 +438,9 @@ Exercice
 #. Reprenez votre formulaire de commande de pizzas de l'`exercice précédent<exo_post>`:ref:.
 #. Créez une page contenant la fonction de connexion à la BDD pizzas.
 #. Modifiez la page "prix.php" pour que la construction du tableau soit faite depuis les données de la BDD.	
+
+
+.. _ecriture_bdd:
 
 Ecrire des données dans une base de donnnées
 --------------------------------------------
