@@ -181,3 +181,25 @@ pseudoxml:
 	$(SPHINXBUILD) -b pseudoxml $(ALLSPHINXOPTS) $(BUILDDIR)/pseudoxml
 	@echo
 	@echo "Build finished. The pseudo-XML files are in $(BUILDDIR)/pseudoxml."
+
+publishable:
+	@echo ------ Building HTML ------
+	@echo 
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+	@echo 
+	@echo Finished: The HTML pages are in $(BUILDDIR)/html.
+	@echo 
+	@echo ------ HTML Build finished ------
+	@echo 
+	@echo ------ Building SLIDES ------
+	@echo 
+	$(SPHINXBUILD) -b slides $(ALLSPHINXOPTS) $(BUILDDIR)/html/slides
+	@echo 
+	@echo Finished : the HTML slides are in $(BUILDDIR)/html/slides.
+	@echo 
+	@echo ------ SLIDES Build finished ------
+
+slides:
+	$(SPHINXBUILD) -b slides $(ALLSPHINXOPTS) $(BUILDDIR)/html/slides
+	@echo 
+	@echo Build finished. The HTML slides are in $(BUILDDIR)/html/slides.
