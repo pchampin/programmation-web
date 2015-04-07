@@ -258,7 +258,7 @@ Exemple de script PHP permettant d'effectuer toutes ces vérifications :
   
   <?php
    if (isset($_FILES['fichier'])
-    AND $_FILES['fichier']['error'] == 0)
+    AND $_FILES['fichier']['error'] == 0
     AND $_FILES['fichier']['size'] <= 1048576) {  // 1Mo 
      $infosfichier = pathinfo($_FILES['fichier']['name']);
      $ext_upload = $infosfichier['extension'];
