@@ -189,7 +189,8 @@ Fonction de connexion :
     try {
 	 $bdd=new PDO('mysql:host='.$host.';dbname='.$dbname.
 	              ';charset=utf8',$user,$password);
-    } catch (Exception $e) {
+	 return $bdd;
+	} catch (Exception $e) {
 	 die('Erreur : '.$e->getMessage());
     }
    }
@@ -354,7 +355,7 @@ Exemple générique
   :linenos:
   
   <?php
-   Connect_db(); //connexion à la BDD
+   $bdd = Connect_db(); //connexion à la BDD
    $query = $bdd->prepare('...'); // requête SQL
    $query->execute(...); // paramètres et exécution
    while($data = $query->fetch()) { // lecture par ligne
@@ -373,6 +374,14 @@ Quelques remarques :
 * La fonction ``fetch()`` retourne un tableau associatif dont les clés correspondent aux champs sélectionnés par la requête.
 * La lecture s'arrête lorsque l'affectation de l'enregistrement échoue : il n'y a plus de données à lire.
 * La fonction ``closeCursor()`` permet de libérer la ressource lorqu'on a fini les traitements sur les données retournées par le SGBD.
+
+
+.. nextslide::
+
+.. warning::
+  
+  Une faille connue nommée "injection SQL" peut être exploitée lorsque l'on utilise des données entrées par l'utilisateur dans des requêtes SQL.
+  Afin d'éviter que d'autres requêtes soient injectées dans les variables via PHP, il faut TOUJOURS utiliser les fonctions ``prepare()`` et ``execute()``. 
 
 
 Requête sans paramètres
@@ -394,6 +403,9 @@ Requête sans paramètres
   
   ``$query=$bdd->exec('...');``.
 
+  Attention : n'utilisez la fonction ``exec()`` que si la requête ne comporte pas de paramètres (pas de variables PHP) pour éviter la faille d'injection SQL.
+
+  
 Requête avec paramètres anonymes
 ````````````````````````````````
 
@@ -461,7 +473,7 @@ Avec paramètres :
   :linenos:
   
   <?php
-   Connect_db(); //connexion à la BDD
+   $bdd = Connect_db(); //connexion à la BDD
    $query = $bdd->prepare('...'); // requête SQL
    $query->execute(...); // paramètres et exécution
   ?>
@@ -474,7 +486,7 @@ Sans paramètres :
   :linenos:
   
   <?php
-   Connect_db(); //connexion à la BDD
+   $bdd = Connect_db(); //connexion à la BDD
    $query = $bdd->exec('...'); // requête SQL
   ?>
   
