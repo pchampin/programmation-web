@@ -957,22 +957,22 @@ Exemple avec cryptage :
   
 
   
-Les expressions régulières
-++++++++++++++++++++++++++
+.. Les expressions régulières
+.. ++++++++++++++++++++++++++
 
-A venir.
+.. A venir.
 		  
-Programmation Orientée Objet
-++++++++++++++++++++++++++++
+.. Programmation Orientée Objet
+.. ++++++++++++++++++++++++++++
  
-A venir.
+.. A venir.
  
-Gestion des exceptions
-----------------------
+.. Gestion des exceptions
+.. ----------------------
 
-A venir.
+.. A venir.
 
-Architecture MVC
-++++++++++++++++
+.. Architecture MVC
+.. ++++++++++++++++
   
-A venir.
+.. A venir.
