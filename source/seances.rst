@@ -82,15 +82,21 @@ Séance 6
 
   - Ecriture des données
   - `Exercice<exo_ecriture>`:ref:
+  
+.. _seance7:
+
+Séance 7
+========
 
 * Suite `Manipulation des données<envoi_fichiers>`:ref:
 
   - Suite formulaires : envoi de fichiers
   - `Exercice envoi de fichiers<exo_fichierform>`:ref:
-  
-.. _seance7:
 
-Séance 7
+  
+.. _seance8:
+
+Séance 8
 ========
 
 * Suite et fin `Bases de données<jointure_bdd>`:ref:
@@ -98,10 +104,9 @@ Séance 7
   - Requêtes de jointure
   - `Exercice<exo_jointure>`:ref:
   
+.. _seance9:
 
-.. _seance8:
-
-Séance 8
+Séance 9
 ========
 
 * Suite `Manipulation des données<variables_superglobales>`:ref:
@@ -112,20 +117,6 @@ Séance 8
   - Cookies
   - `Exercice<exo_cookies>`:ref:
   
-.. _seance9:
-
-Séance 9
-========
-
-* Suite et fin `PHP<php_avance>`:ref:
-
-  - Utilisation avancée de PHP
-  - Sécuriser des pages PHP 
-  - Expressions régulières
-  - Programmation Orientée Objet
-  - Architecture MVC
-  
-
 .. _seance10:
   
 Séance 10
@@ -136,7 +127,15 @@ Séance 10
   - Lire et écrire dans un fichier
   - `Exercice<exo_donnees_fichiers>`:ref:
   
+* Suite et fin `PHP<php_avance>`:ref:
 
+  - Utilisation avancée de PHP
+  - Sécuriser des pages PHP 
+  
+  .. - Expressions régulières
+  .. - Programmation Orientée Objet
+  .. - Architecture MVC
+  
 .. _seance11:
   
 Séance 11
