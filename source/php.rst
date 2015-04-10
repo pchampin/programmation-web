@@ -856,7 +856,7 @@ PHP permet de rediriger l'utilisateur d'une page à une autre grâce à la fonct
 .. code-block:: php
 
   <?php
-   header('Location : urlDeRedirection.php?parametres');
+   header('Location: urlDeRedirection.php?parametres');
    exit ();
   ?>
 
