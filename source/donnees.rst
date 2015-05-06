@@ -89,7 +89,7 @@ Exemple (avec l'URL précédente) :
 Contrôler la valeur des paramètres
 `````````````````````````````````` 
 
-Lorsque des données transitent par l'URL, il faut s'assurer que les **valeurs correspondent au type attentdu**.
+Lorsque des données transitent par l'URL, il faut s'assurer que les **valeurs correspondent au type attendu**.
 Dans le cas contraire, PHP permet de convertir les valeurs d'un type à un autre.
 
 De plus, il est possible que certains paramètres attendus dans le code PHP soient absents de l'URL, dans ce cas
@@ -339,7 +339,7 @@ Création d'une session
 ----------------------
 
 La variable session ``$_SESSION`` est accessible n'importe où dans le code à condition qu'on aie préalablement fait appel à la fonction ``session_start()``.
-Les variables de session s'instantient comme des champs du tableau associatif ``$_SESSION``. Exemple :
+Les variables de session s'instancient comme des champs du tableau associatif ``$_SESSION``. Exemple :
 
 .. code-block:: php
 
