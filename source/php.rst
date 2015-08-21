@@ -19,7 +19,7 @@ PHP: Hypertex Preprocessor
 __ http://commons.wikimedia.org/wiki/File:PHP-logo.svg
 
 * Un acronyme récursif !
-* Un **langage de script** exécuté **côté serveur**,
+* Un **langage de script interprété** (exécuté) **côté serveur**,
 * Qui permet d'écrire des pages web **dynamiques**.
 * Une extension de fichier (.php).
 * Un outil incontournable pour intéragir avec une `base de données <bdd>`:doc: (MySQL).
@@ -32,8 +32,8 @@ Comment ça marche ?
 
 - Reprenons l'architecture client serveur ; pour une page statique (HTML) :
 
-	.. figure:: _static/php/client-serveur_HTML.png
-		:alt: client-serveur-html
+  .. figure:: _static/php/client-serveur_HTML.png
+    :alt: client-serveur-html
 
 .. container:: build
 
@@ -41,9 +41,9 @@ Comment ça marche ?
   
     - pour une page dynamique (PHP) :
 
-	.. figure:: _static/php/client-serveur_PHP.png
-		:alt: client-serveur-php
-	
+  .. figure:: _static/php/client-serveur_PHP.png
+    :alt: client-serveur-php
+  
 
 Quel lien avec HTML/CSS ?
 ++++++++++++++++++++++++++
@@ -56,10 +56,10 @@ Quel lien avec HTML/CSS ?
   
    - PHP est interprété côté serveur :
 
-	.. figure:: _static/php/client-serveur_PHP2.png
-		:alt: client-serveur-php2
-	
-	
+  .. figure:: _static/php/client-serveur_PHP2.png
+    :alt: client-serveur-php2
+  
+  
 Quel lien avec JavaScript ?
 ++++++++++++++++++++++++++++
 
@@ -70,7 +70,7 @@ JavaScript :
 - **mais** s'éxécute côté client et non côté serveur.
 
 .. figure:: _static/php/client-serveur_JS.png
-	:alt: client-serveur-JS
+  :alt: client-serveur-JS
 
 
 Pourquoi utiliser PHP alors ?
@@ -81,11 +81,11 @@ Pourquoi utiliser PHP alors ?
  - Parce que ces données brutes manipulées par le serveur sont inacessibles par les clients.
  
 Mais il existe bien sûr d'autres concurrents : `ASP.NET`__, `Ruby on Rails`__, `JSP (Java EE)`__, ...
-	
+  
 __ http://www.asp.net/
 __ http://rubyonrails.org/
 __ http://www.oracle.com/technetwork/java/javaee/jsp/index.html
-	
+  
 
 Ma première page en PHP !
 =========================
@@ -118,19 +118,19 @@ Exemple
   <!DOCTYPE html>
   <html>
     <head>
-	  <meta charset="utf-8"/>
-	  <title>Ma première page en PHP !</title>
+    <meta charset="utf-8"/>
+    <title>Ma première page en PHP !</title>
     </head>
     <body>
-	  <?php echo("Ce texte est écrit 
-	  par du script PHP!"); ?>
+    <?php echo("Ce texte est écrit 
+    par du script PHP!"); ?>
     </body>
   </html>
 
 .. note::
 
   L'instruction ``echo`` est une fonction PHP. Elle permet d'écrire la chaîne de caractères passée en paramètre dans le fichier HTML généré.
-  
+
 Exemple minimal 
 +++++++++++++++
 
@@ -138,7 +138,7 @@ Cet exemple est aussi un script PHP valide :
 
 .. code-block:: php
 
-	  <?php echo("Ce texte est écrit par du script PHP!"); ?>
+    <?php echo("Ce texte est écrit par du script PHP!"); ?>
 
 Mais ce fichier ne générera en revanche pas un fichier HTML valide.
 
@@ -147,7 +147,7 @@ Mais ce fichier ne générera en revanche pas un fichier HTML valide.
    Nous verrons par la suite qu'il est possible d'intégrer un fichier PHP dans un autre, ce qui donne tout son intérêt à concevoir des fichiers PHP réduits, mais génériques.
   
 .. _exo_premierepagephp:
-  
+
 Exercice
 ++++++++
 
@@ -166,6 +166,8 @@ Voir le `résultat`__ attendu.
 __ _static/php/html5_minimal.html
 
 __ _static/php/corrections/premierepagephp/
+
+
 
 Les variables
 ==============
@@ -203,31 +205,29 @@ Exemple
   
     .. code-block:: html
     
-	  Vous avez 21 ans !
+    Vous avez 21 ans !
  
 __ _static/php/test.php#affvariable
   
 Les chaînes de caractères
 +++++++++++++++++++++++++
 
-Les chaînes de caractères affectées à une variable sont écrites entre ``"`` ou entre ``'``.
+Les chaînes de caractères :
 
-Exemple :
+* écrites entre ``"`` ou entre ``'``.
+* concatenation avec ``.``
+* peuvent integrer la valeur d'une variable
 
-.. code-block:: php
+.. note::
 
-  <?php 
-   $phrase1="Ma chaîne de caractères";
-   $phrase2='Ma chaîne de caractères';
-  ?>
+Beaucoup de fonctions mathématiques et pour la manipulation des strings (``http://www.php.net/manual/fr/ref.strings.php``__)
 
-Il est possible d'intégrer la valeur d'une variable à une chaîne de caractères.
-Cela se nomme la **concaténation**
+__ _http://www.php.net/manual/fr/ref.strings.php
 
-La concaténation
-----------------
+Affichage de chaines
+--------------------
 
-La syntaxe de PHP permet de simplifier la concaténation de chaînes de caractères entre elles ou avec des variables.
+La syntaxe de PHP permet de simplifier l'affichage de chaînes de caractères entre elles ou avec des variables.
 
 La syntaxe est différente suivant les délimiteurs utilisés :
 
@@ -238,7 +238,7 @@ La syntaxe est différente suivant les délimiteurs utilisés :
    $mot2=8;
    echo("Voici une $mot1 composée de $mot2 mots.\n");
    echo('Voici une $mot1 composée de $mot2 mots.'."\n");
-   echo('Voici une '.$mot1.' composée de '.$mot2.' mots.');
+   echo('Voici une '.$mot1.' composée de '.$mot2.' mots.'."\n");
   ?>
   
 .. note::
@@ -252,10 +252,6 @@ La syntaxe est différente suivant les délimiteurs utilisés :
   Voici une phrase composée de 8 mots.
   Voici une $mot1 composée de $mot2 mots.
   Voici une phrase composée de 8 mots.
-  
-Voir le `résultat généré`__.
-  
-__ _static/php/test.php#concatenation
   
 Les tableaux
 +++++++++++++
@@ -487,10 +483,10 @@ Exemple : ``switch``
   <?php couleur
   $couleur = "rouge";
   switch ($couleur) {
-	case "bleu"  : $r=0;   $g=0;   $b=255; break;
-	case "vert"  : $r=0;   $g=255; $b=0;   break;
-	case "rouge" : $r=255; $g=0;   $b=0;   break;
-	default      : $r=0;   $g=0;   $b=0;   break;
+  case "bleu"  : $r=0;   $g=0;   $b=255; break;
+  case "vert"  : $r=0;   $g=255; $b=0;   break;
+  case "rouge" : $r=255; $g=0;   $b=0;   break;
+  default      : $r=0;   $g=0;   $b=0;   break;
   }
   echo "Valeurs RGB pour $couleur : ($r,$g,$b).";
   ?>
@@ -518,7 +514,7 @@ Exemple :
 
   <?php 
    if($condition1 && (!$condition2 || $condition3)){
-	...
+  ...
    }
   ?>
 
@@ -683,14 +679,14 @@ Opérateurs arithmétiques
 PHP reconnait tous les `opérateurs arithmétiques`__ classiques :
 
 =========== =============== =======================================================================
-Exemple	    Nom	            Résultat
+Exemple     Nom             Résultat
 =========== =============== =======================================================================
--$a	        Négation	    Opposé de $a.
-$a + $b	    Addition	    Somme de $a et $b.
-$a - $b	    Soustraction    Différence de $a et $b.
+-$a         Négation      Opposé de $a.
+$a + $b     Addition      Somme de $a et $b.
+$a - $b     Soustraction    Différence de $a et $b.
 $a \* $b    Multiplication  Produit de $a et $b.
-$a / $b	    Division	    Quotient de $a et $b.
-$a % $b	    Modulo	        Reste de $a divisé par $b.
+$a / $b     Division      Quotient de $a et $b.
+$a % $b     Modulo          Reste de $a divisé par $b.
 $a \*\* $b  Exponentielle   Résultat de l'élévation de $a à la puissance $b. Introduit en PHP 5.6.
 =========== =============== =======================================================================
   
@@ -702,16 +698,16 @@ Opérateurs d'affectation
 Il est possible de modifier une variable lors de son affectation :
 
 =============== =============== =======================================  
-Exemple	        Nom	            Résultat
+Exemple         Nom             Résultat
 =============== =============== =======================================  
-$a=3	        Affectation	    $a vaut 3.
-$a += 3	        Addition        $a vaut $a + 3.
-$a -= 3	        Soustraction    $a vaut $a - 3.
+$a=3          Affectation     $a vaut 3.
+$a += 3         Addition        $a vaut $a + 3.
+$a -= 3         Soustraction    $a vaut $a - 3.
 $a \*= 3         Multiplication  $a vaut $a \* 3.
-$a /= 3	        Division        $a vaut $a /3.
-$a %= 3	        Modulo          $a vaut $a % 3.
-$a++ 	        Incrémentation  $a vaut $a + 1. Equivalent à $a += 1.
-$a--	        Décrémentation  $a vaut $a - 1. Equivalent à $a -= 1.
+$a /= 3         Division        $a vaut $a /3.
+$a %= 3         Modulo          $a vaut $a % 3.
+$a++          Incrémentation  $a vaut $a + 1. Equivalent à $a += 1.
+$a--          Décrémentation  $a vaut $a - 1. Equivalent à $a -= 1.
 $b .= "chaine"  Concaténation   $b vaut $b."chaine".
 =============== =============== =======================================  
 
@@ -721,7 +717,7 @@ Opérateurs de comparaison
 Les `comparaisons`__ de variables sont facilités par des opérateurs spécifiques :
 
 ============== ================== =======================================================
-Exemple	       Nom	              Résultat
+Exemple        Nom                Résultat
 ============== ================== =======================================================
 $a == $b       Egal               TRUE si $a est égal à $b
 $a === $b      Identique          TRUE si $a == $b et qu'ils sont de même type.
@@ -748,11 +744,11 @@ La syntaxe PHP impose l'utilisation du mot-clé ``function`` :
 
   <?php
    function MaFonction ($parametre1, $parametre2) {
-	//corps de la fonction
-	return $valeurRetournee;
+  //corps de la fonction
+  return $valeurRetournee;
    }
   ?>
-	
+  
 .. note:: 
   
   Les fonctions peuvent ne rien retourner (pas d'instruction ``return``). Par défaut, c'est la valeur ``NULL`` est retournée.
@@ -961,7 +957,7 @@ Exemple avec cryptage :
 .. ++++++++++++++++++++++++++
 
 .. A venir.
-		  
+      
 .. Programmation Orientée Objet
 .. ++++++++++++++++++++++++++++
  

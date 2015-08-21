@@ -13,9 +13,14 @@ Programmation Web
 .. toctree::
    :maxdepth: 1
 
+   intro
    php
    donnees
    bdd
+   projet1
+   mvc
+   patterns
+   frameworks
 
 .. toctree::
    :maxdepth: 1
