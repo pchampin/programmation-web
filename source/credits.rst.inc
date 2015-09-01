@@ -1,10 +1,6 @@
 .. raw:: html
 
    <!-- NB: using raw:: directive in order to accurately tag metadata -->
-
-     <a rel="author"
-           href="http://liris.cnrs.fr/~mgueriau/"
-           ><p>Maxime Guériau</p></a>
 		   
      <a rel="license"
         href="http://creativecommons.org/licenses/by-sa/3.0/fr/deed.fr">
@@ -20,8 +16,6 @@
 .. only:: not(html)
 
    .. fallback for non HTML content
-
-   `Maxime Guériau <http://liris.cnrs.fr/~mgueriau/>`_
 
    .. figure:: _static/cc.png
       :target: http://creativecommons.org/licenses/by-sa/3.0/fr/deed.fr

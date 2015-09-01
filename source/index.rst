@@ -8,8 +8,6 @@
 Programmation Web
 ===================
 
-.. include:: credits.rst.inc
-
 .. toctree::
    :maxdepth: 1
 
@@ -36,8 +34,12 @@ Programmation Web
 
 .. rubric:: Remerciements
 
-Le thème utilisé dans ce support est celui de `Pierre-Antoine Champin`__ que je remercie.
+Ce support a été préparé par `Michael Mrissa`_ et `Pierre De Vettor`_, très largement inspiré des supports d'Isabelle Gonçalves, de `Maxime Guériau`_ et de `Pierre-Antoine Champin`_ .
 
-Ce support est très largement inspiré des supports d'Isabelle Gonçalves à qui j'adresse mes remerciements.
+.. include:: credits.rst.inc
 
-__ http://www.champin.net
+.. _Maxime Guériau: http://liris.cnrs.fr/~mgueriau/
+.. _Pierre De Vettor: http://liris.cnrs.fr/~pdevetto/
+.. _Michael Mrissa: http://liris.cnrs.fr/~mmrissa/
+.. _Pierre-Antoine Champin: http://www.champin.net
+.. _Isabelle Gonçalves: http://creativecommons.org/licenses/by-sa/3.0/fr/deed.fr

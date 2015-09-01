@@ -73,6 +73,7 @@ Les Requetes HTTP
 +++++++++++++++++
 
 Une requete HTTP contient :
+
 * Le type d'échange (écriture, lecture, ...) => VERBE HTTP
 * Spécifie l'adresse => URL
 * Transmet des informations à propos du client => HEADER
@@ -83,7 +84,8 @@ Construction d'une requete
 
 Une requete est construite comme suit:
 
-.. code-block:: http
+.. code-block:: none
+
   [VERBE] [URL] [PROTOCOLE]
   /* En-tetes */
   [TYPE1]:[VALEUR1]
@@ -115,7 +117,6 @@ Exemple d'une requete
 ++++++++++++++++++++++++++
 
 .. code-block:: http
-  :linenos:
 
   GET http://www.univ-lyon1.fr HTTP/1.1
   User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64) 
@@ -138,22 +139,25 @@ La réponse du serveur à une requete est similaire:
 Statut de réponse HTTP
 ++++++++++++++++++++++
 
-Le statut de réponse HTTP informe du statut de la requete (`Liste des codes`_:
+Le statut de réponse HTTP informe du statut de la requete (`Liste des codes`_):
 
-3 types usuels:
+* 1xx : En attente
 * 2xx : Succes
 * 3xx : Redirection
 * 4xx : Acces refusé
 * 5xx : Erreur serveur
 
-.. note:: Les codes les plus vus sont : 200 OK, 404 NOT FOUND, et 500 INTERNAL SERVER ERROR
+.. note:: Quelques codes usuels :
+
+  **200** OK, **301** Moved Permanently, **404** Not found, **418** `I’m a teapot`_, **501** Internal error
 
 .. _Liste des codes: https://fr.wikipedia.org/wiki/Liste_des_codes_HTTP
+.. _I’m a teapot: https://tools.ietf.org/html/rfc2324
 
 Construction de réponse
 +++++++++++++++++++++++
 
-.. code-block:: http
+.. code-block:: none
   [PROTOCOLE] [CODE] [SIGNIFICATIOn] 
   /* En-tetes */
   [TYPE1]:[VALEUR1]
@@ -164,9 +168,10 @@ Construction de réponse
   /* Corps de la requete */
   [BODY]
 
+Exemple de réponse
+++++++++++++++++++
 
 .. code-block:: http
-  :linenos:
 
   HTTP/1.1 200 OK 
   Content-Type:text/html
@@ -174,10 +179,3 @@ Construction de réponse
   Last-Modified:Tue, 04 Aug 2015 10:25:13 GMT
 
   <html><body> Corps du document ...
-
-- La première ligne contient le code de réponse à la requ^ete
-- Les plus connus sont:
-
-  * **200 OK** pour une requ^ete avec succès
-  * **404 Not found** lorsque l'URL pointe vers une resource inexistante
-  * **501 Internal error** pour une erreur interne du serveur

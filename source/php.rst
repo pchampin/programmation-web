@@ -19,7 +19,7 @@ PHP: Hypertex Preprocessor
 __ http://commons.wikimedia.org/wiki/File:PHP-logo.svg
 
 * Un acronyme récursif !
-* Un **langage de script interprété** (exécuté) **côté serveur**,
+* Un **langage de script interprété côté serveur**,
 * Qui permet d'écrire des pages web **dynamiques**.
 * Une extension de fichier (.php).
 * Un outil incontournable pour intéragir avec une `base de données <bdd>`:doc: (MySQL).
