@@ -14,6 +14,7 @@ En quelques mots
 * Une des application d'Internet
 * Ensemble hyperdocumentaire (réseau de documents) public
 * Basé sur un système hypertexte (protocole HTTP)
+* Accès aux documents par leurs adresses (URL)
 * Assemblage de technologies diverses (standards)
 
 Architecture Client Serveur
@@ -45,7 +46,7 @@ URLs
 
 .. rst-class:: small
 
-  NB: les URLs sont parfois appelés URIs → même chose
+  NB: les URLs sont parfois appelés URIs -> Plus générique, URL = URI particulière
 
 HTML
 ++++
@@ -53,7 +54,7 @@ HTML
 * HyperText Markup Language (`HTML`_)
 * Standard de description des documents sur le Web
 * Langage statique décrivant la structure des pages
-* Peut ^etre combiné avec CSS pour la gestion des styles
+* Peut être combiné avec CSS pour la gestion des styles
 
 .. _HTML: http://www.w3.org/TR/html5/
 
@@ -102,16 +103,15 @@ Les Verbes HTTP (1/2)
 * Définissent le type d'échange
 * Ont une sémantique propre
 
-.. note:: Une application qui respecte cette sémantique est appellée RESTful
+  * GET : Lecture de la ressource
+  * HEAD : Requête de l'en-tête de la ressource
+  * POST : Mise à jour de la resource située à l'URL spécifiée
+  * PUT : Creation de la resource à l'URL spécifiée
+  * DELETE : Suppression de la ressource
 
-Les Verbes HTTP (2/2)
-+++++++++++++++++++++
-
-* GET : Lecture de la ressource
-* HEAD : Requête de l'en-tête de la ressource
-* POST : Mise à jour de la resource située à l'URL spécifiée
-* PUT : Creation de la resource à l'URL spécifiée
-* DELETE : Suppression de la ressource
+.. rst-class:: small
+  
+  NB: Une application qui respecte cette sémantique est appellée RESTful
 
 Exemple d'une requete
 ++++++++++++++++++++++++++
@@ -125,10 +125,12 @@ Exemple d'une requete
   Accept-Language: en-US
   Connection: keep-alive
 
-.. note:: Ces en-têtes contiennent de précieuses informations pour le serveur
+.. rst-class:: small
 
-Réponse HTTP
-++++++++++++
+  NB:Ces en-têtes contiennent de précieuses informations pour le serveur
+
+Réponse du serveur
+++++++++++++++++++
 
 La réponse du serveur à une requete est similaire:
 
@@ -147,7 +149,8 @@ Le statut de réponse HTTP informe du statut de la requete (`Liste des codes`_):
 * 4xx : Acces refusé
 * 5xx : Erreur serveur
 
-.. note:: Quelques codes usuels :
+.. note:: 
+  Quelques codes usuels :
 
   **200** OK, **301** Moved Permanently, **404** Not found, **418** `I’m a teapot`_, **501** Internal error
 
@@ -158,6 +161,7 @@ Construction de réponse
 +++++++++++++++++++++++
 
 .. code-block:: none
+
   [PROTOCOLE] [CODE] [SIGNIFICATIOn] 
   /* En-tetes */
   [TYPE1]:[VALEUR1]

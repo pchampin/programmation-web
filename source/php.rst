@@ -35,11 +35,8 @@ Comment ça marche ?
   .. figure:: _static/php/client-serveur_HTML.png
     :alt: client-serveur-html
 
-.. container:: build
-
-  .. container::
   
-    - pour une page dynamique (PHP) :
+- pour une page dynamique (PHP) :
 
   .. figure:: _static/php/client-serveur_PHP.png
     :alt: client-serveur-php
@@ -50,11 +47,7 @@ Quel lien avec HTML/CSS ?
 - PHP permet de générer du HTML.
 - Le client (navigateur) est incapable de lire du code PHP, mais il sait afficher du code HTML et/ou CSS.
 
-.. container:: build
-
-  .. container::
-  
-   - PHP est interprété côté serveur :
+- PHP est interprété côté serveur :
 
   .. figure:: _static/php/client-serveur_PHP2.png
     :alt: client-serveur-php2
@@ -80,11 +73,14 @@ Pourquoi utiliser PHP alors ?
  - Parce que le résultat de l'éxécution sera identique pour tous les clients.
  - Parce que ces données brutes manipulées par le serveur sont inacessibles par les clients.
  
-Mais il existe bien sûr d'autres concurrents : `ASP.NET`__, `Ruby on Rails`__, `JSP (Java EE)`__, ...
+Mais il existe bien sûr d'autres concurrents : 
+  * `ASP.NET`_
+  * `Ruby on Rails`_
+  * `JSP (Java EE)`_
   
-__ http://www.asp.net/
-__ http://rubyonrails.org/
-__ http://www.oracle.com/technetwork/java/javaee/jsp/index.html
+.. _ASP.NET: http://www.asp.net/
+.. _Ruby on Rails: http://rubyonrails.org/
+.. _JSP (Java EE): http://www.oracle.com/technetwork/java/javaee/jsp/index.html
   
 
 Ma première page en PHP !
