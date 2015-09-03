@@ -10,22 +10,19 @@ Transmettre des données via des formulaires
 Les méthodes d'envoi
 ++++++++++++++++++++
 
-En HTML, la balise ``<form>`` spécifie la méthode d'envoi des données :
+En HTML, la balise ``<form>`` spécifie la méthode HTTP utilisée par le formulaire :
 
-* **Get** : les données sont passées via l’URL (défaut)
-* **Post** : les données sont passées dans la requête HTTP/HTTPS
-
-.. tip::
-
-  Comment choisir la méthode d'envoi ?
-
-    La méthode **Get** doit être employée lorsque les données ne sont pas trop volumineuses, et surtout lorsque le traitement des données n’a pas d’effet de bord.
-    Dans tous les autres cas, la méthode **Post** doit être préférée.
+* **GET** : 
+  * Dans le cas d'une lecture d'information (accès à un article, recherche)
+  * Les données seront passées via l’URL (défaut)
+* **POST** :
+  * Dans le cas d'une modification (Paramètres utilisateurs)
+  * Les données seront passées dans le corps de la requête HTTP
 
 Transmettre des données par l'URL
 +++++++++++++++++++++++++++++++++
 
-La méthode d'envoi Get est celle utilisée par défaut lorqu'on utilise les formulaires sans préciser la méthode :
+La méthode d'envoi GET est celle utilisée par défaut lorqu'on utilise les formulaires sans préciser la méthode :
 
 .. code-block:: html
 
@@ -46,7 +43,6 @@ Envoi des données par URL
 -------------------------
 
 Les données du formulaire qui sont passées dans l'URL s'écrivent sous la forme :
-
 
 .. raw:: html
 
@@ -132,7 +128,7 @@ __ _static/donnees/corrections/get/
 Transmettre des données dans une requête
 ++++++++++++++++++++++++++++++++++++++++
 
-La méthode d'envoi Post doit être spécifiée dans le formulaire si l'on souhaite transmettre des données dans une requête :
+La méthode POST doit être spécifiée dans le formulaire si l'on souhaite transmettre des données dans une requête :
 
 .. code-block:: html
 

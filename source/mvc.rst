@@ -60,7 +60,7 @@ Source : OpenClassrooms
 Représentation schématique (2/2)
 ++++++++++++++++++++++++++++++++
 
-.. figure:: _static/mvc/mvc-symfony.png
+.. figure:: _static/mvc/mvc_symfony.png
 	:alt: model-view-controller-symfony
 
 Source : Documentation Symfony 2

@@ -147,7 +147,7 @@ Mais ce fichier ne générera en revanche pas un fichier HTML valide.
 Exercice
 ++++++++
 
-#. Téléchargez le modèle minimal de `page HTML`__.
+#. Téléchargez le modèle minimal de `page HTML <_static/php/html5_minimal.html>`_.
 
 #. Sauvegardez le fichier sous l'extension ".php".
 
@@ -157,13 +157,7 @@ Exercice
 
 #. Comparez votre fichier avec la source reçue au niveau du client.
 
-Voir le `résultat`__ attendu.
-
-__ _static/php/html5_minimal.html
-
-__ _static/php/corrections/premierepagephp/
-
-
+Voir le `résultat <_static/php/corrections/premierepagephp/>`_ attendu.
 
 Les variables
 ==============
@@ -192,18 +186,12 @@ Exemple
    $age=21;
    echo("Vous avez $age ans !"); 
   ?>
-
-.. container:: build
-
-  .. container::
   
-    `Résultat`__ HTML :
+`Résultat <_static/php/test.php#affvariable>`_ HTML :
   
-    .. code-block:: html
+.. code-block:: html
     
     Vous avez 21 ans !
- 
-__ _static/php/test.php#affvariable
   
 Les chaînes de caractères
 +++++++++++++++++++++++++
@@ -214,11 +202,9 @@ Les chaînes de caractères :
 * concatenation avec ``.``
 * peuvent integrer la valeur d'une variable
 
-.. note::
+.. note:: Beaucoup de fonctions mathématiques et pour la manipulation des strings (`PHP Manual for Strings`_)
 
-Beaucoup de fonctions mathématiques et pour la manipulation des strings (``http://www.php.net/manual/fr/ref.strings.php``__)
-
-__ _http://www.php.net/manual/fr/ref.strings.php
+.. _PHP Manual for Strings: http://www.php.net/manual/fr/ref.strings.php
 
 Affichage de chaines
 --------------------
@@ -285,8 +271,7 @@ Affectation
 .. code-block:: php
 
   <?php
-   $prenoms = array ('François', 'Michel', 
-   'Nicole', 'Véronique', 'Benoît');
+   $prenoms = array ('François', 'Michel', 'Nicole', 'Véronique', 'Benoît');
   ?>
 
 * Depuis les indices :
@@ -328,10 +313,7 @@ Accès aux éléments
   ?>
 
 
-Voir le `résultat`__.
-  
-__ _static/php/test.php#accestableau
-  
+Voir le `résultat <_static/php/test.php#accestableau>`_ .
 
 Les tableaux associatifs
 ------------------------
@@ -360,9 +342,10 @@ Affectation
 .. code-block:: php
 
   <?php
-   $patronyme = array (
-    'prenom' => 'François',
-    'nom' => 'Dupont');
+    $patronyme = array (
+      'prenom' => 'François',
+      'nom' => 'Dupont'
+    );
   ?>
 
 * En définissant les indices :
@@ -370,8 +353,9 @@ Affectation
 .. code-block:: php
 
   <?php
-   $patronyme['prenom'] = 'François';
-   $patronyme['nom'] = 'Dupont';
+    $patronyme = array();
+    $patronyme['prenom'] = 'François';
+    $patronyme['nom'] = 'Dupont';
   ?>
 
 Accès aux éléments
@@ -386,10 +370,7 @@ Accès aux éléments
    echo $coordonnees['ville'];
   ?>
 
-Voir le `résultat`__.
-  
-__ _static/php/test.php#accestableauassoc
-  
+Voir le `résultat <_static/php/test.php#accestableauassoc>`_ .
   
 Conversion de type
 ++++++++++++++++++
@@ -407,9 +388,7 @@ Par exemple :
    echo $b;
   ?>  
   
-Voir le `résultat`__.
-  
-__ _static/php/test.php#cast
+Voir le `résultat <_static/php/test.php#cast>`_ .
   
 Les structures de contrôle
 ==========================
@@ -446,21 +425,18 @@ Exemple : ``if ... else``
   <?php 
   $longueur_mdp = 6;
   if ($longueur_mdp >= 8) { // SI
-   $save_mdp = true;
+    $save_mdp = true;
   } elseif ($longueur_mdp >= 6){ //SINON SI
-   $save_mdp = true;
-   echo "Ce mot de passe n'est pas très sûr !\n";
+    $save_mdp = true;
+    echo "Ce mot de passe n'est pas très sûr !\n";
   } else { // SINON
-   echo "Ce mot de passe est trop court !\n";
-   $save_mdp = false;
+    echo "Ce mot de passe est trop court !\n";
+    $save_mdp = false;
   }
   if($save_mdp){ echo "Mot de passe sauvegardé !"; }
   ?>
   
-Voir le `résultat`__.
-  
-__ _static/php/test.php#mdp
-
+Voir le `résultat <_static/php/test.php#mdp>`_ .
 
 .. nextslide::
 
@@ -477,19 +453,17 @@ Exemple : ``switch``
   :linenos:
   
   <?php couleur
-  $couleur = "rouge";
-  switch ($couleur) {
-  case "bleu"  : $r=0;   $g=0;   $b=255; break;
-  case "vert"  : $r=0;   $g=255; $b=0;   break;
-  case "rouge" : $r=255; $g=0;   $b=0;   break;
-  default      : $r=0;   $g=0;   $b=0;   break;
-  }
-  echo "Valeurs RGB pour $couleur : ($r,$g,$b).";
+    $couleur = "rouge";
+    switch ($couleur) {
+      case "bleu"  : $r=0;   $g=0;   $b=255; break;
+      case "vert"  : $r=0;   $g=255; $b=0;   break;
+      case "rouge" : $r=255; $g=0;   $b=0;   break;
+      default      : $r=0;   $g=0;   $b=0;   break;
+    }
+    echo "Valeurs RGB pour $couleur : ($r,$g,$b).";
   ?>
 
-Voir le `résultat`__.
-  
-__ _static/php/test.php#switch
+Voir le `résultat <_static/php/test.php#switch>`_ .
   
 Les conditions multiples
 ++++++++++++++++++++++++
@@ -499,7 +473,7 @@ Il est possible de combiner les conditions dans une même instruction :
 ======= ============ ==========================
 Symbole Mot-clé      Signification
 ======= ============ ==========================
-``&&``    AND          Et
+``&&``  AND          Et
   ||    OR           Ou   
   !     NOT          Négation de la condition
 ======= ============ ==========================
@@ -509,12 +483,11 @@ Exemple :
 .. code-block:: php
 
   <?php 
-   if($condition1 && (!$condition2 || $condition3)){
-  ...
-   }
+    if($condition1 && (!$condition2 || $condition3)){
+      ...
+    }
   ?>
 
-  
 Les boucles et opérateurs
 =========================
 
@@ -545,15 +518,13 @@ Exemple :
    }
   ?>
   
-Voir le `résultat`__.
+Voir le `résultat <_static/php/test.php#while>`_.
 
 .. nextslide::  
 
 .. tip::
 
    La bouche ``do-while`` existe aussi. Pratique pour s'assurer qu'on rentre au moins une fois dans la boucle.
-  
-__ _static/php/test.php#while
 
 La boucle ``for``
 -------------------
@@ -571,9 +542,7 @@ Exemple :
    }
   ?>
 
-Voir le `résultat`__.
-  
-__ _static/php/test.php#for
+Voir le `résultat <_static/php/test.php#for>`_ .
   
 .. _exo_for:
   
@@ -584,10 +553,7 @@ Exercice
 
 #. Affichez grâce à un script une liste composée de 10 "Hello World !".
 
-Voir le `résultat`__ attendu.
-
-__ _static/php/corrections/for/
-
+Voir le `résultat <_static/php/corrections/for/>`_ attendu.
 
 .. _boucle_foreach:
   
@@ -599,16 +565,13 @@ Elle permet de simplifier le parcours des tableaux, en permetant une écriture p
 .. code-block:: php
 
   <?php
-   $prenoms = array ('François', 'Michel',
-   'Nicole', 'Véronique', 'Benoît');
-   for ($numero = 0; $numero < 5; $numero++)
-    echo $prenoms[$numero] . "\n";
-   }
+    $prenoms = array ('François', 'Michel', 'Nicole', 'Véronique', 'Benoît');
+    for ($numero = 0; $numero < 5; $numero++)
+      echo $prenoms[$numero] . "\n";
+    }
   ?>
 
-Voir le `résultat`__.
-  
-__ _static/php/test.php#pacrourstableau
+Voir le `résultat <_static/php/test.php#pacrourstableau>`_ .
   
 Pour les tableaux simples
 `````````````````````````
@@ -616,16 +579,13 @@ Pour les tableaux simples
 .. code-block:: php
 
   <?php
-   $prenoms = array ('François', 'Michel',
-   'Nicole', 'Véronique', 'Benoît');
-   foreach($prenoms as $element) {
-    echo $element . "\n";
-   }
+    $prenoms = array ('François', 'Michel', 'Nicole', 'Véronique', 'Benoît');
+    foreach($prenoms as $element) {
+      echo $element . "\n";
+    }
   ?>
 
-Voir le `résultat`__.
-  
-__ _static/php/test.php#foreach
+Voir le `résultat <_static/php/test.php#foreach>`_ .
   
 Pour les tableaux clé-valeur
 ````````````````````````````
@@ -633,21 +593,18 @@ Pour les tableaux clé-valeur
 .. code-block:: php
 
   <?php
-   $coordonnees = array (
-    'prenom' => 'François',
-    'nom' => 'Dupont',
-    'adresse' => '3 Rue du Paradis',
-    'ville' => 'Marseille');
+    $coordonnees = array (
+      'prenom' => 'François',
+      'nom' => 'Dupont',
+      'adresse' => '3 Rue du Paradis',
+      'ville' => 'Marseille');
 
-   foreach($coordonnees as $champ => $element)
-   {
-    echo $champ . ' : ' .$element . "\n";
-   }
+    foreach($coordonnees as $champ => $element){
+      echo $champ . ' : ' .$element . "\n";
+    }
   ?>
 
-Voir le `résultat`__.
-  
-__ _static/php/test.php#foreach2
+Voir le `résultat <_static/php/test.php#foreach2>`_.
 
 .. _exo_tableau:
 
@@ -658,9 +615,7 @@ Exercice
 #. Créez et initialisez un tableau clé-valeur dont les clés seront "prix_unitaire" et "quantite".
 #. Réalisez un affichage basique en parcourant votre tableau.
 
-Voir le `résultat`__ attendu.
-
-__ _static/php/corrections/tableau/
+Voir le `résultat <_static/php/corrections/tableau/>`_ attendu.
 
 Les opérateurs
 ++++++++++++++
@@ -677,11 +632,11 @@ PHP reconnait tous les `opérateurs arithmétiques`__ classiques :
 =========== =============== =======================================================================
 Exemple     Nom             Résultat
 =========== =============== =======================================================================
--$a         Négation      Opposé de $a.
-$a + $b     Addition      Somme de $a et $b.
+-$a         Négation        Opposé de $a.
+$a + $b     Addition        Somme de $a et $b.
 $a - $b     Soustraction    Différence de $a et $b.
 $a \* $b    Multiplication  Produit de $a et $b.
-$a / $b     Division      Quotient de $a et $b.
+$a / $b     Division        Quotient de $a et $b.
 $a % $b     Modulo          Reste de $a divisé par $b.
 $a \*\* $b  Exponentielle   Résultat de l'élévation de $a à la puissance $b. Introduit en PHP 5.6.
 =========== =============== =======================================================================
@@ -696,14 +651,14 @@ Il est possible de modifier une variable lors de son affectation :
 =============== =============== =======================================  
 Exemple         Nom             Résultat
 =============== =============== =======================================  
-$a=3          Affectation     $a vaut 3.
+$a=3            Affectation     $a vaut 3.
 $a += 3         Addition        $a vaut $a + 3.
 $a -= 3         Soustraction    $a vaut $a - 3.
-$a \*= 3         Multiplication  $a vaut $a \* 3.
+$a \*= 3        Multiplication  $a vaut $a \* 3.
 $a /= 3         Division        $a vaut $a /3.
 $a %= 3         Modulo          $a vaut $a % 3.
-$a++          Incrémentation  $a vaut $a + 1. Equivalent à $a += 1.
-$a--          Décrémentation  $a vaut $a - 1. Equivalent à $a -= 1.
+$a++            Incrémentation  $a vaut $a + 1. Equivalent à $a += 1.
+$a--            Décrémentation  $a vaut $a - 1. Equivalent à $a -= 1.
 $b .= "chaine"  Concaténation   $b vaut $b."chaine".
 =============== =============== =======================================  
 
