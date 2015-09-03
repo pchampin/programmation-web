@@ -1,7 +1,7 @@
 :tocdepth: 2
 
 ============================
- PHP et le Web
+ Le Web : Introduction
 ============================
 
 C'est quoi le Web ?
@@ -11,11 +11,12 @@ En quelques mots
 ++++++++++++++++
 
 * Son vrai nom : World Wide Web
-* Une des application d'Internet
-* Ensemble hyperdocumentaire (réseau de documents) public
-* Basé sur un système hypertexte (protocole HTTP)
-* Accès aux documents par leurs adresses (URL)
 * Assemblage de technologies diverses (standards)
+* Une des applications d'Internet (citez en 4 autres)
+* Ensemble hyperdocumentaire (réseau de documents) public
+* Basé sur HTTP (HyperText Transport Protocol)
+* Accès aux documents par leurs adresses (URL)
+* Représentation des données pour l'humain (HTML) ou les machines (XML/JSON)
 
 Architecture Client Serveur
 +++++++++++++++++++++++++++
@@ -28,6 +29,11 @@ Architecture Client Serveur
    :height: 200ex
 
    Source image http://commons.wikimedia.org/wiki/File:Client-server-model.svg
+
+.. note:: Différents r^oles : le client initie l'exécution d'une opération fournie par le serveur (!= pair à pair)
+
+Les Technologies
+================
 
 .. index:: URL
 
@@ -48,6 +54,8 @@ URLs
 
   NB: les URLs sont parfois appelés URIs -> Plus générique, URL = URI particulière
 
+.. index:: HTML
+
 HTML
 ++++
 
@@ -58,24 +66,23 @@ HTML
 
 .. _HTML: http://www.w3.org/TR/html5/
 
-Principes de HTTP
-================
+.. index:: HTTP
 
 HTTP
 ++++
 
 * HyperText Transfer Protocol (`RFC 2616`_)
 * Protocole d'échange de données entre machines
-* Utilisé par les clients pour communiquer avec les serveurs
+* Utilisé par les clients pour communiquer avec les serveurs
 
 .. _RFC 2616: http://datatracker.ietf.org/doc/rfc2616/
 
 Les Requetes HTTP
-+++++++++++++++++
+-----------------
 
 Une requete HTTP contient :
 
-* Le type d'échange (écriture, lecture, ...) => VERBE HTTP
+* Le type d'échange => VERBE HTTP (GET, POST, ...)
 * Spécifie l'adresse => URL
 * Transmet des informations à propos du client => HEADER
 * Transmet éventuellement des données => BODY
@@ -100,18 +107,22 @@ Une requete est construite comme suit:
 Les Verbes HTTP (1/2)
 +++++++++++++++++++++
 
+.. index:: GET
+.. index:: POST
+
 * Définissent le type d'échange
 * Ont une sémantique propre
 
-  * GET : Lecture de la ressource
-  * HEAD : Requête de l'en-tête de la ressource
-  * POST : Mise à jour de la resource située à l'URL spécifiée
-  * PUT : Creation de la resource à l'URL spécifiée
+  * GET : Récupère une représentation de la ressource
+  * HEAD : Récupère seulement l'en-tête de la ressource
+  * POST : Création d'une sous-ressource de l'URL spécifiée
+  * PUT : Modification de la resource à l'URL spécifiée (warning: si la ressource n'existe pas, elle est crée) (todo)
   * DELETE : Suppression de la ressource
+
 
 .. rst-class:: small
   
-  NB: Une application qui respecte cette sémantique est appellée RESTful
+  NB: Une application qui respecte cette sémantique est appellée RESTful (complément : lien todo : pédagogique)
 
 Exemple d'une requete
 ++++++++++++++++++++++++++
@@ -132,14 +143,16 @@ Exemple d'une requete
 Réponse du serveur
 ++++++++++++++++++
 
-La réponse du serveur à une requete est similaire:
+La réponse du serveur à une requête est similaire:
 
 * Statut de réponse
-* En-tetes de réponses
+* En-têtes de réponses
 * Corps de la réponse
 
 Statut de réponse HTTP
 ++++++++++++++++++++++
+
+.. index:: Response status
 
 Le statut de réponse HTTP informe du statut de la requete (`Liste des codes`_):
 
@@ -183,3 +196,17 @@ Exemple de réponse
   Last-Modified:Tue, 04 Aug 2015 10:25:13 GMT
 
   <html><body> Corps du document ...
+
+Exercice
+++++++++++++++++++
+
+Il est possible de voir le détail des requètes dans le navigateur
+
+# Ouvrez une page web
+# Ouvrez l'interface développeur "Network" de votre navigateur
+
+  * Firefox : Ctrl + Maj + Q
+  * Chrome : 
+  * 
+
+# Actualisez la page (F5) et observez les différentes requètes effectuées par le navigateur

@@ -1,190 +1,131 @@
-:tocdepth: 2
 
+.. _php_avance:
+
+========================== 
+Utilisation Avancée de PHP
 ==========================
- Manipulation des données
-==========================
 
-Transmettre des données via des formulaires
-===========================================
+Afficher les erreurs
+--------------------
 
-Les méthodes d'envoi
-++++++++++++++++++++
+Il est possible d'utiliser PHP en mode débogage lors de la phase de conception de vos scripts.
 
-En HTML, la balise ``<form>`` spécifie la méthode HTTP utilisée par le formulaire :
+Pour cela, deux fonctions doivent être appelées dans le script :
 
-* **GET** : 
-  * Dans le cas d'une lecture d'information (accès à un article, recherche)
-  * Les données seront passées via l’URL (défaut)
-* **POST** :
-  * Dans le cas d'une modification (Paramètres utilisateurs)
-  * Les données seront passées dans le corps de la requête HTTP
+.. code-block:: php
 
-Transmettre des données par l'URL
-+++++++++++++++++++++++++++++++++
+  <?php 
+   ini_set(’display_errors’,’1’) ;
+   error_reporting(E_ALL) ;
+   ... // instructions du script
+  ?>
 
-La méthode d'envoi GET est celle utilisée par défaut lorqu'on utilise les formulaires sans préciser la méthode :
+.. tip::
 
-.. code-block:: html
+   Il est aussi possible de configurer l'affichage des erreurs dans le fichier de configuration ``php.ini``
+  
 
-  <form action="traitement.php">
-     ...
-  </form>
+Redirection
+-----------
 
-Cette écriture est exactement équivalente à :
-
-.. code-block:: html
-
-  <form action="traitement.php" method="get">
-     ...
-  </form>
-
-
-Envoi des données par URL
--------------------------
-
-Les données du formulaire qui sont passées dans l'URL s'écrivent sous la forme :
-
-.. raw:: html
-
-    <p><font color="green">http://www.site.com/page.php?</font><font color="red">param1</font><font color="green">=</font><font color="blue">valeur1</font><font color="green">&</font><font color="red">param2</font><font color="green">=</font><font color="blue">valeur2</font>...</p>
-    </br>
-
-.. raw:: html
-
-    <p>Le caractère <font color="green">?</font> sépare le nom de la page des paramètres.</p>
-    <p>Chaque couple paramètre/valeur s'écrit sous la forme : <font color="red">nom</font><font color="green">=</font><font color="blue">valeur</font>; ils sont séparés les uns des autres par le symbole <font color="green">&</font>.</p>
-	
-	
-.. note::
-
-	Le nom des paramètres correspond à la valeur de l'attribut ``@name`` définit dans chaque balise ``<input>``.
-	
-	La valeur des paramètres correspond à la valeur de l'attribut ``@value`` s'il est définit, ou au texte saisi par l'utilisateur (dans un champ texte par exemple).
-	
-	
-Traitement des données reçues dans une URL
-------------------------------------------
-
-Côté serveur (en PHP, donc), les valeurs passées dans l'URL sont stockées dans un tableau associatif ``$_GET`` : 
-
-Exemple (avec l'URL précédente) :
+PHP permet de rediriger l'utilisateur d'une page à une autre grâce à la fonction ``header()``. Exemple :
 
 .. code-block:: php
 
   <?php
-    $valeur = $_GET[’param1’]; // contient valeur1
+   header('Location: urlDeRedirection.php?parametres');
+   exit ();
   ?>
 
+.. tip::
+  
+  Il est possible de rediriger vers une page via une URL relative ou une URL externe. On peut même faire une redirection vers la même page mais avec des paramètres différents !
+  
 .. warning::
-	
-  Comme les paramètres et leurs valeurs sont intégrés dans l'URL, ils sont directement modifiables.
-  
-  Il est donc très important de tester si les données reçues sont celles attendues (mauvais type, données manquantes ...).
 
-  
-Contrôler la valeur des paramètres
-`````````````````````````````````` 
+  La fonction ``header()`` doit être exécutée avant toute écriture de texte.
 
-Lorsque des données transitent par l'URL, il faut s'assurer que les **valeurs correspondent au type attendu**.
-Dans le cas contraire, PHP permet de convertir les valeurs d'un type à un autre.
 
-De plus, il est possible que certains paramètres attendus dans le code PHP soient absents de l'URL, dans ce cas
-il est possible de **tester leur présence** avec la fonction ``isset``.
+Sécuriser des pages PHP
++++++++++++++++++++++++
 
-.. nextslide::
+Contrôle d'accès sur serveur Apache
+-----------------------------------
+
+Certaines pages ou certaines sections de votre site web peuvent être privées ou limitées à certains utilisateurs (pages d'administration ...).
+
+Pour cela, il est possible d'utiliser les `sessions PHP<sessions>`:ref:, mais leur mise en place impose de créer une interface et une table dans la BDD pour gérer les accès.
+
+Une autre possibilité est d'utiliser le contrôle d'accès côté serveur. Cela garantit de limiter l'accès à certains fichiers aux seuls utilisateurs autorisés.
+
+Pour mettre en place un contrôle d'accès, il faut créer deux fichiers :
+
+#. Un fichier ``.htaccess``  qui contient l'adresse du ``.htpasswd`` et définit les options du contrôle d'accès.
+#. Un fichier ``.htpasswd``  qui contient une liste de logins/mots de passe des utilisateurs autorisés à accèder aux pages contenues dans le dossier du fichier ``.htaccess``.
+
+
+.. note::
+
+  Chaque fichier ``.htaccess`` protège les pages du répertoire dans lequel il se trouve.
+  Pour protéger plusieurs pages, il est donc nécessaire de dupliquer ce fichier, mais il est préférable de le faire pointer sur un fichier ``.htpasswd`` unique.
+
+Le fichier ``.htaccess``
+````````````````````````
 
 Exemple :
 
-.. code-block:: php
+.. code-block:: none
 
-  <?php
-  if (isset($_GET['param1']) AND isset($_GET['param2'])) {
-	$valeur1 = (int) $_GET['param1'];
-	$valeur2 = (int) $_GET['param2'];
-	... // code à exécuter si tous les paramètres sont présents
-  } else {
-	...
-	// code à exécuter par défaut
-  }
-  ?>
+  AuthName "Message de l'invité"
+  AuthType Basic
+  AuthUserFile "/home/univ-lyon1/pxxxxxxx/
+                public_html/admin/.htpasswd"
+  Require valid-user
 
-.. _exo_get: 
- 
-Exercice
-````````
+Le champ ``AuthName`` correspond au message affiché lors de la tentative d'accès à une ressource sous contrôle d'accès.
+
+Le champ ``AuthUserFile`` est le chemin absolu vers le fichier ``.htpasswd``.
+
+.. note::
+
+  La fonction PHP `realpath()`__ permet de récupérer le chemin absolu du fichier ``.htpasswd``.
   
-#. Reprenez votre script `de l'exercice sur les boucles <exo_for>`:ref:.
-#. Permettre d'adapter le nombre de "Hello World!" affichés en fonction de la valeur de la variable ``nb_hello`` passée en paramètre de l'URL.
-#. Améliorez votre script vous assurant que l'affichage des "Hello World !" soit limité à 100 occurences, et qu'une valeur négative ou nulle de ``nb_hello`` n'aie pas d'incidence sur le script.
-#. Ajoutez un numéro de ligne toutes les 10 lignes et alternez les couleurs une ligne sur deux (utiliser une feuille de style CSS !).
-#. Assurez vous que la valeur transmise soit bien de type entier (soit par conversion, ou mieux, avec la ``is_int`` (`documentation`__). 
-
-
-Voir le `résultat`__.
-
-__ http://php.net/manual/fr/function.is-int.php
-__ _static/donnees/corrections/get/
+__ http://php.net/manual/fr/function.realpath.php
   
-Transmettre des données dans une requête
-++++++++++++++++++++++++++++++++++++++++
+Le fichier ``.htpasswd``
+````````````````````````
 
-La méthode POST doit être spécifiée dans le formulaire si l'on souhaite transmettre des données dans une requête :
+Le fichier ``.htpasswd`` se compose de lignes suivant le format : ``login:mot_de_passe_crypté``.
 
-.. code-block:: html
+Il est possible d'afficher les mots de passe en clair. Mais ils sont alors visibles pour qui à les droits de lecture sur le serveur.
 
-  <form action="traitement.php" method="post">
-     ...
-  </form>
+Pour crypter les mots de passe du fichier ``.htpasswd``, PHP propose la fonction `crypt()`__. 
 
-Dans ce cas, les paramètres et leurs valeurs envoyés ne seront plus visibles dans l'URL.
+Exemple sans cryptage :
 
-
-Traitement des données reçues en Post
--------------------------------------
-
-Les valeurs transmises par la méthode Post sont stockées dans la variable ``$_POST``. Les données sont stockées de la même manière que dans la variable ``$_GET``.
-
-.. warning::
-	
-  Même si les paramètres et leurs valeurs sont transmises sans apparaître dans l'URL, il est tout de même possible d'envoyer des valeurs inattendues (par exemple, en modifiant une copie du code HTML du formulaire).
-  Il est d'autant plus important de contrôler les données reçues que les données envoyées en Post peuvent contenir des chaînes de caractères conséquentes (et pourquoi pas, du code HTML ou JavaScript !).
-
-
-Aller plus loin dans le contrôle des paramètres
-```````````````````````````````````````````````
-
-En plus de vérifier le type et la présence des paramètres, le traitement des chaînes de caractères doit comprendre une conversion pour **éviter que le texte puisse être interprété comme du code** HTML (ou JavaScript).
-
-Il existe des fonctions PHP conçues à cet effet : ``htmlspecialchars`` (`documentation`__) et ``htmlentities`` (`documentation`__). Elles permettent de convertir les caractères spéciaux en entités HTML. Exemple : 
-
-__ http://php.net/manual/fr/function.htmlspecialchars.php
-__ http://php.net/manual/fr/function.htmlentities.php
-
-.. code-block:: php
+.. code-block:: none
   
-  <?php
-	$value = ( isset($_POST['variable']) ) ?
-             htmlspecialchars($_POST['variable']) : "";
-	if((strlen($value) > 0) && (strlen($value) < 50)){
-	 ... //
-	}
-  ?>
-
-.. _exo_post:
+  autralian32:kangourou
+  kikoo69:totolitoto
+  monuser:monpass
   
-Exercice
-````````
+__ http://php.net/manual/fr/function.crypt.php
+  
+.. nextslide::
 
-#. Téléchargez `l'archive`__ contenant des pages permettant de commander des pizzas en ligne.
-#. Créez une page nommée "prix.php" contenant un tableau simple dont chaque élément est un tableau clé-valeur comprenant les clés "pizza", "ingredients" et "prix". 
-#. Modifiez la page PHP du formulaire pour inclure le tableau et mettre à jour la liste des pizzas depuis les valeurs du tableau.
-#. Modifiez la page "recap_commande.php" qui sera la cible du formulaire et affichera un récapitulatif de la commande sous la forme d'un tableau, avec calcul du total (aidez-vous des fonctions définies dans un `précédent exercice<exo_include>`:ref:).
-#. En utilisant les fonction d'inclusion, faire en sorte que l'utilisateur reste en permanence sur la page principale et adaptez son contenu en fonction des données transmises (ou l'absence de données transmises).
+Exemple avec cryptage : 
 
-Voir le `résultat`__.
+.. code-block:: none
+  
+  autralian32:$1$nRSP5U.A$e8FqI6QTq/Bp6lNMjBUMO1
+  kikoo69:$1$riMIdCaV$6GO24RT5v4iwrSzChZq720
+  monuser:$apr1$MWZtd0xs$mRBeIn.alFLzJZe4.r07U1
+  
+.. tip::
 
-__ _static/donnees/exercices/pizza.zip
-__ _static/donnees/corrections/pizza/
+  Comme il est possible de manipuler des fichiers en PHP, il est aussi possible d'écrire les fichiers de contrôle d'accès directement depuis PHP.
+  
+  Par exemple, un formulaire accessible seulement par l'administrateur pourrait permettre d'ajouter de nouveaux utilisateurs.
   
 
 .. _envoi_fichiers:
@@ -212,10 +153,10 @@ Exemple :
   <form action="traitement.php" method="post"
         enctype="multipart/form-data">
         ...
-	<input type="hidden"
-		name="MAX_FILE_SIZE" value="1048576" />
-	<input type="file" name="fichier" />
-	...
+  <input type="hidden"
+    name="MAX_FILE_SIZE" value="1048576" />
+  <input type="file" name="fichier" />
+  ...
   </form>
 
 .. note::
@@ -268,8 +209,8 @@ Exemple de script PHP permettant d'effectuer toutes ces vérifications :
 
 .. note::
 
-	N'hésitez pas à consulter la documentation PHP pour les fonctions `pathinfo()`__ et `move_uploaded_file()`__.
-	
+  N'hésitez pas à consulter la documentation PHP pour les fonctions `pathinfo()`__ et `move_uploaded_file()`__.
+  
 __ http://php.net/manual/fr/function.pathinfo.php
 __ http://php.net/manual/fr/function.move-uploaded-file.php
 
@@ -285,6 +226,7 @@ Exercice
 #. Pour aller plus loin : reprendre la page de commande de pizza et ajouter une colonne dans le tableau où sera affichée l'image de chaque pizza (si diponible).
 
 __ http://php.net/manual/en/function.strtolower.php
+
 
 .. _variables_superglobales:
 
@@ -440,9 +382,9 @@ Création d'un cookie (qui expire au bout d'une heure):
                'valeurDuCookie',
                time()+3600,
                null,
-	       null,
- 	       false,
-	       true );
+         null,
+         false,
+         true );
   ?>
 
 .. warning::
@@ -523,8 +465,8 @@ Exemple de lecture ligne par ligne :
    if($fichier != NULL){
     $ligne = fgets($fichier);
     while($ligne){
-	 ... // traitement de la ligne
-	 $ligne = fgets($fichier);
+   ... // traitement de la ligne
+   $ligne = fgets($fichier);
     }
     fclose($fichier);
    }
@@ -556,7 +498,7 @@ Exemple d'écriture au début du fichier :
    $fichier = fopen('fichier.txt', 'r+');
    if($fichier != NULL){
     fseek($fichier, 0);
-	fputs($fichier, 'nouvelles données');
+  fputs($fichier, 'nouvelles données');
     fclose($fichier);
    }
   ?>
@@ -573,3 +515,25 @@ Exercice
 #. Pour aller plus loin : créez une page "générer_menu.php" qui permet d'extraire toutes les pizzas de la BDD et de les enregistrer dans un fichier téléchargé au chargement de la page sous le format "Pizza (prix €) : Ingrédients, ...".
 
 __ _static/donnees/exercices/pizzas.txt
+
+
+
+Les expressions régulières
+++++++++++++++++++++++++++
+
+A venir.
+      
+Programmation Orientée Objet
+++++++++++++++++++++++++++++
+ 
+A venir.
+ 
+Gestion des exceptions
+----------------------
+
+A venir.
+
+Architecture MVC
+++++++++++++++++
+  
+A venir.

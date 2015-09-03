@@ -1,13 +1,13 @@
 :tocdepth: 2
 
 ============================
- Introduction au PHP
+ PHP : Les bases
 ============================
 
 Le PHP, c'est quoi ?
 ====================
 
-PHP: Hypertex Preprocessor
+PHP: Hypertext Preprocessor
 ++++++++++++++++++++++++++
 
 .. figure:: _static/php/logo_php.png
@@ -18,13 +18,13 @@ PHP: Hypertex Preprocessor
    Source image `Wikimedia commons`__
 __ http://commons.wikimedia.org/wiki/File:PHP-logo.svg
 
-* Un acronyme récursif !
-* Un **langage de script interprété côté serveur**,
-* Qui permet d'écrire des pages web **dynamiques**.
-* Une extension de fichier (.php).
-* Un outil incontournable pour intéragir avec une `base de données <bdd>`:doc: (MySQL).
+* Un acronyme récursif
+* Un **langage de script interprété côté serveur**
+* Qui permet d'écrire des pages web **dynamiques**
+* Indiqué par l'extension de fichier **.php**
+* Un outil incontournable pour interagir avec une `base de données <bdd>`:doc: (MySQL)
 
-C'est aussi un site web http://php.net/ rempli d'autres informations utiles.
+Documentation: http://php.net/ rempli d'autres informations utiles
 
 
 Comment ça marche ?
@@ -60,7 +60,7 @@ JavaScript :
  
 - est un langage de script, tout comme PHP ;
 - permet de modifier dynamiquement le contenu HTML/CSS ;
-- **mais** s'éxécute côté client et non côté serveur.
+- **mais** s'éxécute **généralement** côté client et non côté serveur.
 
 .. figure:: _static/php/client-serveur_JS.png
   :alt: client-serveur-JS
@@ -68,12 +68,13 @@ JavaScript :
 
 Pourquoi utiliser PHP alors ?
 +++++++++++++++++++++++++++++
+
+Pour des raisons de :
+  * Performance: les données sont centralisées sur le serveur
+  * Sécurité: Certaines opérations doivent rester inaccessibles au client (mot de passe)
+  * Personnalisation: chaque utilisateur peut avoir une page différente (horloge)
  
- - Parce que les données sont centralisées sur le serveur.
- - Parce que le résultat de l'éxécution sera identique pour tous les clients.
- - Parce que ces données brutes manipulées par le serveur sont inacessibles par les clients.
- 
-Mais il existe bien sûr d'autres concurrents : 
+Autres concurrents : 
   * `ASP.NET`_
   * `Ruby on Rails`_
   * `JSP (Java EE)`_
@@ -83,27 +84,21 @@ Mais il existe bien sûr d'autres concurrents :
 .. _JSP (Java EE): http://www.oracle.com/technetwork/java/javaee/jsp/index.html
   
 
-Ma première page en PHP !
-=========================
+Ma première page
+================
 
 Les fichiers PHP
 ++++++++++++++++
 
-* Les fichiers contenant du PHP doivent porter l'extension ".php".
-* Le script PHP doit toujours être situé entre les balises ``<?php`` et ``?>``.
-* Les commentaires peuvent être :
+* Extension ".php"
+* Instructions entre les balises ``<?php`` et ``?>``.
+* Commentaires:
   
-  - Multilignes (``/*`` ... ``*/``)
-  - Monoligne (``//``, ``#``)
+  - Multilignes ``/*`` ... ``*/``
+  - Monoligne ``//`` ou ``#``
   
-* Toutes les instructions se terminent par ``;``
-* PHP est insensible à la casse pour les noms de fonction mais pas pour les noms de variables.
-
-.. note::
-
-  Il est aussi possible d'utiliser les balises courtes  ``<?`` et ``?>`` pour signaler du code PHP.
-  On préférera toutefois les balises longues qui assurent une portabilité totale sur tous les serveurs et avec toutes les versions de PHP.
-
+* Instructions terminées par ``;``
+* Insensible à la casse pour les noms de fonction MAIS pas pour les noms de variables.
 
 Exemple
 +++++++
@@ -118,8 +113,7 @@ Exemple
     <title>Ma première page en PHP !</title>
     </head>
     <body>
-    <?php echo("Ce texte est écrit 
-    par du script PHP!"); ?>
+    <?php echo("Ce texte est écrit par du script PHP!"); ?>
     </body>
   </html>
 
@@ -144,20 +138,22 @@ Mais ce fichier ne générera en revanche pas un fichier HTML valide.
   
 .. _exo_premierepagephp:
 
-Exercice
-++++++++
+Exercice (10 minutes)
++++++++++++++++++++++
 
 #. Téléchargez le modèle minimal de `page HTML <_static/php/html5_minimal.html>`_.
 
-#. Sauvegardez le fichier sous l'extension ".php".
+#. Sauvegardez le fichier sous l'extension ".php"
 
-#. Ajoutez du code PHP entre balises ``<?php`` et ``?>`` pour afficher du texte dans la page.
+#. Ajoutez du code PHP entre balises ``<?php`` et ``?>`` pour afficher du texte dans la page
 
-#. Testez l'éxécution de votre script depuis un serveur (local ou en ligne).
+#. Testez l'éxécution de votre script depuis un serveur (local ou en ligne)
 
-#. Comparez votre fichier avec la source reçue au niveau du client.
+#. Comparez votre fichier avec la source reçue au niveau du client
 
 Voir le `résultat <_static/php/corrections/premierepagephp/>`_ attendu.
+
+#. Comment rendre le résultat valide en HTML ?
 
 Les variables
 ==============
@@ -165,17 +161,17 @@ Les variables
 Syntaxe
 +++++++
 
-En PHP, il est possible d'utiliser la mémoire du serveur afin d'y stocker des informations durant l'éxécution du script PHP, dans des **variables** qui :
+Utilisation de la mémoire du serveur afin de stocker des informations durant l'éxécution du script PHP, dans des **variables** qui :
 
 * s'écrivent avec un identifiant précédé d'un ``$``, par exemple ``$ma_variable``,
 * ne se déclarent pas, c'est l'affectation qui détermine leur type :
  
-   - booléen (``true``/``false``) ;
-   - nombre entier ;
-   - flottants (nombre à virgule) ;
-   - chaîne de caractères (entre ``"``) ;
-   - tableau ;
-   - ou même un objet (programmation orientée objet).  
+   - booléen (``true``/``false``)
+   - nombre entier
+   - flottants (nombre à virgule)
+   - chaîne de caractères (entre ``"``)
+   - tableau
+   - ou même un objet (programmation orientée objet)
    
 Exemple
 -------
@@ -198,7 +194,7 @@ Les chaînes de caractères
 
 Les chaînes de caractères :
 
-* écrites entre ``"`` ou entre ``'``.
+* écrites entre ``"`` ou entre ``'``
 * concatenation avec ``.``
 * peuvent integrer la valeur d'une variable
 
@@ -318,7 +314,7 @@ Voir le `résultat <_static/php/test.php#accestableau>`_ .
 Les tableaux associatifs
 ------------------------
 
-Ils permettent une représentation plus complexe et détaillée.
+Ils permettent de donner des noms aux clés
 
 Par exemple, votre tableau pourrait contenir : 
 
@@ -332,8 +328,7 @@ Clé        Valeur
 ========== ==========================
 
 Cette fois, les notion de "clé" et de "valeur" prennent tout leur sens.
-  
-  
+
 Affectation
 ```````````
 
@@ -543,17 +538,6 @@ Exemple :
   ?>
 
 Voir le `résultat <_static/php/test.php#for>`_ .
-  
-.. _exo_for:
-  
-Exercice
-````````
-
-#. Créez une nouvelle page PHP (ou reprenez votre `votre première page PHP <exo_premierepagephp>`:ref:).
-
-#. Affichez grâce à un script une liste composée de 10 "Hello World !".
-
-Voir le `résultat <_static/php/corrections/for/>`_ attendu.
 
 .. _boucle_foreach:
   
@@ -682,7 +666,7 @@ $a >= $b       Supérieur ou égal  TRUE si $a est plus grand ou égal à $b.
 ============== ================== =======================================================
   
 __ http://php.net/manual/fr/language.operators.comparison.php
-  
+
 Les fonctions
 =============
 
@@ -722,17 +706,6 @@ Appeler une fonction
 
    Une bonne pratique consiste à définir vos fonctions dans des fichiers séparés, puis de les inclure dans vos pages grâce à la fonction ``require_once``.
 
-
-.. _exo_fonction:
-   
-Exercice
---------
-
-#. Créez un fichier "calcul_prix.php" qui contient une fonction ``Prix`` permettant de calculer un prix total à partir d'un prix unitaire et d'une quantité.
-#. Ajoutez une seconde fonction ``Total`` qui calcule le prix total correspondant aux données de prix et de quantités contenues dans un tableau composé d'élements correspondant à votre tableau de l'`exercice précédent<exo_tableau>`:ref:.
-#. Affichez et vérifiez le résultat en modifiant les valeurs stockées dans le tableau.
-
-
 Voir le `résultat`__ attendu.
 
 __ _static/php/corrections/fonction/
@@ -753,7 +726,6 @@ PHP propose une multitude de fonctions "toutes prêtes", qui permettent entre au
 Le site web de PHP référence `toutes les fonctions`__ par catégorie.
 
 __ http://fr.php.net/manual/fr/funcref.php
-   
 
 Intégrer des fichiers externes
 ------------------------------
@@ -765,161 +737,189 @@ Intégrer des fichiers externes
   - ``include("page.php");`` qui permet d'intégrer le contenu de "page.php". Un message warning s'affiche si la ressource est manquante.
   - ``require("page.php");`` qui fait la même chose mais une erreur fatale est retournée si la ressource est manquante (arrêt du script).
   - ``include_once("page.php");`` et ``require_once("page.php");`` intègrent en plus un test pour empêcher une intégration multiple.
+
+Transmettre des données via des formulaires
+===========================================
+
+Les méthodes d'envoi
+++++++++++++++++++++
+
+En HTML, la balise ``<form>`` spécifie la méthode HTTP utilisée par le formulaire :
+
+* **GET** :
+
+  * Dans le cas d'une lecture d'information (accès à un article, recherche)
+  * Les données seront passées via l’URL (défaut)
+
+* **POST** :
+
+  * Dans le cas d'une modification (Paramètres utilisateurs)
+  * Les données seront passées dans le corps de la requête HTTP
+
+Transmettre des données par l'URL
++++++++++++++++++++++++++++++++++
+
+La méthode d'envoi GET est celle utilisée par défaut lorqu'on utilise les formulaires sans préciser la méthode :
+
+.. code-block:: html
+
+  <form action="traitement.php">
+     ...
+  </form>
+
+Cette écriture est exactement équivalente à :
+
+.. code-block:: html
+
+  <form action="traitement.php" method="get">
+     ...
+  </form>
+
+
+Envoi des données par URL
+-------------------------
+
+Les données du formulaire qui sont passées dans l'URL s'écrivent sous la forme :
+
+.. raw:: html
+
+    <p><font color="green">http://www.site.com/page.php?</font><font color="red">param1</font><font color="green">=</font><font color="blue">valeur1</font><font color="green">&</font><font color="red">param2</font><font color="green">=</font><font color="blue">valeur2</font>...</p>
+    </br>
+
+.. raw:: html
+
+    <p>Le caractère <font color="green">?</font> sépare le nom de la page des paramètres.</p>
+    <p>Chaque couple paramètre/valeur s'écrit sous la forme : <font color="red">nom</font><font color="green">=</font><font color="blue">valeur</font>; ils sont séparés les uns des autres par le symbole <font color="green">&</font>.</p>
   
-.. _exo_include:
   
-Exercice
-````````
+.. note::
 
-#. Reprenez le code de vos fonctions écrit pour l'`exercice précédent<exo_fonction>`:ref:.
-#. Séparez le tableau de données dans un fichier "donnees.php" et les fonctions dans un fichier "calcul_prix.php".
-#. Créez une page générale qui contient un squelette de page HTML et affiche le résultat de la fonction ``Total``. 
+  Le nom des paramètres correspond à la valeur de l'attribut ``@name`` définit dans chaque balise ``<input>``.
   
-Afficher les erreurs
---------------------
-
-Il est possible d'utiliser PHP en mode débogage lors de la phase de conception de vos scripts.
-
-Pour cela, deux fonctions doivent être appelées dans le script :
-
-.. code-block:: php
-
-  <?php 
-   ini_set(’display_errors’,’1’) ;
-   error_reporting(E_ALL) ;
-   ... // instructions du script
-  ?>
-
-.. tip::
-
-   Il est aussi possible de configurer l'affichage des erreurs dans le fichier de configuration ``php.ini``
+  La valeur des paramètres correspond à la valeur de l'attribut ``@value`` s'il est définit, ou au texte saisi par l'utilisateur (dans un champ texte par exemple).
   
+  
+Traitement des données reçues dans une URL
+------------------------------------------
 
-Redirection
------------
+Côté serveur (en PHP, donc), les valeurs passées dans l'URL sont stockées dans un tableau associatif ``$_GET`` : 
 
-PHP permet de rediriger l'utilisateur d'une page à une autre grâce à la fonction ``header()``. Exemple :
+Exemple (avec l'URL précédente) :
 
 .. code-block:: php
 
   <?php
-   header('Location: urlDeRedirection.php?parametres');
-   exit ();
+    $valeur = $_GET[’param1’]; // contient valeur1
   ?>
 
-.. tip::
-  
-  Il est possible de rediriger vers une page via une URL relative ou une URL externe. On peut même faire une redirection vers la même page mais avec des paramètres différents !
-  
 .. warning::
+  
+  Comme les paramètres et leurs valeurs sont intégrés dans l'URL, ils sont directement modifiables.
+  
+  Il est donc très important de tester si les données reçues sont celles attendues (mauvais type, données manquantes ...).
 
-  La fonction ``header()`` doit être exécutée avant toute écriture de texte.
- 
+  
+Contrôler la valeur des paramètres
+----------------------------------
 
-.. _php_avance:
- 
-Utilisation Avancée de PHP
-==========================
+Lorsque des données transitent par l'URL, il faut s'assurer que les **valeurs correspondent au type attendu**.
+Dans le cas contraire, PHP permet de convertir les valeurs d'un type à un autre.
 
-Sécuriser des pages PHP
-+++++++++++++++++++++++
+De plus, il est possible que certains paramètres attendus dans le code PHP soient absents de l'URL, dans ce cas
+il est possible de **tester leur présence** avec la fonction ``isset``.
 
-Contrôle d'accès sur serveur Apache
------------------------------------
-
-Certaines pages ou certaines sections de votre site web peuvent être privées ou limitées à certains utilisateurs (pages d'administration ...).
-
-Pour cela, il est possible d'utiliser les `sessions PHP<sessions>`:ref:, mais leur mise en place impose de créer une interface et une table dans la BDD pour gérer les accès.
-
-Une autre possibilité est d'utiliser le contrôle d'accès côté serveur. Cela garantit de limiter l'accès à certains fichiers aux seuls utilisateurs autorisés.
-
-Pour mettre en place un contrôle d'accès, il faut créer deux fichiers :
-
-#. Un fichier ``.htaccess``  qui contient l'adresse du ``.htpasswd`` et définit les options du contrôle d'accès.
-#. Un fichier ``.htpasswd``  qui contient une liste de logins/mots de passe des utilisateurs autorisés à accèder aux pages contenues dans le dossier du fichier ``.htaccess``.
-
-
-.. note::
-
-  Chaque fichier ``.htaccess`` protège les pages du répertoire dans lequel il se trouve.
-  Pour protéger plusieurs pages, il est donc nécessaire de dupliquer ce fichier, mais il est préférable de le faire pointer sur un fichier ``.htpasswd`` unique.
-
-Le fichier ``.htaccess``
-````````````````````````
+.. nextslide::
 
 Exemple :
 
-.. code-block:: none
+.. code-block:: php
 
-  AuthName "Message de l'invité"
-  AuthType Basic
-  AuthUserFile "/home/univ-lyon1/pxxxxxxx/
-                public_html/admin/.htpasswd"
-  Require valid-user
+  <?php
+  if (isset($_GET['param1']) AND isset($_GET['param2'])) {
+  $valeur1 = (int) $_GET['param1'];
+  $valeur2 = (int) $_GET['param2'];
+  ... // code à exécuter si tous les paramètres sont présents
+  } else {
+  ...
+  // code à exécuter par défaut
+  }
+  ?>
 
-Le champ ``AuthName`` correspond au message affiché lors de la tentative d'accès à une ressource sous contrôle d'accès.
-
-Le champ ``AuthUserFile`` est le chemin absolu vers le fichier ``.htpasswd``.
-
-.. note::
-
-  La fonction PHP `realpath()`__ permet de récupérer le chemin absolu du fichier ``.htpasswd``.
-  
-__ http://php.net/manual/fr/function.realpath.php
-  
-Le fichier ``.htpasswd``
-````````````````````````
-
-Le fichier ``.htpasswd`` se compose de lignes suivant le format : ``login:mot_de_passe_crypté``.
-
-Il est possible d'afficher les mots de passe en clair. Mais ils sont alors visibles pour qui à les droits de lecture sur le serveur.
-
-Pour crypter les mots de passe du fichier ``.htpasswd``, PHP propose la fonction `crypt()`__. 
-
-Exemple sans cryptage :
-
-.. code-block:: none
-  
-  autralian32:kangourou
-  kikoo69:totolitoto
-  monuser:monpass
-  
-__ http://php.net/manual/fr/function.crypt.php
-  
-.. nextslide::
-
-Exemple avec cryptage : 
-
-.. code-block:: none
-  
-  autralian32:$1$nRSP5U.A$e8FqI6QTq/Bp6lNMjBUMO1
-  kikoo69:$1$riMIdCaV$6GO24RT5v4iwrSzChZq720
-  monuser:$apr1$MWZtd0xs$mRBeIn.alFLzJZe4.r07U1
-  
-.. tip::
-
-  Comme il est possible de manipuler des fichiers en PHP, il est aussi possible d'écrire les fichiers de contrôle d'accès directement depuis PHP.
-  
-  Par exemple, un formulaire accessible seulement par l'administrateur pourrait permettre d'ajouter de nouveaux utilisateurs.
-  
-
-  
-.. Les expressions régulières
-.. ++++++++++++++++++++++++++
-
-.. A venir.
-      
-.. Programmation Orientée Objet
-.. ++++++++++++++++++++++++++++
+.. _exo_get: 
  
-.. A venir.
- 
-.. Gestion des exceptions
-.. ----------------------
-
-.. A venir.
-
-.. Architecture MVC
-.. ++++++++++++++++
+Exercice
+--------
   
-.. A venir.
+#. Reprenez votre script `de l'exercice sur les boucles <exo_for>`:ref:.
+#. Permettre d'adapter le nombre de "Hello World!" affichés en fonction de la valeur de la variable ``nb_hello`` passée en paramètre de l'URL.
+#. Améliorez votre script vous assurant que l'affichage des "Hello World !" soit limité à 100 occurences, et qu'une valeur négative ou nulle de ``nb_hello`` n'aie pas d'incidence sur le script.
+#. Ajoutez un numéro de ligne toutes les 10 lignes et alternez les couleurs une ligne sur deux (utiliser une feuille de style CSS !).
+#. Assurez vous que la valeur transmise soit bien de type entier (soit par conversion, ou mieux, avec la ``is_int`` (`documentation`__). 
+
+
+Voir le `résultat`__.
+
+__ http://php.net/manual/fr/function.is-int.php
+__ _static/donnees/corrections/get/
+  
+Transmettre des données dans une requête
+========================================
+
+La méthode POST doit être spécifiée dans le formulaire si l'on souhaite transmettre des données dans une requête :
+
+.. code-block:: html
+
+  <form action="traitement.php" method="post">
+     ...
+  </form>
+
+Dans ce cas, les paramètres et leurs valeurs envoyés ne seront plus visibles dans l'URL.
+
+
+Traitement des données reçues en Post
+-------------------------------------
+
+Les valeurs transmises par la méthode Post sont stockées dans la variable ``$_POST``. Les données sont stockées de la même manière que dans la variable ``$_GET``.
+
+.. warning::
+  
+  Même si les paramètres et leurs valeurs sont transmises sans apparaître dans l'URL, il est tout de même possible d'envoyer des valeurs inattendues (par exemple, en modifiant une copie du code HTML du formulaire).
+  Il est d'autant plus important de contrôler les données reçues que les données envoyées en Post peuvent contenir des chaînes de caractères conséquentes (et pourquoi pas, du code HTML ou JavaScript !).
+
+
+Aller plus loin dans le contrôle des paramètres
+-----------------------------------------------
+
+En plus de vérifier le type et la présence des paramètres, le traitement des chaînes de caractères doit comprendre une conversion pour **éviter que le texte puisse être interprété comme du code** HTML (ou JavaScript).
+
+Il existe des fonctions PHP conçues à cet effet : ``htmlspecialchars`` (`documentation`__) et ``htmlentities`` (`documentation`__). Elles permettent de convertir les caractères spéciaux en entités HTML. Exemple : 
+
+__ http://php.net/manual/fr/function.htmlspecialchars.php
+__ http://php.net/manual/fr/function.htmlentities.php
+
+.. code-block:: php
+  
+  <?php
+  $value = ( isset($_POST['variable']) ) ?
+             htmlspecialchars($_POST['variable']) : "";
+  if((strlen($value) > 0) && (strlen($value) < 50)){
+   ... //
+  }
+  ?>
+
+.. _exo_impots:
+  
+Exercice: Les impots
+--------------------
+TODO : remettre les TD mettre les formulaire dans les impots
+
+#. Téléchargez `l'archive`__ contenant des pages permettant de commander des pizzas en ligne.
+#. Créez une page nommée "prix.php" contenant un tableau simple dont chaque élément est un tableau clé-valeur comprenant les clés "pizza", "ingredients" et "prix". 
+#. Modifiez la page PHP du formulaire pour inclure le tableau et mettre à jour la liste des pizzas depuis les valeurs du tableau.
+#. Modifiez la page "recap_commande.php" qui sera la cible du formulaire et affichera un récapitulatif de la commande sous la forme d'un tableau, avec calcul du total (aidez-vous des fonctions définies dans un `précédent exercice<exo_include>`:ref:).
+#. En utilisant les fonction d'inclusion, faire en sorte que l'utilisateur reste en permanence sur la page principale et adaptez son contenu en fonction des données transmises (ou l'absence de données transmises).
+
+Voir le `résultat`__.
+
+__ _static/donnees/exercices/pizza.zip
+__ _static/donnees/corrections/pizza/

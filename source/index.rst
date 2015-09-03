@@ -8,17 +8,18 @@
 Programmation Web
 ===================
 
+TODO : Mettre le plan du cours en début de cours
+
 .. toctree::
    :maxdepth: 1
 
    intro
    php
-   donnees
    bdd
-   projet1
    mvc
    patterns
    frameworks
+   advanced
 
 .. toctree::
    :maxdepth: 1
