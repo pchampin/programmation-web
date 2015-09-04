@@ -10,6 +10,8 @@ Plan du cours
 Plan des séances
 ++++++++++++++++
 
+.. rst-class:: small
+
   * Séance 1 et 2 : 4H
 
     * Le Web : Rappel / Bases de PHP
