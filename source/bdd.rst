@@ -37,7 +37,7 @@ Le SGBD a pour mission de permettre leur accès en optimisant les opération de 
 
 
 Quel SGBD utiliser ?
---------------------
+++++++++++++++++++++
 
 Il existe plusieurs SGBD; parmi les plus utilisés on retrouve :
 
@@ -49,7 +49,7 @@ Il existe plusieurs SGBD; parmi les plus utilisés on retrouve :
 Dans ce cours, nous travaillerons avec MySQL. Il est le SGBD libre et gratuit le plus utilisé (mais pas le seul).
 
 Comment s'interfacent PHP et MySQL ?
-------------------------------------
+++++++++++++++++++++++++++++++++++++
 
 .. figure:: _static/bdd/client-serveur_MySQL.png
 		:alt: client-serveur-mysql
@@ -117,7 +117,7 @@ qui propose une interface de gestion Web des BDD sous la forme de pages PHP perm
 - l'importation/exportation de bases de données (complètes ou partielles).
  
 Accéder à PhpMyAdmin
---------------------
+++++++++++++++++++++
 
 * Depuis le site Web de l'IUT  : http://iutdoua-webetu.univ-lyon1.fr/phpMyAdmin/
    - login habituel : pxxxxxxx
@@ -132,14 +132,15 @@ Accéder à PhpMyAdmin
 .. _exo_phpmyadmin:  
 
 Exercice
-````````
+++++++++
+
 L'objectif de cet exercice est de se familiariser avec l'interface PhpMyAdmin.
 
 Instructions :
 
-#. Créez une base de données nommée "bdd_pizzas".
-#. Créez une table nommée "pizzas" avec les champs "id_pizza" (entier, clé primaire), "nom_pizza" (chaîne de caractères), "ingredients_pizza" (chaîne de caractères) et "prix_pizza" (nombre flottant).
-#. Remplissez vos tables avec quelques données (5-10 pizzas).
+#. Créez une base de données nommée "bdd_films".
+#. Créez une table nommée "films" avec les champs "id_film" (entier, clé primaire), "nom_film" (chaîne de caractères), "année_film" (entier) et "score" (nombre flottant).
+#. Remplissez vos tables avec quelques données (5-10 films).
 
 
 Interroger une base de données
@@ -214,7 +215,7 @@ Les requêtes sont interprétées par le SGBD, elles sont dont formulées dans l
 Le langage SQL est dédié à l'écriture de requêtes. Sa syntaxe, sous forme de chaîne de caractères, permet de créer des requêtes complexes à partir de quelques mots clés.
 
 Les instructions SQL
-````````````````````
+--------------------
 
 Le langage SQL est articulé autour de mots-clés facilement interprétables, exemple :
 
@@ -233,7 +234,7 @@ Le langage SQL est articulé autour de mots-clés facilement interprétables, ex
 	Cette liste n'est pas exhaustive : il est possible de tout faire avec des requêtes SQL (y compris création/suppresion de table et même de BDD).
  
 Requête de lecture
-``````````````````
+------------------
 
 L'ordre des mots-clés est figé, mais il n'est pas obligatoire de tous les utiliser.
 
@@ -262,7 +263,7 @@ Un exemple d'une requête de lecture complète pourrait être :
 * La limite du nombre d'enregistrement s'écrit : ``LIMIT indice_debut, indice_fin`` ; il y aura donc ``indice_fin - indice_debut`` enregistrements sélectionnés. Si un seul indice est précisé, la requête renverra ce nombre d'enregistrements à partir du premier (**dans l'ordre définie par le tri**). 
 
 Requête d'écriture
-``````````````````
+------------------
 
 D'autres mots-clés permettent d'ajouter/modifier/supprimer un enregistrement dans une table.
 
@@ -322,15 +323,15 @@ Exemple de **suppression** :
 .. _exo_sql:
  
 Exercice
-````````
+--------
 
 Depuis PhpMyAdmin, il est possible de taper directement des requêtes SQL et d'afficher le résultat retourné.
 
-#. Accédez à votre base de données de l'`exercice précédent<exo_phpmyadmin>`:ref:.
-#. Depuis le formulaire de requêtes de PhpMyAdmin, écrire une requête pour récupérer le nom de toutes les pizzas.
-#. Ecrire une requête permettant de récupérer au plus 5 pizzas parmi les moins chères (<=10€).
-#. Récupérez le nom et le prix de toutes les pizzas et triez le résultat par prix (croissant).
-#. Ajouter une nouvelle pizza nommée "Cannibale", qui coûte 20€, et contient du Fromage, de la Tomate, de la Viande Hachée, du Poulet, du Chorizo, du Canard, et du Jambon.
+#. Accédez à votre base de données de l'`exercice précédent<exo_phpmyadmin>`:ref:
+#. Depuis le formulaire de requêtes de PhpMyAdmin, écrire une requête pour récupérer le nom de tous les films
+#. Ecrire une requête permettant de récupérer au plus 5 films parmi les plus récents (<= 2010)
+#. Récupérez le nom et la note de tous les films et triez le résultat par note (croissant)
+#. Ajouter un nouveau film nommé "Alien", de 1979 et noté 8.5
 
  
 .. _lecture_bdd:
@@ -349,7 +350,7 @@ La lecture de données depuis une BDD s'exécute suivant ce protocole :
 
 
 Exemple générique
-````````````````` 
+-----------------
 
 .. code-block:: php
   :linenos:
@@ -385,7 +386,7 @@ Quelques remarques :
 
 
 Requête sans paramètres
-```````````````````````
+-----------------------
 
 .. code-block:: php
   :linenos:
@@ -407,7 +408,7 @@ Requête sans paramètres
 
   
 Requête avec paramètres anonymes
-````````````````````````````````
+--------------------------------
 
 .. code-block:: php
   :linenos:
@@ -425,7 +426,7 @@ Requête avec paramètres anonymes
 
 
 Requête avec paramètres identifiés
-``````````````````````````````````
+----------------------------------
   
 .. code-block:: php
   :linenos:
@@ -445,12 +446,11 @@ Requête avec paramètres identifiés
 .. _exo_requete:
   
 Exercice
-````````
+--------
 
-#. Reprenez votre formulaire de commande de pizzas de l'`exercice précédent<exo_post>`:ref:.
-#. Créez une page contenant la fonction de connexion à la BDD pizzas.
-#. Modifiez la page "prix.php" pour que la construction du tableau soit faite depuis les données de la BDD.	
-
+#. Créer une page contenant la fonction de connexion à la BDD films
+#. Récuperez la liste des films avec la requete adéquate
+#. Afficher le résultat
 
 .. _ecriture_bdd:
 
@@ -466,7 +466,8 @@ L'écriture de données dans une BDD se fait en suivant les étapes suivantes :
 Trois actions sont possibles pour l'écriture : insertion, modification ou suppression d'un enregistrement.
 
 Exemple générique
-`````````````````
+-----------------
+
 Avec paramètres :
 
 .. code-block:: php
@@ -498,14 +499,13 @@ Sans paramètres :
 .. _exo_ecriture:
   
 Exercice
-````````
+---------
 
-#. Récupérez `la page "ajout_pizza.php"`__ qui permet d'afficher un formulaire.
-#. Modifiez la pour que, lorsque des données sont envoyées, elles soient insérées dans la table pizzas de votre BDD.
-#. Ajoutez tous les tests nécessaires au traitement des données entrées.
-#. Si l'utilisateur entre un nom de pizza déja existant dans la table, appliquer une requête de modification avec les nouvelles données (empêchez la création de doublons).
-
-__ _static/bdd/exercices/ajout_pizza.zip
+#. Créer une page "ajout_film.php"
+#. Créer et afficher un formulaire simple permettant l'ajout d'un film
+#. Modifier la page pour que les données envoyées soient insérées dans la table films de votre BDD.
+#. Ajoutez les tests nécessaires au traitement des données entrées
+#. Si l'utilisateur entre un nom de film déja existant dans la table, appliquer une requête de modification avec les nouvelles données (empêchez la création de doublons).
 
 .. _jointure_bdd:
 
@@ -562,7 +562,7 @@ Pour pouvoir accéder aux données présentes dans des tables jointes de la sort
 
 
 Aller plus loin avec les requêtes SQL
-`````````````````````````````````````
+-------------------------------------
 
 **Les alias :**
 
@@ -607,14 +607,19 @@ Exemple :
   On peut bien sûr imbriquer plusieurs jointures lorsque plus de deux tables sont liées.
   Pour cela, il suffit de préciser les conditions de jointures les unes après les autres (``INNER JOIN ... ON ... INNER JOIN ... ON``).
 
-  
 .. _exo_jointure:
   
-Exercice
-````````
+Projet 1: Site de films
+=======================
 
-* Reprenez et réalisez une copie du formulaire de commande de pizzas réalisé pour un `exercice ultérieur<exo_requete>`:ref:.
-* Téléchargez et importez (dans PhpMyAdmin) la nouvelle `BDD de pizzas`__ qui utilise une table de jointure.
-* Modifiez vos pages PHP et actualisez vos requêtes pour obtenir le même résultat (chargement des infos dans le tableau associatif).
+Consignes interface:
 
-__ _static/bdd/exercices/pizzas_db.sql
+* Interface se rapprochant de la présentation ci-dessous
+* Uniquement du PHP, HTML et CSS
+* pas de framework, ni de moteur de templates
+* passer le valideur HTML5 et CSS3 sans erreur
+* placer les fichiers dans le répertoire public_html/PHP/projet1 du login hébergeant le projet
+* envoyer un zip du répertoire projet1 par mail à l’enseignant en mettant le binôme en CC
+
+.. figure:: _static/projet/interface.png
+    :alt: interface-projet

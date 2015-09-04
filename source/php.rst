@@ -738,11 +738,11 @@ Intégrer des fichiers externes
   - ``require("page.php");`` qui fait la même chose mais une erreur fatale est retournée si la ressource est manquante (arrêt du script).
   - ``include_once("page.php");`` et ``require_once("page.php");`` intègrent en plus un test pour empêcher une intégration multiple.
 
-Transmettre des données via des formulaires
-===========================================
+Transmettre des données
+=======================
 
-Les méthodes d'envoi
-++++++++++++++++++++
+Via un formulaire : Les méthodes d'envoi
+++++++++++++++++++++++++++++++++++++++++
 
 En HTML, la balise ``<form>`` spécifie la méthode HTTP utilisée par le formulaire :
 
@@ -756,8 +756,8 @@ En HTML, la balise ``<form>`` spécifie la méthode HTTP utilisée par le formul
   * Dans le cas d'une modification (Paramètres utilisateurs)
   * Les données seront passées dans le corps de la requête HTTP
 
-Transmettre des données par l'URL
-+++++++++++++++++++++++++++++++++
+GET : Envoi par l'URL (1/2)
++++++++++++++++++++++++++++
 
 La méthode d'envoi GET est celle utilisée par défaut lorqu'on utilise les formulaires sans préciser la méthode :
 
@@ -776,8 +776,8 @@ Cette écriture est exactement équivalente à :
   </form>
 
 
-Envoi des données par URL
--------------------------
+GET : Envoi par l'URL (1/2)
++++++++++++++++++++++++++++
 
 Les données du formulaire qui sont passées dans l'URL s'écrivent sous la forme :
 
@@ -799,8 +799,8 @@ Les données du formulaire qui sont passées dans l'URL s'écrivent sous la form
   La valeur des paramètres correspond à la valeur de l'attribut ``@value`` s'il est définit, ou au texte saisi par l'utilisateur (dans un champ texte par exemple).
   
   
-Traitement des données reçues dans une URL
-------------------------------------------
+Reception des données
++++++++++++++++++++++
 
 Côté serveur (en PHP, donc), les valeurs passées dans l'URL sont stockées dans un tableau associatif ``$_GET`` : 
 
@@ -817,10 +817,33 @@ Exemple (avec l'URL précédente) :
   Comme les paramètres et leurs valeurs sont intégrés dans l'URL, ils sont directement modifiables.
   
   Il est donc très important de tester si les données reçues sont celles attendues (mauvais type, données manquantes ...).
-
   
+Transmettre des données dans une requête
+++++++++++++++++++++++++++++++++++++++++
+
+La méthode POST doit être spécifiée dans le formulaire si l'on souhaite transmettre des données dans une requête :
+
+.. code-block:: html
+
+  <form action="traitement.php" method="post">
+     ...
+  </form>
+
+Dans ce cas, les paramètres et leurs valeurs envoyés ne seront plus visibles dans l'URL.
+
+
+Traitement des données reçues en Post
++++++++++++++++++++++++++++++++++++++
+
+Les valeurs transmises par la méthode Post sont stockées dans la variable ``$_POST``. Les données sont stockées de la même manière que dans la variable ``$_GET``.
+
+.. warning::
+  
+  Même si les paramètres et leurs valeurs sont transmises sans apparaître dans l'URL, il est tout de même possible d'envoyer des valeurs inattendues (par exemple, en modifiant une copie du code HTML du formulaire).
+  Il est d'autant plus important de contrôler les données reçues que les données envoyées en Post peuvent contenir des chaînes de caractères conséquentes (et pourquoi pas, du code HTML ou JavaScript !).
+
 Contrôler la valeur des paramètres
-----------------------------------
+++++++++++++++++++++++++++++++++++
 
 Lorsque des données transitent par l'URL, il faut s'assurer que les **valeurs correspondent au type attendu**.
 Dans le cas contraire, PHP permet de convertir les valeurs d'un type à un autre.
@@ -845,50 +868,8 @@ Exemple :
   }
   ?>
 
-.. _exo_get: 
- 
-Exercice
---------
-  
-#. Reprenez votre script `de l'exercice sur les boucles <exo_for>`:ref:.
-#. Permettre d'adapter le nombre de "Hello World!" affichés en fonction de la valeur de la variable ``nb_hello`` passée en paramètre de l'URL.
-#. Améliorez votre script vous assurant que l'affichage des "Hello World !" soit limité à 100 occurences, et qu'une valeur négative ou nulle de ``nb_hello`` n'aie pas d'incidence sur le script.
-#. Ajoutez un numéro de ligne toutes les 10 lignes et alternez les couleurs une ligne sur deux (utiliser une feuille de style CSS !).
-#. Assurez vous que la valeur transmise soit bien de type entier (soit par conversion, ou mieux, avec la ``is_int`` (`documentation`__). 
-
-
-Voir le `résultat`__.
-
-__ http://php.net/manual/fr/function.is-int.php
-__ _static/donnees/corrections/get/
-  
-Transmettre des données dans une requête
-========================================
-
-La méthode POST doit être spécifiée dans le formulaire si l'on souhaite transmettre des données dans une requête :
-
-.. code-block:: html
-
-  <form action="traitement.php" method="post">
-     ...
-  </form>
-
-Dans ce cas, les paramètres et leurs valeurs envoyés ne seront plus visibles dans l'URL.
-
-
-Traitement des données reçues en Post
--------------------------------------
-
-Les valeurs transmises par la méthode Post sont stockées dans la variable ``$_POST``. Les données sont stockées de la même manière que dans la variable ``$_GET``.
-
-.. warning::
-  
-  Même si les paramètres et leurs valeurs sont transmises sans apparaître dans l'URL, il est tout de même possible d'envoyer des valeurs inattendues (par exemple, en modifiant une copie du code HTML du formulaire).
-  Il est d'autant plus important de contrôler les données reçues que les données envoyées en Post peuvent contenir des chaînes de caractères conséquentes (et pourquoi pas, du code HTML ou JavaScript !).
-
-
 Aller plus loin dans le contrôle des paramètres
------------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++
 
 En plus de vérifier le type et la présence des paramètres, le traitement des chaînes de caractères doit comprendre une conversion pour **éviter que le texte puisse être interprété comme du code** HTML (ou JavaScript).
 
@@ -909,17 +890,46 @@ __ http://php.net/manual/fr/function.htmlentities.php
 
 .. _exo_impots:
   
-Exercice: Les impots
---------------------
-TODO : remettre les TD mettre les formulaire dans les impots
+Exercice : Les impots
+=====================
 
-#. Téléchargez `l'archive`__ contenant des pages permettant de commander des pizzas en ligne.
-#. Créez une page nommée "prix.php" contenant un tableau simple dont chaque élément est un tableau clé-valeur comprenant les clés "pizza", "ingredients" et "prix". 
-#. Modifiez la page PHP du formulaire pour inclure le tableau et mettre à jour la liste des pizzas depuis les valeurs du tableau.
-#. Modifiez la page "recap_commande.php" qui sera la cible du formulaire et affichera un récapitulatif de la commande sous la forme d'un tableau, avec calcul du total (aidez-vous des fonctions définies dans un `précédent exercice<exo_include>`:ref:).
-#. En utilisant les fonction d'inclusion, faire en sorte que l'utilisateur reste en permanence sur la page principale et adaptez son contenu en fonction des données transmises (ou l'absence de données transmises).
+* On souhaite faire une page simple permettant à un utilisateur de calculer le montant de son impôt
 
-Voir le `résultat`__.
+  * On calcule le nombre de parts du salarié (nbEnfants est son nombre d'enfants)
 
-__ _static/donnees/exercices/pizza.zip
-__ _static/donnees/corrections/pizza/
+    .. code:: 
+
+      parts = nbEnfants/2+1 (pas marié)
+
+      parts = nbEnfants/2+2 (marié)
+
+
+  * On calcule son revenu imposable (S est le salaire)
+
+    .. code:: 
+
+      R = 0.72 * S
+
+  * On calcule son quotient familial
+
+    .. code:: 
+
+      Q = R / parts
+
+
+* Les tranches du barème sont les suivantes, appliquée au montant du quotient familial Q :
+
+  ======== ============ ============= ============= =============
+  0 à 5614 5615 à 11198 11199 à 24872 24873 à 66679 66680 et plus
+  ======== ============ ============= ============= =============
+  0%       5.5%         14%           30%           40%
+  ======== ============ ============= ============= =============
+
+
+* Le montant de l’impot est alors remultiplié par le nombre de parts nbParts.
+
+#. Créer un formulaire permettant à l’utilisateur de rentrer ses informations
+#. Calculer le montant prévisionnel de son impôt
+#. Afficher le résultat
+
+  .. figure:: _static/php/form.png
