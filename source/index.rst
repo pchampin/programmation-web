@@ -8,8 +8,6 @@
 Programmation Web
 ===================
 
-TODO : Mettre le plan du cours en début de cours
-
 .. toctree::
    :maxdepth: 1
 
@@ -18,20 +16,14 @@ TODO : Mettre le plan du cours en début de cours
    bdd
    mvc
    patterns
-   frameworks
    advanced
+   frameworks
 
 .. toctree::
    :maxdepth: 1
    
    seances
    annexe
-
-   
-.. toctree::
-   :maxdepth: 1
-   
-   projetp2015
 
 .. rubric:: Remerciements
 

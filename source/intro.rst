@@ -4,6 +4,38 @@
  Le Web : Introduction
 ============================
 
+Plan du cours
+=============
+
+Plan des séances
+++++++++++++++++
+
+.. rst-class:: small
+
+  Séance 1 et 2 : 4H
+
+    * Le Web : Rappel / Bases de PHP
+
+  * Séance 3 + 4 : 4h
+
+    * Les bases de données / PHP Object / Projet v1: Site web de films
+
+  * Séance 5 + 6: 4h
+
+    * Design pattern 1 (MVC, MVVM, etc...)
+
+  * Séance 7 et 8 : 4h
+
+    * Design patterns 2 (Autres designs patterns)
+
+  * Séance 9 et 10 : 4h
+    
+    * PHP Avancé (Sessions, ...) / Protection et sécurité (injection SQL, XSS)
+
+  * Séance 11 et 12 : 4h
+
+    * Etude comparative des frameworks PHP
+
 C'est quoi le Web ?
 ===================
 
@@ -202,11 +234,12 @@ Exercice
 
 Il est possible de voir le détail des requètes dans le navigateur
 
-# Ouvrez une page web
-# Ouvrez l'interface développeur "Network" de votre navigateur
-
+#. Ouvrez une page web
+#. Ouvrez l'interface développeur "Network" de votre navigateur
+  
   * Firefox : Ctrl + Maj + Q
-  * Chrome : 
-  * 
+  * Chrome : Ctrl + Maj + I
+  * IE: Outils > Outils de développement
+  * Safari : Ctrl + Alt + I
 
-# Actualisez la page (F5) et observez les différentes requètes effectuées par le navigateur
+#. Actualisez la page (F5) et observez les différentes requètes effectuées par le navigateur
