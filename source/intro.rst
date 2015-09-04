@@ -10,16 +10,12 @@ Plan du cours
 Plan des séances
 ++++++++++++++++
 
-.. rst-class:: small
-
-  Séance 1 et 2 : 4H
+  * Séance 1 et 2 : 4H
 
     * Le Web : Rappel / Bases de PHP
-
   * Séance 3 + 4 : 4h
 
     * Les bases de données / PHP Object / Projet v1: Site web de films
-
   * Séance 5 + 6: 4h
 
     * Design pattern 1 (MVC, MVVM, etc...)
@@ -62,7 +58,7 @@ Architecture Client Serveur
 
    Source image http://commons.wikimedia.org/wiki/File:Client-server-model.svg
 
-.. note:: Différents r^oles : le client initie l'exécution d'une opération fournie par le serveur (!= pair à pair)
+.. note:: Différents rôles : le client initie l'exécution d'une opération fournie par le serveur (!= pair à pair)
 
 Les Technologies
 ================
