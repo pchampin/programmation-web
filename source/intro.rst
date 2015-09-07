@@ -4,8 +4,8 @@
  Le Web : Introduction
 ============================
 
-Plan du cours
-=============
+Organisation du cours
+======================
 
 Plan des séances
 ++++++++++++++++
@@ -15,10 +15,10 @@ Plan des séances
   * Séance 1 et 2 : 4H
 
     * Le Web : Rappel / Bases de PHP
-  * Séance 3 + 4 : 4h
+  * Séance 3 et 4 : 4h
 
     * Les bases de données / PHP Object / Projet v1: Site web de films
-  * Séance 5 + 6: 4h
+  * Séance 5 et 6: 4h
 
     * Design pattern 1 (MVC, MVVM, etc...)
 
@@ -32,7 +32,19 @@ Plan des séances
 
   * Séance 11 et 12 : 4h
 
-    * Etude comparative des frameworks PHP
+    * Étude comparative des frameworks PHP
+    
+Participation, support et évaluation
++++++++++++++++++++++++++++++++++++++++++++
+
+  * Ce cours est vivant => tous retours bienvenus
+
+  * Contribuer à améliorer le cours est bénéfique pour tous
+
+  * Interrogation sur les savoirs théoriques (tout ce qui est dans le support de cours) et pratiques (exercices)
+  
+    * Interrogation surprise possible
+
 
 C'est quoi le Web ?
 ===================
@@ -51,9 +63,9 @@ En quelques mots
 Architecture Client Serveur
 +++++++++++++++++++++++++++
 
-- **Ressource** : document, image, video publié sur le Web
-- **Serveur** : ordinateur connecté à internet sur lequel se trouve des resources
-- **Client** : appareil (ordinateur, tablette,...) utilisé pour acceder à ces ressources
+- **Ressource** : document, image, vidéo... publiés sur le Web
+- **Serveur** : ordinateur connecté à internet sur lequel se trouvent des ressources
+- **Client** : appareil (ordinateur, tablette,...) utilisé pour accéder à ces ressources
 
 .. figure:: _static/client-server-model.svg
    :height: 200ex
@@ -107,7 +119,7 @@ HTTP
 
 .. _RFC 2616: http://datatracker.ietf.org/doc/rfc2616/
 
-Les Requetes HTTP
+Les Requêtes HTTP
 -----------------
 
 Une requete HTTP contient :
@@ -117,10 +129,10 @@ Une requete HTTP contient :
 * Transmet des informations à propos du client => HEADER
 * Transmet éventuellement des données => BODY
 
-Construction d'une requete
+Construction d'une requête
 ++++++++++++++++++++++++++
 
-Une requete est construite comme suit:
+Une requête est construite comme suit:
 
 .. code-block:: none
 
@@ -131,7 +143,7 @@ Une requete est construite comme suit:
   ...
   /*Ligne vide*/
 
-  /* Corps de la requete */
+  /* Corps de la requête */
   [BODY]
 
 Les Verbes HTTP (1/2)
@@ -146,15 +158,17 @@ Les Verbes HTTP (1/2)
   * GET : Récupère une représentation de la ressource
   * HEAD : Récupère seulement l'en-tête de la ressource
   * POST : Création d'une sous-ressource de l'URL spécifiée
-  * PUT : Modification de la resource à l'URL spécifiée (warning: si la ressource n'existe pas, elle est crée) (todo)
+  * PUT : Modification de la ressource à l'URL spécifiée (warning: si la ressource n'existe pas, elle est créée)
   * DELETE : Suppression de la ressource
 
 
 .. rst-class:: small
   
-  NB: Une application qui respecte cette sémantique est appellée RESTful (complément : lien todo : pédagogique)
+  NB: Une application qui respecte cette sémantique est appellée RESTful  
+  * http://mbaron.developpez.com/soa/rest/
+  * http://ruben.verborgh.org/blog/2012/09/27/the-object-resource-impedance-mismatch/
 
-Exemple d'une requete
+Exemple d'une requête
 ++++++++++++++++++++++++++
 
 .. code-block:: http
@@ -184,12 +198,12 @@ Statut de réponse HTTP
 
 .. index:: Response status
 
-Le statut de réponse HTTP informe du statut de la requete (`Liste des codes`_):
+Le statut de réponse HTTP informe du statut de la requête (`Liste des codes`_):
 
 * 1xx : En attente
-* 2xx : Succes
+* 2xx : Succès
 * 3xx : Redirection
-* 4xx : Acces refusé
+* 4xx : Accès refusé
 * 5xx : Erreur serveur
 
 .. note:: 
@@ -212,7 +226,7 @@ Construction de réponse
   ...
   /*Ligne vide*/
 
-  /* Corps de la requete */
+  /* Corps de la requête */
   [BODY]
 
 Exemple de réponse
@@ -230,7 +244,7 @@ Exemple de réponse
 Exercice
 ++++++++++++++++++
 
-Il est possible de voir le détail des requètes dans le navigateur
+Il est possible de voir le détail des requêtes dans le navigateur
 
 #. Ouvrez une page web
 #. Ouvrez l'interface développeur "Network" de votre navigateur
@@ -240,4 +254,4 @@ Il est possible de voir le détail des requètes dans le navigateur
   * IE: Outils > Outils de développement
   * Safari : Ctrl + Alt + I
 
-#. Actualisez la page (F5) et observez les différentes requètes effectuées par le navigateur
+#. Actualisez la page (F5) et observez les différentes requêtes effectuées par le navigateur
