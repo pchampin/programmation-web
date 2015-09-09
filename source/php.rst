@@ -103,8 +103,7 @@ Les fichiers PHP
 Exemple
 +++++++
 
-.. code-block:: html
-  :linenos:
+.. code-block:: php
 
   <!DOCTYPE html>
   <html>
@@ -113,13 +112,13 @@ Exemple
     <title>Ma première page en PHP !</title>
     </head>
     <body>
-    <?php echo("Ce texte est écrit par du script PHP!"); ?>
+    <?php echo("Ce texte est écrit 
+          par du script PHP!"); ?>
     </body>
   </html>
 
-.. note::
 
-  L'instruction ``echo`` est une fonction PHP. Elle permet d'écrire la chaîne de caractères passée en paramètre dans le fichier HTML généré.
+L'instruction ``echo`` est une fonction PHP. Elle permet d'écrire la chaîne de caractères passée en paramètre dans le fichier HTML généré.
 
 Exemple minimal 
 +++++++++++++++
@@ -153,7 +152,7 @@ Exercice (10 minutes)
 
 Voir le `résultat <_static/php/corrections/premierepagephp/>`_ attendu.
 
-#. Comment rendre le résultat valide en HTML ?
+* Comment rendre le résultat valide en HTML ?
 
 Les variables
 ==============
@@ -195,15 +194,17 @@ Les chaînes de caractères
 Les chaînes de caractères :
 
 * écrites entre ``"`` ou entre ``'``
-* concatenation avec ``.``
-* peuvent integrer la valeur d'une variable
+* concatenation avec ``.`` (attention ``+`` fait la somme)
+* peuvent interpreter la valeur d'une variable (si ``"`` est utilisé)
 
-.. note:: Beaucoup de fonctions mathématiques et pour la manipulation des strings (`PHP Manual for Strings`_)
+
+NB: Beaucoup de fonctions existent pour la manipulation des strings (`PHP Manual for Strings`_)
 
 .. _PHP Manual for Strings: http://www.php.net/manual/fr/ref.strings.php
 
 Affichage de chaines
 --------------------
+
 
 La syntaxe de PHP permet de simplifier l'affichage de chaînes de caractères entre elles ou avec des variables.
 
@@ -219,10 +220,6 @@ La syntaxe est différente suivant les délimiteurs utilisés :
    echo('Voici une '.$mot1.' composée de '.$mot2.' mots.'."\n");
   ?>
   
-.. note::
-
-  Le caractère ``\n`` correspond à un retour à la ligne. A ne pas confondre avec la balise ``<br />`` !
-  
 .. nextslide::
 
 .. code-block:: html
@@ -230,7 +227,9 @@ La syntaxe est différente suivant les délimiteurs utilisés :
   Voici une phrase composée de 8 mots.
   Voici une $mot1 composée de $mot2 mots.
   Voici une phrase composée de 8 mots.
-  
+
+NB: Le caractère ``\n`` correspond à un retour à la ligne. A ne pas confondre avec la balise ``<br />`` !
+
 Les tableaux
 +++++++++++++
 
@@ -248,16 +247,16 @@ Ils contiennent des éléments accessibles via leur indice. Les indices démarre
 
 Par exemple, votre tableau pourrait contenir : 
 
-======= ==========================
+====== ===========
 Clé     Valeur
-======= ==========================
+====== ===========
   0     François
   1     Michel
   2     Nicole
   3     Véronique
   4     Benoît
   ...   ...
-======= ==========================
+====== ===========
 
 Affectation
 ```````````
@@ -343,6 +342,8 @@ Affectation
     );
   ?>
 
+.. nextslide::
+
 * En définissant les indices :
 
 .. code-block:: php
@@ -393,9 +394,6 @@ Les conditions
 
 Elles permettent de définir des **conditions** lors de l'éxécution de votre script PHP :
 
-* la structure ``if`` ... ``else`` ;
-* la structure ``switch``.
-
 ======= ==========================
 Symbole Signification
 ======= ==========================
@@ -407,9 +405,7 @@ Symbole Signification
   !=    Est différent de
 ======= ==========================
 
-.. note::
-
-  Le ``==`` de la comparaison est à distinguer du symbole d'affectation ``=``.
+NB: Le ``==`` de la comparaison est à distinguer du symbole d'affectation ``=``.
 
 Exemple : ``if ... else``
 -------------------------
@@ -435,10 +431,15 @@ Voir le `résultat <_static/php/test.php#mdp>`_ .
 
 .. nextslide::
 
-.. tip::
+PHP tolère aussi l'écriture condensée (nommée opérateur ternaire) : 
 
-   PHP tolère aussi l'écriture condensée (nommée opérateur ternaire) : ``$variable = $condition ? valeurSiVrai : valeurSiFaux``.
-   Comparée au ``if``, cette écriture permet de réduire le nombre de lignes de code, au détriment de sa lisibilité.
+.. code-block:: php
+
+  <?php 
+    $variable = $condition ? valeurSiVrai : valeurSiFaux;
+  ?>
+
+Comparée au ``if``, cette écriture permet de réduire le nombre de lignes de code, au détriment de sa lisibilité.
    
 
 Exemple : ``switch``
@@ -549,7 +550,8 @@ Elle permet de simplifier le parcours des tableaux, en permetant une écriture p
 .. code-block:: php
 
   <?php
-    $prenoms = array ('François', 'Michel', 'Nicole', 'Véronique', 'Benoît');
+    $prenoms = array ('François', 'Michel', 'Nicole', 
+                        'Véronique', 'Benoît');
     for ($numero = 0; $numero < 5; $numero++)
       echo $prenoms[$numero] . "\n";
     }
@@ -563,7 +565,8 @@ Pour les tableaux simples
 .. code-block:: php
 
   <?php
-    $prenoms = array ('François', 'Michel', 'Nicole', 'Véronique', 'Benoît');
+    $prenoms = array ('François', 'Michel', 'Nicole', 
+                        'Véronique', 'Benoît');
     foreach($prenoms as $element) {
       echo $element . "\n";
     }
@@ -678,15 +681,14 @@ La syntaxe PHP impose l'utilisation du mot-clé ``function`` :
 .. code-block:: php
 
   <?php
-   function MaFonction ($parametre1, $parametre2) {
-  //corps de la fonction
-  return $valeurRetournee;
-   }
+    function MaFonction ($parametre1, $parametre2) {
+      //corps de la fonction
+      return $valeurRetournee;
+    }
   ?>
   
-.. note:: 
-  
-  Les fonctions peuvent ne rien retourner (pas d'instruction ``return``). Par défaut, c'est la valeur ``NULL`` est retournée.
+
+Les fonctions peuvent ne rien retourner (pas d'instruction ``return``). Par défaut, c'est la valeur ``NULL`` qui est retournée.
 
   
 Appeler une fonction
@@ -756,8 +758,8 @@ En HTML, la balise ``<form>`` spécifie la méthode HTTP utilisée par le formul
   * Dans le cas d'une modification (Paramètres utilisateurs)
   * Les données seront passées dans le corps de la requête HTTP
 
-GET : Envoi par l'URL (1/2)
-+++++++++++++++++++++++++++
+GET : Envoi par l'URL
++++++++++++++++++++++
 
 La méthode d'envoi GET est celle utilisée par défaut lorqu'on utilise les formulaires sans préciser la méthode :
 
@@ -776,8 +778,8 @@ Cette écriture est exactement équivalente à :
   </form>
 
 
-GET : Envoi par l'URL (1/2)
-+++++++++++++++++++++++++++
+GET : Envoi par l'URL
++++++++++++++++++++++
 
 Les données du formulaire qui sont passées dans l'URL s'écrivent sous la forme :
 
@@ -859,12 +861,12 @@ Exemple :
 
   <?php
   if (isset($_GET['param1']) AND isset($_GET['param2'])) {
-  $valeur1 = (int) $_GET['param1'];
-  $valeur2 = (int) $_GET['param2'];
-  ... // code à exécuter si tous les paramètres sont présents
+    $valeur1 = (int) $_GET['param1'];
+    $valeur2 = (int) $_GET['param2'];
+    ... // code à exécuter si tous les paramètres sont présents
   } else {
-  ...
-  // code à exécuter par défaut
+    ...
+    // code à exécuter par défaut
   }
   ?>
 
@@ -884,14 +886,14 @@ __ http://php.net/manual/fr/function.htmlentities.php
   $value = ( isset($_POST['variable']) ) ?
              htmlspecialchars($_POST['variable']) : "";
   if((strlen($value) > 0) && (strlen($value) < 50)){
-   ... //
+    ... //
   }
   ?>
 
 .. _exo_impots:
   
 Exercice : Les impots
-=====================
++++++++++++++++++++++
 
 * On souhaite faire une page simple permettant à un utilisateur de calculer le montant de son impôt
 
@@ -910,11 +912,14 @@ Exercice : Les impots
 
       R = 0.72 * S
 
-  * On calcule son quotient familial
+Exercice : Les impots
++++++++++++++++++++++
 
-    .. code:: 
+* On calcule son quotient familial
 
-      Q = R / parts
+  .. code:: 
+
+    Q = R / parts
 
 
 * Les tranches du barème sont les suivantes, appliquée au montant du quotient familial Q :
@@ -927,6 +932,9 @@ Exercice : Les impots
 
 
 * Le montant de l’impot est alors remultiplié par le nombre de parts nbParts.
+
+Exercice : Les impots
++++++++++++++++++++++
 
 #. Créer un formulaire permettant à l’utilisateur de rentrer ses informations
 #. Calculer le montant prévisionnel de son impôt

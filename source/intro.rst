@@ -146,25 +146,25 @@ Une requête est construite comme suit:
   /* Corps de la requête */
   [BODY]
 
-Les Verbes HTTP (1/2)
-+++++++++++++++++++++
+Les Verbes HTTP
++++++++++++++++
 
 .. index:: GET
 .. index:: POST
 
-* Définissent le type d'échange
-* Ont une sémantique propre
+* Sémantique définissant le type d'échange
 
   * GET : Récupère une représentation de la ressource
   * HEAD : Récupère seulement l'en-tête de la ressource
   * POST : Création d'une sous-ressource de l'URL spécifiée
-  * PUT : Modification de la ressource à l'URL spécifiée (warning: si la ressource n'existe pas, elle est créée)
+  * PUT : Modification de la ressource à l'URL (warning: création si elle n'existe pas)
   * DELETE : Suppression de la ressource
 
 
 .. rst-class:: small
   
-  NB: Une application qui respecte cette sémantique est appellée RESTful  
+  NB: Une application qui respecte cette sémantique est appellée RESTful 
+
   * http://mbaron.developpez.com/soa/rest/
   * http://ruben.verborgh.org/blog/2012/09/27/the-object-resource-impedance-mismatch/
 
@@ -206,10 +206,9 @@ Le statut de réponse HTTP informe du statut de la requête (`Liste des codes`_)
 * 4xx : Accès refusé
 * 5xx : Erreur serveur
 
-.. note:: 
-  Quelques codes usuels :
+Quelques codes usuels : 
 
-  **200** OK, **301** Moved Permanently, **404** Not found, **418** `I’m a teapot`_, **501** Internal error
+**200** OK, **301** Moved Permanently, **404** Not found, **418** `I’m a teapot`_, **501** Internal error
 
 .. _Liste des codes: https://fr.wikipedia.org/wiki/Liste_des_codes_HTTP
 .. _I’m a teapot: https://tools.ietf.org/html/rfc2324
@@ -219,7 +218,7 @@ Construction de réponse
 
 .. code-block:: none
 
-  [PROTOCOLE] [CODE] [SIGNIFICATIOn] 
+  [PROTOCOLE] [CODE] [SIGNIFICATION] 
   /* En-tetes */
   [TYPE1]:[VALEUR1]
   [TYPE2]:[VALEUR2]

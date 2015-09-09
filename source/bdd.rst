@@ -10,12 +10,15 @@ Introduction aux bases de données
 Qu'est ce qu'une base de données ?
 ++++++++++++++++++++++++++++++++++
 
-Un **base de données** (BDD) permet l'enregistrement de données dans un format organisé et hiérarchisé.
+Un **base de données** (BDD) sert à enregistrer des données
 
-La durée de vie des données stockées dans des variables PHP est limitée au temps d'éxécution du script.
+ * Format organisé et hiérarchisé
+ * Requetable
+ * Durable
 
-Il est aussi possible de stocker des données dans des fichiers externes, mais cette solution n'est pas viable
-pour une grande quantité de données. 
+Durée de vie d'une variable PHP = temps d'éxécution du script
+
+Possibilité de stocker des données dans des fichiers externes => pas viable (grande quantité de données)
 
 Pour manipuler une BDD, on utilise un **SGBD**.
 

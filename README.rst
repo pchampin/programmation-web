@@ -2,12 +2,13 @@ Programmation Web
 =================
 
 Cours de programmation pour le Web dynamique
-enseigné par `Maxime Guériau`_
+enseigné par `Michael Mrissa`_ et `Pierre De Vettor`_
 au département informatique de l'`IUT de Lyon 1`_.
 
-Il est publié à http://liris.cnrs.fr/~mgueriau/enseignement/iut_lyon1/programmation-web/ .
+Il est publié à http://liris.cnrs.fr/~pdevetto/enseignement/module-php/ .
 
-.. _Maxime Guériau: http://liris.cnrs.fr/~mgueriau
+.. _Michael Mrissa: http://liris.cnrs.fr/~mmrissa
+.. _Pierre De Vettor: http://liris.cnrs.fr/~pdevetto
 .. _IUT de Lyon 1: http://iut.univ-lyon1.fr/
 
 Contribuer
