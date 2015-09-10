@@ -154,92 +154,61 @@ Voir le `résultat <_static/php/corrections/premierepagephp/>`_ attendu.
 
 * Comment rendre le résultat valide en HTML ?
 
+
 Un point sur l'UTF8
 ===================
 
+Apache et UTF8
+++++++++++++++
 
-Sécuriser des pages PHP
-=======================
+Par défault, la configuration du serveur apache n'utilise pas UTF-8
 
-Contrôle d'accès sur serveur Apache
------------------------------------
+.. tip::
+  Il est important de spécifier l'encodage lorsque l'on conçoit une application (caractère spéciaux et accentués) pour éviter les affichages du type Ã©
 
-Nécessité de séparer public/privé (admin, ...), plusieurs possibilités:
+Pour spécifier à apache d'utiliser UTF-8, la première solution : 
 
-* Sessions PHP (vu plus tard dans le cours)
-* Contrôle d'accès côté serveur 
+  * Les fichiers de config /etc/apache2/apache2.conf
 
-  * limiter l'accès à certains fichiers aux seuls utilisateurs autorisés
+On a pas toujours accès aux configurations
 
-Pour mettre en place un contrôle d'accès, il faut créer deux fichiers :
+  * les fichiers .htaccess
 
-#. Un fichier ``.htaccess``  qui contient l'adresse du ``.htpasswd`` et définit les options du contrôle d'accès.
-#. Un fichier ``.htpasswd``  qui contient une liste de logins/mots de passe des utilisateurs autorisés à accèder aux pages contenues dans le dossier du fichier ``.htaccess``.
+Les fichiers .htaccess
+++++++++++++++++++++++
 
-.. note::
+Fichier ``.htaccess`` :
 
-  Chaque fichier ``.htaccess`` protège les pages du répertoire dans lequel il se trouve.
-  Pour protéger plusieurs pages, il est donc nécessaire de dupliquer ce fichier, mais il est préférable de le faire pointer sur un fichier ``.htpasswd`` unique.
+* fichiers de configuration apache
+* portée limitée au dossier
+* pas de reboot apache necessaire
 
-Le fichier ``.htaccess``
-````````````````````````
+Permettent:
 
-Exemple :
+* Sécurité (Public/Privé, ...)
+* Réécriture d'URL
+* Redirection
+* Gestion erreurs (404, 405,...)
 
-.. code-block:: none
+Structure .htaccess
++++++++++++++++++++
 
-  AuthName "Message de l'invité"
-  AuthType Basic
-  AuthUserFile "/home/univ-lyon1/pxxxxxxx/
-                public_html/admin/.htpasswd"
-  Require valid-user
+Ensemble de directives, similaire au fichier de config apache 
 
-Le champ ``AuthName`` correspond au message affiché lors de la tentative d'accès à une ressource sous contrôle d'accès.
+.. code-block:: http
 
-Le champ ``AuthUserFile`` est le chemin absolu vers le fichier ``.htpasswd``.
+  RewriteEngine on
+  ErrorDocument 404 /erreur.html
 
-.. note::
+Dans notre cas, pour modifier l'encodage dans les en-tetes HTTP
 
-  La fonction PHP `realpath()`__ permet de récupérer le chemin absolu du fichier ``.htpasswd``.
-  
-__ http://php.net/manual/fr/function.realpath.php
-  
-Le fichier ``.htpasswd``
-````````````````````````
+.. code-block:: http
 
-Le fichier ``.htpasswd`` se compose de lignes suivant le format : ``login:mot_de_passe_crypté``.
+  AddDefaultCharset UTF-8 
 
-Il est possible d'afficher les mots de passe en clair. Mais ils sont alors visibles pour qui à les droits de lecture sur le serveur.
-
-Pour crypter les mots de passe du fichier ``.htpasswd``, PHP propose la fonction `crypt()`__. 
-
-Exemple sans cryptage :
-
-.. code-block:: none
-  
-  autralian32:kangourou
-  kikoo69:totolitoto
-  monuser:monpass
-  
-__ http://php.net/manual/fr/function.crypt.php
-  
-.. nextslide::
-
-Exemple avec cryptage : 
-
-.. code-block:: none
-  
-  autralian32:$1$nRSP5U.A$e8FqI6QTq/Bp6lNMjBUMO1
-  kikoo69:$1$riMIdCaV$6GO24RT5v4iwrSzChZq720
-  monuser:$apr1$MWZtd0xs$mRBeIn.alFLzJZe4.r07U1
-  
 .. tip::
 
-  Comme il est possible de manipuler des fichiers en PHP, il est aussi possible d'écrire les fichiers de contrôle d'accès directement depuis PHP.
-  
-  Par exemple, un formulaire accessible seulement par l'administrateur pourrait permettre d'ajouter de nouveaux utilisateurs.
-
-
+  Pour créer un fichier .htaccess sous windows, il faut (entre autre) que les extensions de fichier soient visibles dans le navigateur
 
 Les variables
 ==============
