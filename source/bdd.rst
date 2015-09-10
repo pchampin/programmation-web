@@ -58,11 +58,11 @@ Comment s'interfacent PHP et MySQL ?
 		:alt: client-serveur-mysql
 
 #. Le serveur interprète le script PHP
-#. Le script PHP interroge dans une requête la base de données par MySQL
+#. PHP interroge (requête) la base de données par MySQL
 #. MySQL renvoie les données en réponse à la requête
 #. PHP traite les données reçues côté serveur
 
-.. note::
+NB:
 
   Dans ce schéma, vous pourriez remplacer PHP par n'importe quel langage dédié à la gestion de pages web dynamiques.
   De même, MySQL pourrait très bien être remplacé par un autre SGBD, tant que le langage qui utilisé de PHP au SGBD reste le SQL.
@@ -141,10 +141,8 @@ L'objectif de cet exercice est de se familiariser avec l'interface PhpMyAdmin.
 
 Instructions :
 
-#. Créez une base de données nommée "bdd_films".
 #. Créez une table nommée "films" avec les champs "id_film" (entier, clé primaire), "nom_film" (chaîne de caractères), "année_film" (entier) et "score" (nombre flottant).
 #. Remplissez vos tables avec quelques données (5-10 films).
-
 
 Interroger une base de données
 ==============================
@@ -152,9 +150,9 @@ Interroger une base de données
 Se connecter à une base de donnnées
 +++++++++++++++++++++++++++++++++++
 
-Avant de pouvoir lire ou écrire dans une base de données, il est nécessaire de s'y connecter.
+Première étape nécessaire : connection
 
-La connexion à une base de données est un processus d'authentification qui permet de s'assurer que seuls les utilisateurs autorisés peuvent accéder aux données et/ou les modifier.
+Connexion : processus d'authentification qui permet de s'assurer que seuls les utilisateurs autorisés peuvent accéder aux données et/ou les modifier
 
 Les SGBD utilisent un vocabulaire spécifique relatif au processus de connexion :
 
@@ -169,13 +167,14 @@ Type de connexion
 PHP propose plusieurs fonctionnalités intégrées pour se connecter à une base de données via un SGBD.
 Les évolutions successives de PHP explique l'existance de 3 exentions :
 
-* ``mysql_`` : les fonctions dont le nom commence par cette extension permettent d'accéder à une BDD gérée par MySQL;
-* ``mysqli_`` : propose des fonctionalités améliorées pour MySQL;
-* ``PDO`` : constitue la concrétisation d'un effort d'unification entre les différents SGBD.
+* ``mysql_`` : API MySQL originele => Dépréciée depuis PHP 5.5
+* ``mysqli_`` : API MySQL améliorée (**i** pour improved)
+* ``PDO`` : PHP Data Objects - API bdd abstraite
 
-En conclusion, ``PDO`` est une solution générique qui permettra d'utiliser le même code pour dialoguer avec les différents SGBD.
-C'est aussi une version optimisée qui utilise les fonctionnalités avancées des dernières versions de PHP (nottament la programmation orientée objet).
+``PDO`` constitue la concrétisation d'un effort d'unification entre les différents SGBD:
 
+ * Générique (différents SGBD => même code)
+ * Optimisée pour l'orienté objet
 
 Se connecter en PHP
 -------------------

@@ -15,23 +15,25 @@ Plan des séances
   * Séance 1 et 2 : 4H
 
     * Le Web : Rappel / Bases de PHP
+  
   * Séance 3 et 4 : 4h
+    
+    * Bases de données / Object / Projet v1
 
-    * Les bases de données / PHP Object / Projet v1: Site web de films
   * Séance 5 et 6: 4h
 
     * Design pattern 1 (MVC, MVVM, etc...)
-
+  
   * Séance 7 et 8 : 4h
-
+    
     * Design patterns 2 (Autres designs patterns)
-
+  
   * Séance 9 et 10 : 4h
     
-    * PHP Avancé (Sessions, ...) / Protection et sécurité (injection SQL, XSS)
-
+    * PHP Avancé (Sessions, ...) / Sécurité (injection SQL, XSS)
+  
   * Séance 11 et 12 : 4h
-
+    
     * Étude comparative des frameworks PHP
     
 Participation, support et évaluation
