@@ -615,6 +615,7 @@ Projet 1: Site de films
 =======================
 
 Consignes interface:
+++++++++++++++++++++
 
 * Interface se rapprochant de la présentation ci-dessous
 * Uniquement du PHP, HTML et CSS
