@@ -19,7 +19,7 @@ MVC : Model View Controller
    - Une partie modèle
    - Une partie vue
    - Une partie controlleur
-* Utilisée par le framework PHP Symfony 2
+* Utilisée par de nombreux frameworks PHP (Symfony 2 etc...)
 
 .. note::
 
@@ -42,12 +42,12 @@ La partie Modèle
 * Elle contient aussi tout ce qui concerne l’accès aux données
 * C’est là qu’on trouvera les requêtes SQL
 
-La partie controlleur
+La partie contrôleur
 +++++++++++++++++++++
 
 * Fait le lien entre l’utilisateur et le reste de l’application
-* Il est la couche qui se charge d’analyser et de traiter la requête de l’utilisateur.
-* Il demande au modèle les données, les traite et appelle la vue qui utilisera ces données pour afficher la page
+* Se charge d’analyser et de traiter la requête de l’utilisateur.
+* Il demande au modèle les données et appelle la vue qui utilisera ces données pour afficher la page
 
 Représentation schématique (1/2)
 ++++++++++++++++++++++++++++++++

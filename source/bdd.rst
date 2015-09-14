@@ -617,7 +617,8 @@ Projet 1: Site de films
 Consignes interface:
 ++++++++++++++++++++
 
-* Interface se rapprochant de la présentation ci-dessous
+* Interface se rapprochant de la présentation ci-dessous (vous pouvez utiliser d'autres couleurs et formatages !)
+* Visualisation des films, acteurs, formulaire ajout de film
 * Uniquement du PHP, HTML et CSS
 * pas de framework, ni de moteur de templates
 * passer le valideur HTML5 et CSS3 sans erreur
