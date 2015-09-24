@@ -53,4 +53,4 @@ Le pattern Décorateur
 Autres design patterns ?
 ========================
 
-Mise en application pour : gestion des sessions, mots de passe, protection sécurité (injection SQL & XSS, cf mon cours ici : http://liris.cnrs.fr/~mmrissa/doku.php?id=lpdasi)
+Mise en application pour : gestion des sessions, mots de passe, protection sécurité (injection SQL & XSS, cf: http://liris.cnrs.fr/~mmrissa/doku.php?id=lpdasi)

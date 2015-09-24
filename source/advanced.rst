@@ -518,25 +518,3 @@ Exercice
 #. Pour aller plus loin : créez une page "générer_menu.php" qui permet d'extraire toutes les pizzas de la BDD et de les enregistrer dans un fichier téléchargé au chargement de la page sous le format "Pizza (prix €) : Ingrédients, ...".
 
 __ _static/donnees/exercices/pizzas.txt
-
-
-
-Les expressions régulières
-++++++++++++++++++++++++++
-
-A venir.
-      
-Programmation Orientée Objet
-++++++++++++++++++++++++++++
- 
-A venir.
- 
-Gestion des exceptions
-----------------------
-
-A venir.
-
-Architecture MVC
-++++++++++++++++
-  
-A venir.
