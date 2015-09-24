@@ -145,7 +145,7 @@ Attributs statiques
 
     - ATTENTION AUX CONFUSIONS
 
-    .. code:: php
+  .. code:: php
 
     class a
     {

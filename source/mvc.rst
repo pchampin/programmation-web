@@ -73,8 +73,56 @@ Avantages de MVC
 * Découpage standard qui permet aux autres développeurs de rapidement rentrer dans votre code
 * Découpage des responsabilités qui permet à des développeurs avec différents profils de travailler sur un projet
 
-MVC Maison
-==========
-
 MVVM : Model-View-View-Model
 ============================
+
+
+Projet v2
+=========
+
+Vers MVC Maison
++++++++++++++++
+
+Transformer son code en une architecture MVC Maison
+
+( `Un peu d'aide sur le sujet <http://bpesquet.developpez.com/tutoriels/php/evoluer-architecture-mvc/>`_ )
+
+.. figure:: _static/mvc/arbo.jpg
+	:alt: arborescenece
+
+1. Refactoriser le code concernant l’accès aux données pour votre projet en créant un fichier Iteration2/Model/Model.php. Il contient le code d’une classe Model dans lequel les services d’accès aux données sont définis comme des méthodes.
+
+		+-------------------------+
+		|  Model                  |
+		+=========================+
+		| `-` bdd                 |
+		+-------------------------+
+		| `+` getFilms() : array  |
+		+-------------------------+
+		| `+` getFilmsNb() : int  |
+		+-------------------------+
+		| `-` getBdd() : PDO      |
+		+-------------------------+
+
+  * La fonction getBdd requiert le fichier Cinema.php qui ne contient plus que l’affectation des variables nécessaires à la connexion à la base de données.
+
+2. Refactoriser le reste du code concernant la vue de l’itération 1 :
+
+  * layout.php contient tous les éléments communs des vues Il constue donc un modèle de page (template). Il permet également d’ajouter les éléments spécifiques à chaque vue à l’aide de deux variables $title et $content.
+  * home.php valorise la variable title ainsi que content en utilisant pour cette dernière variable la bufferisation de sortie.
+  * index.php est un contrôleur minimal qui charge les données dans un tableau $films et affiche la page d’accueil. Il gère également les erreurs.
+  * error.php permet d’afficher l’erreur en respectant la charte graphique.
+
+3. On souhaite que l’utilisateur puisse accéder au détail d’un film (en particulier le casting de celui-ci). 
+
+  * Une nouvelle méthode de Model.php getFilmDetails() permettra de recueillir les données nécessaires dans la base de données.
+  * La vue film.php devra permettre d’afficher les informations relatives au film, ainsi que son casting, avec les acteurs ordonnés par rang de casting en conservant la charte graphique adoptée.
+  * Pour accéder au détail d’un film, il faut taper demander la page index.php (contrôleur) avec deux paramètres dans l’URL (action à détails et movied).
+  * Modifier la page listant les films pour y rajouter pour chacun des films un lien vers le détail de ce film, permettant à l’utilisateur de visionner les détails de ce film. 
+  * Activer le lien ACCUEIL pour revenir sur la page d’accueil.
+
+.. figure:: _static/mvc/detail.png
+	:alt: detail
+
+.. figure:: _static/mvc/detail2.png
+	:alt: detail liste
