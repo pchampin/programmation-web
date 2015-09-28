@@ -23,7 +23,7 @@ MVC : Model View Controller
 
 .. note::
 
-  Framework : Ensembe de composant qui sert à créer les fondations, l'architecture et les grandes lignes d'un logiciel
+  Framework : Ensemble de composants qui servent à créer les fondations, l'architecture et les grandes lignes d'un logiciel
 
 La partie Vue
 +++++++++++++
@@ -69,13 +69,9 @@ Avantages de MVC
 ++++++++++++++++
 
 * Séparation des préoccupations
-* Code clair, bien organisé, gage de réutilisable
+* Code clair, bien organisé, gage de réutilisabilité
 * Découpage standard qui permet aux autres développeurs de rapidement rentrer dans votre code
 * Découpage des responsabilités qui permet à des développeurs avec différents profils de travailler sur un projet
-
-MVVM : Model-View-View-Model
-============================
-
 
 Projet v2
 =========
@@ -87,8 +83,7 @@ Transformer son code en une architecture MVC Maison
 
 ( `Un peu d'aide sur le sujet <http://bpesquet.developpez.com/tutoriels/php/evoluer-architecture-mvc/>`_ )
 
-.. figure:: _static/mvc/arbo.jpg
-	:alt: arborescenece
+Arborescence à respecter : un répertoire "Model", un "View", un "Controller" et un répertoire "Library" pour stocker les bibliothèques additionnelles par la suite
 
 1. Refactoriser le code concernant l’accès aux données pour votre projet en créant un fichier Iteration2/Model/Model.php. Il contient le code d’une classe Model dans lequel les services d’accès aux données sont définis comme des méthodes.
 
@@ -126,3 +121,6 @@ Transformer son code en une architecture MVC Maison
 
 .. figure:: _static/mvc/detail2.png
 	:alt: detail liste
+
+MVVM : Model-View-View-Model
+============================
