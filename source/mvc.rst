@@ -85,6 +85,14 @@ Transformer son code en une architecture MVC Maison
 
 Arborescence à respecter : un répertoire "Model", un "View", un "Controller" et un répertoire "Library" pour stocker les bibliothèques additionnelles par la suite
 
+Classes nécessaires :
+
+  * FilmCollection (liste de films)
+  * Film (contient un film de la table film)
+  * Casting (liste d'acteurs pour un film)
+  * Actor (acteur)
+  * DBConnectionManager
+
 1. Refactoriser le code concernant l’accès aux données pour votre projet en créant un fichier Iteration2/Model/Model.php. Il contient le code d’une classe Model dans lequel les services d’accès aux données sont définis comme des méthodes.
 
 		+-------------------------+
@@ -99,7 +107,7 @@ Arborescence à respecter : un répertoire "Model", un "View", un "Controller" e
 		| `-` getBdd() : PDO      |
 		+-------------------------+
 
-  * La fonction getBdd requiert le fichier Cinema.php qui ne contient plus que l’affectation des variables nécessaires à la connexion à la base de données.
+  * La fonction getBdd retourne l'instance de DBConnectionManager qui gère la connexion à la base de données.
 
 2. Refactoriser le reste du code concernant la vue de l’itération 1 :
 
@@ -121,6 +129,3 @@ Arborescence à respecter : un répertoire "Model", un "View", un "Controller" e
 
 .. figure:: _static/mvc/detail2.png
 	:alt: detail liste
-
-MVVM : Model-View-View-Model
-============================
