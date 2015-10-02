@@ -5,6 +5,9 @@
 Utilisation Avancée de PHP
 ==========================
 
+Fonctionnalités
+===============
+
 Afficher les erreurs
 --------------------
 
@@ -44,10 +47,6 @@ PHP permet de rediriger l'utilisateur d'une page à une autre grâce à la fonct
 .. warning::
 
   La fonction ``header()`` doit être exécutée avant toute écriture de texte.
-
-
-
-
 
 Sécuriser des pages PHP
 =======================
@@ -129,7 +128,6 @@ Exemple avec cryptage :
   Comme il est possible de manipuler des fichiers en PHP, il est aussi possible d'écrire les fichiers de contrôle d'accès directement depuis PHP.
   
   Par exemple, un formulaire accessible seulement par l'administrateur pourrait permettre d'ajouter de nouveaux utilisateurs.
-
 
 .. _envoi_fichiers:
   
@@ -336,7 +334,7 @@ La fermeture de la session s'effectue comme suit :
 .. _exo_sessions:
   
 Exercice
---------
+=========
 
 #. Reprenez les pages de l'`exercice précédent<exo_fichierform>`:ref: sur le formulaire d'ajout de pizza.
 #. Créez une page d'authentification "authentification.php" qui affiche un formulaire avec un champ "login" et un champ "mot de passe" dont la cible est le formulaire d'ajout de pizza.
