@@ -18,14 +18,14 @@ Objectif : Fournir un objet pret à l'emploi, configuré correctement, avec les 
   * On peut aussi utiliser une méthode statique dans la meme classe
 
 ..code: php
-	class FilmFactory{
-		static function create(){
-			// Ajouter le film dans la base
-			self::ajoutFilm($data)
-			// Retourner une instance
-			return new Film($data)
-		}
-	}
+  class FilmFactory{
+    static function create(){
+      // Ajouter le film dans la base
+      self::ajoutFilm($data)
+      // Retourner une instance
+      return new Film($data)
+    }
+  }
 
 Le pattern factory a pour but de laisser des classes usine créer les instances à votre place.
 
