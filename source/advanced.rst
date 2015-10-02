@@ -215,20 +215,6 @@ Exemple de script PHP permettant d'effectuer toutes ces vérifications :
 __ http://php.net/manual/fr/function.pathinfo.php
 __ http://php.net/manual/fr/function.move-uploaded-file.php
 
-.. _exo_fichierform:
-
-Exercice
---------
-
-#. Reprenez les pages de l'`exercice précédent<exo_ecriture>`:ref: sur le formulaire d'ajout de pizza.
-#. Ajoutez un champ permettant d'ajouter une image (spécifiez que cela constitue une action optionnelle).
-#. Limitez la taille de l'envoi à 2 Mo, et aux formats .png et .jpg.
-#. Enregistrez l'image (si envoyée) dans un dossier "./images/pizzas/" avec pour nom, le nom de la pizza en minuscules (indice : fonction `strtolower()`__).
-#. Pour aller plus loin : reprendre la page de commande de pizza et ajouter une colonne dans le tableau où sera affichée l'image de chaque pizza (si diponible).
-
-__ http://php.net/manual/en/function.strtolower.php
-
-
 .. _variables_superglobales:
 
 Les variables superglobales
@@ -330,18 +316,6 @@ La fermeture de la session s'effectue comme suit :
     session_destroy();
   ?>
 
-
-.. _exo_sessions:
-  
-Exercice
-=========
-
-#. Reprenez les pages de l'`exercice précédent<exo_fichierform>`:ref: sur le formulaire d'ajout de pizza.
-#. Créez une page d'authentification "authentification.php" qui affiche un formulaire avec un champ "login" et un champ "mot de passe" dont la cible est le formulaire d'ajout de pizza.
-#. Grâce aux sessions, réalisez un mini-contrôle d'accès à la page d'ajout aux seuls utilisateurs connectés (indiquez le login et mot de passe attendu en dur dans la page "authentification.php").
-#. Pour aller plus loin: grâce aux fonctions d'inclusion, s'assurer que l'on demande systématiquement les informations d'authentification lorsque l'on souhaite accèder à la page d'ajout, sauf si elles ont déjà été renseignées (et donc stockées dans des variables de session).
-
-
 Les cookies
 +++++++++++
 
@@ -415,19 +389,6 @@ Exemple :
 
   Contrairement aux variables de session, les données des variables des cookies peuvent avoir été modifiées par l'utilisateur.
   Il faut donc leur appliquer un contrôle très strict.
-
-
-.. _exo_cookies:
-  
-Exercice
---------
-
-#. Reprenez votre `exercice sur les sessions<exo_sessions>`:ref:.
-#. Créez un cookie pour sauvegarder la date de la dernière connexion de l'utilisateur sous la forme d'un timestamp (indice : fonction `time()`__).
-#. Afficher cette date au format "Dernière connexion le JJ/MM/AAAA à HH:mm" sur la page d'ajout de pizza (indice : fonction `date()`__).
-
-__ http://php.net/manual/fr/function.time.php
-__ http://php.net/manual/fr/function.date.php
 
 
 .. _manipulation_fichiers:
@@ -504,15 +465,16 @@ Exemple d'écriture au début du fichier :
    }
   ?>
 
+Projet Fin :
+============
+
+On veut permettre de voter pour un film en autorisant le vote uniquement aux utilisateurs connectés du site. On considère que les votes sont binaires, on vote ou non pour un film.
+
+1. Ajoutez une table User à la base de données:
   
-.. _exo_donnees_fichiers:   
+  Utilisateur (UserID, Login, Pass, Nom, Mail)
 
-Exercice
-++++++++
+Les types de données des colonnes sont : UserID int(11), Login varchar(20), Pass varchar(255), Nom varchar(35), Mail varchar(35). 
 
-#. Reprenez votre `exercice ultérieur<exo_jointure>`:ref: avec la BDD incluant la table de jointure.
-#. Téléchargez le fichier `pizzas.txt`__ et enregistrez le dans un dossier du serveur.
-#. Créez une page protégée "maj_bdd.php" permettant de mettre à jour les données de la base depuis le fichier externe fourni (indice : utilisez les expressions régulières pour découper le fichier).
-#. Pour aller plus loin : créez une page "générer_menu.php" qui permet d'extraire toutes les pizzas de la BDD et de les enregistrer dans un fichier téléchargé au chargement de la page sous le format "Pizza (prix €) : Ingrédients, ...".
-
-__ _static/donnees/exercices/pizzas.txt
+2. Ajouter une table Vote (MovieID#, UserID#).
+3 . Refactoriser le code du modèle pour regrouper les méthodes en fonction de la problématique :

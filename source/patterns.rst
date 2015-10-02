@@ -17,7 +17,8 @@ Objectif : Fournir un objet pret à l'emploi, configuré correctement, avec les 
 
   * On peut aussi utiliser une méthode statique dans la meme classe
 
-..code: php
+.. code-block:: php
+
   class FilmFactory{
     static function create(){
       // Ajouter le film dans la base
@@ -37,33 +38,73 @@ Objectif : S’assurer que une seule et m^eme instance d’une classe soit utili
   * Contre les problemes de duplication d'objet
   * Fonctionne très bien associé au pattern Factory
 
-  * On va ici définir le constructeur en privé (ou protected)
-  * Puis utiliser une méthode ou une classe Factory
+  * Méthode :
+    * On va ici définir le constructeur en privé (ou protected)
+    * Puis utiliser une méthode ou une classe Factory
+
+  Exemple: Pour la connection à la base de donnée, on utilise qu'une seule instance de DBConnectionManager, que l'on peut au choix stocker dans les objets ou passer en param^etre lorsqu'il est nécessaire
 
 Le pattern Observer
 ===================
 
-* Il est possible de suivre l'etat d'un objet grace à un observer
+  * Il est possible de suivre l'etat d'un objet grace à un observer
 
     Le pattern observer permet de lier certains objets à des « écouteurs » eux-mêmes chargés de notifier les objets auxquels ils sont rattachés.
 
-( `Pour aller plus loin <http://bpesquet.developpez.com/tutoriels/php/evoluer-architecture-mvc/>`_ )
+  * Méthode:
+
+    * L'objet observé doit implémenter **SplSubject**
+    * Il faut redéfinir les 3 méthodes suivantes:
+
+      + **attach(SplObserver)**  : ajouter un observateur à l'objet
+      + **detach(SplObserver)** : retirer un observateur
+      + **notify()** : prévenir les observeurs de quelque chose
+
+  * Exemple d'utilisation : Surveiller les erreurs ou les comportements et envoyer un email en cas de problème
+
+( `Pour aller plus loin <https://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/les-design-patterns>`_ )
 
 Le pattern Strategy
 ===================
 
 * Séparer les algorithmes
 
-    Le pattern strategy sert à délocaliser la partie algorithmique d'une méthode afin de le permettre réutilisable, évitant ainsi la duplication de cet algorithme.
+  Le pattern strategy sert à délocaliser la partie algorithmique d'une méthode afin de le permettre réutilisable, évitant ainsi la duplication de cet algorithme.
 
+  * Utiliser des interfaces pour partager des méthodes similaires entre des classes
+
+( `Pour aller plus loin <https://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/les-design-patterns>`_ )
 
 L'injection de dépendance
 =========================
 
-* Envoyer à un objet les objet dont il va avoir besoin
+Objectif: Rendre une classe indépendante de ses dépendance
 
-Le pattern injection de dépendances a pour but de rendre le plus indépendantes possible les classes.
+Voici un exemple pour comprendre:
 
+.. code-block:: php
+  
+  class Films{
+    private $db;
+    function __construct(){
+      $db = MyPDO::getInstance();
+    }
+  }
+
+Cette classe est dépendante de PDO, elle force l'utilisateur a utiliser PDO
+
+.. code-block:: php
+  
+  class Films{
+    private $db;
+    function __construct( $db ){
+      $this->db = $db;
+    }
+  }
+
+Maintenant, je peux envoyer n'importe quel type de connection base de donnée à cette classe pour peu que cet objet implemente les méthodes "connect()", "prepare()", etc...
+
+( `Pour aller plus loin <https://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/les-design-patterns>`_ )
 
 Le pattern Décorateur
 =====================
@@ -71,7 +112,5 @@ Le pattern Décorateur
 * La puissance de ce pattern qui permet d’ajouter (ou modifier) des fonctionnalités facilement
 * provient de la combinaison de l’héritage et de la composition.
 
-Autres design patterns ?
-========================
+  * L'idée ici est de pouvoir associer à une classe une fonctionnalité à la volée
 
-Mise en application pour : gestion des sessions, mots de passe, protection sécurité (injection SQL & XSS, cf: http://liris.cnrs.fr/~mmrissa/doku.php?id=lpdasi)
