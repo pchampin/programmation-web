@@ -53,7 +53,7 @@ Représentation schématique (1/2)
 ++++++++++++++++++++++++++++++++
 
 .. figure:: _static/mvc/mvc.png
-	:alt: model-view-controller
+  :alt: model-view-controller
 
 Source : OpenClassrooms
 
@@ -61,7 +61,7 @@ Représentation schématique (2/2)
 ++++++++++++++++++++++++++++++++
 
 .. figure:: _static/mvc/mvc_symfony.png
-	:alt: model-view-controller-symfony
+  :alt: model-view-controller-symfony
 
 Source : Documentation Symfony 2
 
@@ -96,17 +96,17 @@ Arborescence à respecter : un répertoire "Model", un "View", un "Controller" e
 
 Exemple 
 
-		+-------------------------+
-		|  FilmCollection         |
-		+=========================+
-		| `-` bdd                 |
-		+-------------------------+
-		| `+` getFilms() : array  |
-		+-------------------------+
-		| `+` getFilmsNb() : int  |
+    +-------------------------+
+    |  FilmCollection         |
+    +=========================+
+    | `-` bdd                 |
+    +-------------------------+
+    | `+` getFilms() : array  |
+    +-------------------------+
+    | `+` getFilmsNb() : int  |
     +-------------------------+
     | `+` __toString()        |
-		+-------------------------+
+    +-------------------------+
 
 2. Refactoriser le reste du code concernant la vue de l’itération 1 :
 
@@ -124,7 +124,7 @@ Exemple
   * Activer le lien ACCUEIL pour revenir sur la page d’accueil.
 
 .. figure:: _static/mvc/detail.png
-	:alt: detail
+  :alt: detail
 
 .. figure:: _static/mvc/detail2.png
-	:alt: detail liste
+  :alt: detail liste
