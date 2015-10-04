@@ -112,7 +112,7 @@ Exemple
 
 2. Refactoriser le reste du code concernant la vue de l’itération 1 :
 
-  * layout.php contient tous les éléments communs des vues Il constue donc un modèle de page (template). Il permet également d’ajouter les éléments spécifiques à chaque vue à l’aide de deux variables $title et $content (la variable $content pourra etre remplie grace à la `bufferisation de sortie <http://php.net/manual/fr/outcontrol.examples.basic.php>`_)
+  * créer un fichier layout.php (à placer dans le dossier Vue) contenant tous les éléments communs des vues Il constue donc un modèle de page (template). Il permet également d’ajouter les éléments spécifiques à chaque vue à l’aide de deux variables $title et $content (la variable $content pourra etre remplie grace à la `bufferisation de sortie <http://php.net/manual/fr/outcontrol.examples.basic.php>`_)
 
 .. code-block:: php
 
