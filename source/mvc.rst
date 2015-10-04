@@ -103,28 +103,40 @@ Exemple
     +-------------------------+
     | `+` getFilms() : array  |
     +-------------------------+
-    | `+` getFilmsNb() : int  |
-    +-------------------------+
     | `+` __toString()        |
     +-------------------------+
 
-2. Refactoriser le reste du code concernant la vue de l’itération 1 :
-
-  * layout.php contient tous les éléments communs des vues Il constue donc un modèle de page (template). Il permet également d’ajouter les éléments spécifiques à chaque vue à l’aide de deux variables $title et $content.
-  * home.php valorise la variable title ainsi que content en utilisant pour cette dernière variable la bufferisation de sortie.
-  * index.php est un contrôleur minimal qui charge les données dans un tableau $films et affiche la page d’accueil. Il gère également les erreurs.
-  * error.php permet d’afficher l’erreur en respectant la charte graphique.
-
-3. On souhaite que l’utilisateur puisse accéder au détail d’un film (en particulier le casting de celui-ci). 
-
-  * Une nouvelle méthode de Model.php getFilmDetails() permettra de recueillir les données nécessaires dans la base de données.
-  * La vue film.php devra permettre d’afficher les informations relatives au film, ainsi que son casting, avec les acteurs ordonnés par rang de casting en conservant la charte graphique adoptée.
-  * Pour accéder au détail d’un film, il faut taper demander la page index.php (contrôleur) avec deux paramètres dans l’URL (action à détails et movied).
-  * Modifier la page listant les films pour y rajouter pour chacun des films un lien vers le détail de ce film, permettant à l’utilisateur de visionner les détails de ce film. 
-  * Activer le lien ACCUEIL pour revenir sur la page d’accueil.
 
 .. figure:: _static/mvc/detail.png
   :alt: detail
+
+2. Refactoriser le reste du code concernant la vue de l’itération 1 :
+
+  * layout.php contient tous les éléments communs des vues Il constue donc un modèle de page (template). Il permet également d’ajouter les éléments spécifiques à chaque vue à l’aide de deux variables $title et $content (la variable $content pourra etre remplie grace à la `bufferisation de sortie <http://php.net/manual/fr/outcontrol.examples.basic.php>`_)
+
+.. code-block:: php
+
+  <!doctype html>
+  <html lang="fr">
+    <head>
+      <title><?php echo $titre ?></title>
+    </head>
+    <body>
+      <?php echo $content ?>
+    </body>
+  </html>
+
+* Les elements communs de votre design (menu, boutons, formulaires) devront également etre rajoutés (ou inclus) dans cette page
+* index.php est un contrôleur minimal qui crée une instance de FilmCollection et affiche cette instance (liste des films).
+* Lorsque des erreurs apparaisse, la page error.php permet d’afficher cette erreur en respect avec la charte graphique.
+
+3. On souhaite que l’utilisateur puisse accéder au détail d’un film (en particulier le casting de celui-ci). 
+
+  * La vue détailFilm.php devra permettre d’afficher les informations relatives à film, ainsi que son casting, avec les acteurs ordonnés par rang de casting en conservant la charte graphique adoptée.
+  * Pour accéder au détail d’un film, il faut appeller la page index.php (contrôleur) avec un paramètres dans l’URL (movied).
+  
+  * Modifier l'affichage des films pour y rajouter pour chacun un lien vers le détail de ce film
+  * Inclure un lien accueil pour retourner à la liste des films
 
 .. figure:: _static/mvc/detail2.png
   :alt: detail liste
