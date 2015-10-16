@@ -470,15 +470,15 @@ Projet Fin :
 
 On veut permettre de voter pour un film en autorisant le vote uniquement aux utilisateurs connectés du site. On considère que les votes sont binaires, on vote ou non pour un film.
 
-1a. Ajoutez une table User à la base de données:
+1. a. Ajoutez une table User à la base de données:
   
   Utilisateur (UserID, Login, Pass, Nom, Mail)
 
 Les types de données des colonnes sont : UserID int(11), Login varchar(20), Pass varchar(255), Nom varchar(35), Mail varchar(35). 
 
-1b. Implémentez un système de connection (une page Inscription, une page Connection)
+  b. Implémentez un système de connection (une page Inscription, une page Connection)
 
-1c. Vous utiliserez les sessions pour stocker les informaations de connection
+  c. Vous utiliserez les sessions pour stocker les informaations de connection
 
 2. Ajouter une table Vote (MovieID#, UserID#).
 
