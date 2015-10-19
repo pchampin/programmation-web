@@ -184,7 +184,7 @@ Fonction de connexion :
 .. code-block:: php
 
   <?php
-   function Connect_db(){
+   function connectDb(){
 	$host="localhost"; // ou sql.hebergeur.com
 	$user="root";      // ou login
 	$password="";      // ou xxxxxx
@@ -358,7 +358,7 @@ Exemple générique
   :linenos:
   
   <?php
-   $bdd = Connect_db(); //connexion à la BDD
+   $bdd = connectDb(); //connexion à la BDD
    $query = $bdd->prepare('...'); // requête SQL
    $query->execute(...); // paramètres et exécution
    while($data = $query->fetch()) { // lecture par ligne
@@ -476,7 +476,7 @@ Avec paramètres :
   :linenos:
   
   <?php
-   $bdd = Connect_db(); //connexion à la BDD
+   $bdd = connectDb(); //connexion à la BDD
    $query = $bdd->prepare('...'); // requête SQL
    $query->execute(...); // paramètres et exécution
   ?>
@@ -489,7 +489,7 @@ Sans paramètres :
   :linenos:
   
   <?php
-   $bdd = Connect_db(); //connexion à la BDD
+   $bdd = connectDb(); //connexion à la BDD
    $query = $bdd->exec('...'); // requête SQL
   ?>
   
