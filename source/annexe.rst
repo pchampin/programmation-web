@@ -47,13 +47,13 @@ http://iutdoua-webetu.univ-lyon1.fr/phpMyAdmin/
 Les paramètres de connexion sont les suivants :
 
 * Login : pxxxxxxx
-* Mot de passe : habituel, celui de votre messagerie
+* Mot de passe : Numéro BIP (sur la carte étudiant)
 
 .. note::
 
   Pensez à bien paramétrer un mot de passe différent pour vous connecter à vos BDD et à PhpMyAdmin.
 
-  
+
 Utiliser un serveur local pour tester vos pages
 ===============================================
 
@@ -62,10 +62,10 @@ Environnement de développement pour Apache, MySQL, PHP
 
 Il existe des logiciels permettant d'émuler le fonctionnement d'un serveur en local (i.e., sur votre machine).
 
-Suivant votre système d'exploitation : 
+Suivant votre système d'exploitation :
 
 * `WAMP`__ (Windows)
-* `XAMPP`__ (Linux) 
+* `XAMPP`__ (Linux)
 * `MAMP`__ (Mac OS)
 
 __ http://sourceforge.net/projects/wampserver/
@@ -75,20 +75,16 @@ __ http://sourceforge.net/projects/mamp/
 Utilisation
 -----------
 
-Vous pouvez ensuite accéder aux pages HTML et PHP que vous déposez directement dans le répertoire nommé `www` via l'URL : 
+Vous pouvez ensuite accéder aux pages HTML et PHP que vous déposez directement dans le répertoire nommé `www` via l'URL :
 
 http://localhost/
 
 .. note::
 
-  Le port Apache par défaut est le port 80. Si vous le modifiez, l'URL deviendra : 
+  Le port Apache par défaut est le port 80. Si vous le modifiez, l'URL deviendra :
 
   http://localhost:port/
 
 PhpMyAdmin est accessible à l'adresse :
 
 http://localhost/phpmyadmin/
-
-
-
-
