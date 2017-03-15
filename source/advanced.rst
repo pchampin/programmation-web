@@ -1,4 +1,3 @@
-
 .. _php_avance:
 
 ========================== 
@@ -6,10 +5,10 @@ Utilisation Avancée de PHP
 ==========================
 
 Fonctionnalités
-===============
+==========================
 
 Afficher les erreurs
---------------------
+++++++++++++++++++++++++++
 
 Il est possible d'utiliser PHP en mode débogage lors de la phase de conception de vos scripts.
 
@@ -18,38 +17,41 @@ Pour cela, deux fonctions doivent être appelées dans le script :
 .. code-block:: php
 
   <?php 
-   ini_set(’display_errors’,’1’) ;
+   ini_set('display_errors', '1') ;
    error_reporting(E_ALL) ;
    ... // instructions du script
   ?>
 
-.. tip::
+.. note::
 
-   Il est aussi possible de configurer l'affichage des erreurs dans le fichier de configuration ``php.ini``
-  
+   Il est aussi possible de configurer l'affichage des erreurs dans le fichier de configuration ``php.ini`` (nécessite d'être root)
 
 Redirection
------------
++++++++++++
 
-PHP permet de rediriger l'utilisateur d'une page à une autre grâce à la fonction ``header()``. Exemple :
+Les codes de statut HTTP **301** et **302** permettent de faire une redirection, respectivement permanente ou temporaire. L'URL vers laquelle rediriger se trouve dans l'en-tête HTTP ``Location``.
+
+.. note::
+
+  Essayez : ``curl -v http://www.google.com``
+
+Nous avons vu que PHP permettait de redéfinir ou d'ajouter des en-têtes à la réponse HTTP.
 
 .. code-block:: php
 
   <?php
+   // Il ne doit y avoir aucune sortie avant ces lignes
+   http_response_code(302); // temporaire ; ou 301 pour permanente
    header('Location: urlDeRedirection.php?parametres');
-   exit ();
+   exit();
   ?>
 
 .. tip::
   
   Il est possible de rediriger vers une page via une URL relative ou une URL externe. On peut même faire une redirection vers la même page mais avec des paramètres différents !
-  
-.. warning::
-
-  La fonction ``header()`` doit être exécutée avant toute écriture de texte.
 
 Sécuriser des pages PHP
-=======================
++++++++++++++++++++++++
 
 Contrôle d'accès sur serveur Apache
 -----------------------------------
@@ -136,7 +138,7 @@ Envoyer des fichiers
 
 Grâce à PHP, il est possible pour l'utilisateur de transmettre un fichier au serveur par l'intermédiaire des formulaires.
 
-Au moment de l'envoi du formulaire (soumission via ``submit``); le fichier est téléchargé par le serveur (on parle d'un "upload" côté client).
+Au moment de l'envoi du formulaire (soumission via ``submit``), le fichier est téléchargé par le serveur (on parle d'un "upload" côté client).
 
 Le serveur peut ensuite manipuler le fichier puis l'enregistrer.
 
@@ -166,7 +168,6 @@ Exemple :
   
   Le champ ``<input type="hidden" />`` permet de spécifier une taille maximale de fichier.
 
-
 Sauvegarder un fichier sur le serveur
 -------------------------------------
 
@@ -195,18 +196,25 @@ Exemple de script PHP permettant d'effectuer toutes ces vérifications :
 .. code-block:: php
   
   <?php
-   if (isset($_FILES['fichier'])
-    AND $_FILES['fichier']['error'] == 0
-    AND $_FILES['fichier']['size'] <= 1048576) {  // 1Mo 
+   if (isset($_FILES['fichier']) &&
+       $_FILES['fichier']['error'] == 0 &&
+
+       // à vérifier côté serveur, puisque le <input type="hidden" /> est modifiable par le client 
+       // (il ne sert qu'à la pré-validation par le navigateur)
+       $_FILES['fichier']['size'] <= 1048576)
+   {
      $infosfichier = pathinfo($_FILES['fichier']['name']);
      $ext_upload = $infosfichier['extension'];
      $ext_autorisees = array('jpg', 'jpeg', 'gif', 'png');
-     if (in_array($ext_upload, $ext_autorisees)) {
-      move_uploaded_file($_FILES['fichier']['tmp_name'],
-       'destination/' . basename($_FILES['fichier']['name']));
+     if (in_array($ext_upload, $ext_autorisees))
+     {
+       move_uploaded_file(
+         $_FILES['fichier']['tmp_name'],
+         'destination/' . basename($_FILES['fichier']['name'])
+       );
      }
-    }
-   ?>
+   }
+  ?>
 
 .. note::
 
@@ -215,29 +223,86 @@ Exemple de script PHP permettant d'effectuer toutes ces vérifications :
 __ http://php.net/manual/fr/function.pathinfo.php
 __ http://php.net/manual/fr/function.move-uploaded-file.php
 
-.. _variables_superglobales:
+.. _cookies:
 
-Les variables superglobales
-===========================
+Les cookies
++++++++++++
 
-Liste des variables superglobales
-+++++++++++++++++++++++++++++++++
+Les cookies sont des données enregistrées côté client.
 
-Les variables superglobales sont des variables créées et instantiées par PHP.
+L'utilité des cookies est de sauvegarder des données relatives au client, comme la langue qu'il a choisi.
 
-Parmi les variables superglobales, on retrouve :
+L'utilisation des cookies se fait en deux temps :
 
-* ``$_GET`` : données envoyées en paramètres dans l'URL
-* ``$_POST`` : données envoyées dans la requête HTTP
-* ``$_FILES`` : fichiers envoyés par un formulaire
-* ``$_SERVER`` : variables d'exécution du serveur
-* ``$_ENV`` : variables d'environnement du serveur
-* ``$_SESSION`` : variables de session
-* ``$_COOKIE`` : valeurs des cookies enregistrés sur le client
+#. Création et enregistrement du cookie
+#. Consultation des données contenues dans le cookie
+
+Création d'un cookie
+--------------------
+
+Pour créer un cookie, il suffit d'utiliser la fonction
+
+``setcookie($name, $value, $expire, $path, $domain, $secure, $httponly)`` (voir la `documentation`__) dont les paramètres sont :
+
+* ``$name`` : le nom du cookie
+* ``$value`` : sa valeur
+* ``$expire`` : le délai d'expiration (timestamp Unix)
+* ``$path`` : la portée du cookie (par défaut, toutes les pages)
+* ``$domain`` : le domaine où le cookie est accessible
+* ``$secure`` : indique si le protocole HTTPS est obligatoire
+* ``$httponly`` : limite l'accès au protocole HTTP
+
+__ http://php.net/manual/fr/function.setcookie.php
+
+Exemple
+```````
+
+Création d'un cookie (qui expire au bout d'une heure): 
+
+.. code-block:: php
+
+  <?php
+     setcookie(
+        'NomDuCookie',
+        'valeurDuCookie',
+        time() + 3600,
+        null,
+        null,
+        false,
+        true
+     );
+  ?>
+ 
+.. note::
+  
+  Pour modifier un cookie existant, il suffit de faire appel à la même fonction, avec un nom de cookie existant. La date d'expiration est mise à jour.
 
 .. note::
 
-  Un exemple utile de variable serveur : ``$SERVER['REMOTE_ADDR']`` contient l'adresse IP du client qui cherche à consulter la page.
+  En vous aidant des outils pour développeur (ou de curl), regardez à quoi ressemble la réponse HTTP.
+  
+  
+Affichage d'un cookie
+---------------------
+
+Les données stockées dans un cookie sont accessibles dans la variable superglobale ``$_COOKIE`` qui est un tableau associatif dont les clés correspondent aux noms des cookies enregistrés.
+
+Exemple :
+
+.. code-block:: php
+
+  <?php
+   ...
+   echo $_COOKIE['NomDuCookie'];
+  ?>
+
+.. note::
+
+  En vous aidant des outils pour développeur, regardez à quoi ressemble la requête HTTP. Avec curl, on peut utiliser l'option ``--cookie NomDuCookie=valeur`` pour simuler un cookie.
+
+.. warning::
+
+  Les données des cookies proviennent de l'utilisateur (cf. curl), il faut donc les contrôler.
 
 .. _sessions:
   
@@ -245,8 +310,14 @@ Les sessions
 ++++++++++++
 
 L'intérêt des sessions est de pouvoir manipuler dans une variable de page en page.
-
 Les variables de type session sont conçues pour garder en mémoire des informations relatives au client.
+
+Une session est une sorte de "boite" spécifique à un visiteur donné et contenant des variables.
+
+Contrairement aux cookies, les variables de session sont stockées côté serveur et ne sont donc pas directement accessibles au client. HTTP étant un protocole state-less, un unique cookie contient l'identifiant de l'utilisateur, et permet à PHP de retrouver sa "boite" de page en page.
+
+.. note::
+    L'identifiant est stocké en cookie, il est donc accessible à l'utilisateur. Cependant, il est aléatoire et suffisemment grand pour être considéré indevinable par un éventuel imposteur. Attention cependant à ne pas se le faire voler (ordinateur non verrouillé, réseau Wi-Fi non crypté comme McDo ou Eduspot)...
 
 Fonctionnement des sessions :
 
@@ -258,7 +329,6 @@ Fonctionnement des sessions :
 .. note::
 
   La fermeture de la session peut être explicitement demandée où s'exécute automatiquement à la fermeture du navigateur, ou après un **délai d'expiration** ("timeout").
-
 
 Création d'une session
 ----------------------
@@ -277,7 +347,7 @@ Les variables de session s'instancient comme des champs du tableau associatif ``
   
 .. warning::
 
-  La fonction ``session_start()`` doit être appellée sur chacune des pages avant toute écriture de code HTML.
+  La fonction ``session_start()``  doit être appellée sur chacune des pages avant toute écriture de code HTML.
   
 Utilisation des variables de session
 ------------------------------------
@@ -316,88 +386,41 @@ La fermeture de la session s'effectue comme suit :
     session_destroy();
   ?>
 
-Les cookies
-+++++++++++
+.. _variables_superglobales:
 
-Contrairement aux sessions où les données sont stockées côté serveur, les cookies sont des fichiers qui contiennent des donénes et sont enregistrés côté client.
+Récapitulatif : Les variables superglobales
++++++++++++++++++++++++++++++++++++++++++++
 
-L'utilité des cookies est de sauvegarder des données relatives au client et dont la portée dépasse celle des sessions.
+Liste des variables superglobales
+---------------------------------
 
-L'utilisation des cookies se fait en deux temps :
+Les variables superglobales sont des variables créées et instantiées par PHP.
 
-#. Création et enregistrement du cookie
-#. Consultation des données contenues dans le cookie
+Parmi les variables superglobales, on retrouve :
 
-Création d'un cookie
---------------------
+* ``$_GET`` : données envoyées en paramètres dans l'URL
+* ``$_POST`` : données envoyées dans la requête HTTP
+* ``$_FILES`` : fichiers envoyés par un formulaire
+* ``$_SERVER`` : variables d'exécution du serveur
+* ``$_ENV`` : variables d'environnement du serveur
+* ``$_SESSION`` : variables de session
+* ``$_COOKIE`` : valeurs des cookies enregistrés sur le client
 
-Pour créer un cookie, il suffit d'utiliser la fonction
-
-``setcookie($name, $value, $expire, $path, $domain, $secure, $httponly)`` (voir la `documentation`__) dont les paramètres sont :
-
-* ``$name`` : le nom du cookie
-* ``$value`` : sa valeur
-* ``$expire`` : le délai d'expiration (timestamp Unix)
-* ``$path`` : la portée du cookie (par défaut, toutes les pages)
-* ``$domain`` : le domaine où le cookie est accessible
-* ``$secure`` : indique si le protocole HTTPS est obligatoire
-* ``$httponly`` : limite l'accès au protocole HTTP
-
-__ http://php.net/manual/fr/function.setcookie.php
-
-Exemple
-```````
-
-Création d'un cookie (qui expire au bout d'une heure): 
-
-.. code-block:: php
-
-  <?php
-     setcookie("NomDuCookie",
-               'valeurDuCookie',
-               time()+3600,
-               null,
-         null,
-         false,
-         true );
-  ?>
-
-.. warning::
-
-  Le mode "httponly" permet de s'assurer qu'aucun script (JavaScript) ne modifie le cookie.
-  
 .. note::
-  
-  Pour modifier un cookie existant, il suffit de faire appel à la même fonction, avec un nom de cookie existant.
-  
-  
-Affichage d'un cookie
----------------------
 
-Les données stockées dans un cookie sont accessibles dans la variable superglobale ``$_COOKIE`` qui est un tableau associatif dont les clés correspondent aux noms des cookies enregistrés.
-
-Exemple :
-
-.. code-block:: php
-
-  <?php
-   ...
-   echo $_COOKIE['NomDuCookie'];
-  ?>
+  Un exemple utile de variable serveur : ``$_SERVER['REMOTE_ADDR']`` contient l'adresse IP du client qui cherche à consulter la page.
 
 .. warning::
 
-  Contrairement aux variables de session, les données des variables des cookies peuvent avoir été modifiées par l'utilisateur.
-  Il faut donc leur appliquer un contrôle très strict.
-
+  ``$_GET``, ``$_POST``, ``$_COOKIE`` et certaines variables de ``$_SERVER`` comme ``$_SERVER['HTTP_REFERER']`` proviennent de l'utilisateur, il faut donc **absolument** les contrôler.
 
 .. _manipulation_fichiers:
   
 Lire et écrire dans un fichier
-==============================
+++++++++++++++++++++++++++++++
 
 Ouvrir et lire un fichier
-+++++++++++++++++++++++++
+-------------------------
 
 PHP embarque des fonctions très utiles pour ouvrir `fopen()`__, lire `fgetc()`__/`fgets()`__ et fermer `fclose()`__ un fichier.
 
@@ -409,7 +432,7 @@ Le protocole de lecture est en trois étapes :
 
 .. warning:: 
 
-  Lors de l'ouverture avec ``fopen()``, PHP bloque l'accès au fichier tant que la fonction ``fclose()`` n'est pas appellée.
+  Lors de l'ouverture avec ``fopen()``, PHP bloque l'accès au fichier aux autres tant qu'il n'est pas libéré par ``fclose()``.
 
 __ http://php.net/manual/fr/function.fopen.php
 __ http://php.net/manual/fr/function.fgetc.php
@@ -423,14 +446,16 @@ Exemple de lecture ligne par ligne :
 .. code-block:: php
 
   <?php
-   $fichier = fopen('fichier.txt', 'r');
-   if($fichier != NULL){
-    $ligne = fgets($fichier);
-    while($ligne){
-   ... // traitement de la ligne
-   $ligne = fgets($fichier);
-    }
-    fclose($fichier);
+   $fichier = fopen('fichier.txt', 'r'); // en lecture seule
+   if ($fichier != NULL)
+   {
+     $ligne = fgets($fichier);
+     while($ligne)
+     {
+       ... // traitement de la ligne
+       $ligne = fgets($fichier);
+     }
+     fclose($fichier);
    }
   ?>
 
@@ -441,7 +466,7 @@ Exemple de lecture ligne par ligne :
 __ http://php.net/manual/fr/function.fopen.php
   
 Ecrire dans un fichier
-++++++++++++++++++++++
+----------------------
 
 Pour écrire dans un fichier, il est utile de savoir modifier le curseur. Il indique la position courante de la lecture/écriture dans le fichier.
 
@@ -458,28 +483,29 @@ Exemple d'écriture au début du fichier :
 
   <?php
    $fichier = fopen('fichier.txt', 'r+');
-   if($fichier != NULL){
-    fseek($fichier, 0);
-  fputs($fichier, 'nouvelles données');
-    fclose($fichier);
+   if ($fichier != NULL)
+   {
+     fseek($fichier, 0);
+     fputs($fichier, 'nouvelles données');
+     fclose($fichier);
    }
   ?>
 
-Projet Fin :
-============
-
-On veut permettre de voter pour un film en autorisant le vote uniquement aux utilisateurs connectés du site. On considère que les votes sont binaires, on vote ou non pour un film.
-
-1. a. Ajoutez une table User à la base de données:
-  
-  Utilisateur (UserID, Login, Pass, Nom, Mail)
-
-Les types de données des colonnes sont : UserID int(11), Login varchar(20), Pass varchar(255), Nom varchar(35), Mail varchar(35). 
-
-  b. Implémentez un système de connection (une page Inscription, une page Connection)
-
-  c. Vous utiliserez les sessions pour stocker les informaations de connection
-
-2. Ajouter une table Vote (MovieID#, UserID#).
-
-3. Ajouter une page permettant à un utilisateur connecté de voter pour un film
+.. Projet Fin :
+   ============
+   
+   On veut permettre de voter pour un film en autorisant le vote uniquement aux utilisateurs connectés du site. On considère que les votes sont binaires, on vote ou non pour un film.
+   
+   1. a. Ajoutez une table User à la base de données:
+     
+     Utilisateur (UserID, Login, Pass, Nom, Mail)
+   
+   Les types de données des colonnes sont : UserID int(11), Login varchar(20), Pass varchar(255), Nom varchar(35), Mail varchar(35). 
+   
+     b. Implémentez un système de connection (une page Inscription, une page Connection)
+   
+     c. Vous utiliserez les sessions pour stocker les informaations de connection
+   
+   2. Ajouter une table Vote (MovieID#, UserID#).
+   
+   3. Ajouter une page permettant à un utilisateur connecté de voter pour un film

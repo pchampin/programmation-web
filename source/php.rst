@@ -8,7 +8,7 @@ Le PHP, c'est quoi ?
 ====================
 
 PHP: Hypertext Preprocessor
-++++++++++++++++++++++++++
++++++++++++++++++++++++++++
 
 .. figure:: _static/php/logo_php.png
    :height: 6ex
@@ -44,7 +44,6 @@ Comment ça marche ?
 
 Quel lien avec HTML/CSS ?
 ++++++++++++++++++++++++++
-- PHP permet de générer du HTML.
 - Le client (navigateur) est incapable de lire du code PHP, mais il sait afficher du code HTML et/ou CSS.
 
 - PHP est interprété côté serveur :
@@ -52,6 +51,9 @@ Quel lien avec HTML/CSS ?
   .. figure:: _static/php/client-serveur_PHP2.png
     :alt: client-serveur-php2
   
+- On va donc demander à PHP de générer du HTML.
+
+  - On peut aussi utiliser PHP pour générer autre chose : du CSS, du JSON... !
   
 Quel lien avec JavaScript ?
 ++++++++++++++++++++++++++++
@@ -59,7 +61,9 @@ Quel lien avec JavaScript ?
 JavaScript :
  
 - est un langage de script, tout comme PHP ;
+
 - permet de modifier dynamiquement le contenu HTML/CSS ;
+
 - **mais** s'éxécute **généralement** côté client et non côté serveur.
 
 .. figure:: _static/php/client-serveur_JS.png
@@ -69,15 +73,17 @@ JavaScript :
 Pourquoi utiliser PHP alors ?
 +++++++++++++++++++++++++++++
 
-Pour des raisons de :
-  * Performance: les données sont centralisées sur le serveur
-  * Sécurité: Certaines opérations doivent rester inaccessibles au client (mot de passe)
-  * Personnalisation: chaque utilisateur peut avoir une page différente (horloge)
+Pour des raisons :
+
+* Fonctionnelles : les données sont centralisées sur le serveur (ex. forum)
+* De sécurité : Certaines données doivent rester inaccessibles au client (mot de passe)
+* De personnalisation : chaque utilisateur peut avoir une page différente (horloge)
  
 Autres concurrents : 
-  * `ASP.NET`_
-  * `Ruby on Rails`_
-  * `JSP (Java EE)`_
+
+* `ASP.NET`_
+* `Ruby on Rails`_
+* `JSP (Java EE)`_
   
 .. _ASP.NET: http://www.asp.net/
 .. _Ruby on Rails: http://rubyonrails.org/
@@ -91,7 +97,10 @@ Les fichiers PHP
 ++++++++++++++++
 
 * Extension ".php"
-* Instructions entre les balises ``<?php`` et ``?>``.
+* Instructions entre les balises ``<?php`` et ``?>``
+
+  - Syntaxe courte pour l'affichage : ``<?=`` et ``?>``
+
 * Commentaires:
   
   - Multilignes ``/*`` ... ``*/``
@@ -100,10 +109,10 @@ Les fichiers PHP
 * Instructions terminées par ``;``
 * Insensible à la casse pour les noms de fonction MAIS pas pour les noms de variables.
 
-Exemple
-+++++++
+Exemple : générer du HTML
++++++++++++++++++++++++++
 
-.. code-block:: php
+.. code-block:: html+php
 
   <!DOCTYPE html>
   <html>
@@ -112,67 +121,116 @@ Exemple
     <title>Ma première page en PHP !</title>
     </head>
     <body>
-    <?php echo("Ce texte est écrit 
-          par du script PHP!"); ?>
+      <?php echo '<strong>Ce texte est écrit 
+                  par du script PHP !</strong>'; ?>
     </body>
   </html>
 
 
-L'instruction ``echo`` est une fonction PHP. Elle permet d'écrire la chaîne de caractères passée en paramètre dans le fichier HTML généré.
+L'instruction ``echo`` est un mot-clé PHP. Il permet d'écrire la chaîne de caractères qui suit dans la sortie (comparable à ``printf()`` en C).
 
-Exemple minimal 
-+++++++++++++++
+.. nextslide::
+
+L'équivalent avec la syntaxe courte :
+
+.. code-block:: html+php
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+    <meta charset="utf-8"/>
+    <title>Ma première page en PHP !</title>
+    </head>
+    <body>
+      <?= '<strong>Ce texte est écrit par du script PHP !</strong>' ?>
+    </body>
+  </html> 
+
+Autres types de sortie
+++++++++++++++++++++++
 
 Cet exemple est aussi un script PHP valide :
 
 .. code-block:: php
 
-    <?php echo("Ce texte est écrit par du script PHP!"); ?>
+    <?= 'Ce texte est écrit par du script PHP !' ?>
 
-Mais ce fichier ne générera en revanche pas un fichier HTML valide.
+Mais la sortie n'est plus du HTML (pas de DOCTYPE, aucune balise).
+C'est du texte brut (type MIME : ``text/plain``).
+
+Enfin, voyons comment générer du CSS (type MIME : ``text/css``) :
+
+.. code-block:: php
+
+    body {
+      background-color: <?= 'red' ?>;
+    }
+
+.. nextslide::
+
+Un tel exemple ne représente que peu d'intérêt, mais lorsque nous verrons comment dynamiser nos scripts cela deviendra intéressant !
 
 .. tip::
 
-   Nous verrons par la suite qu'il est possible d'intégrer un fichier PHP dans un autre, ce qui donne tout son intérêt à concevoir des fichiers PHP réduits, mais génériques.
+   Nous verrons par la suite qu'il est possible d'inclure un fichier PHP dans un autre, ce qui donne tout son intérêt à concevoir des fichiers PHP réduits, mais génériques.
   
 .. _exo_premierepagephp:
 
 Exercice (10 minutes)
 +++++++++++++++++++++
 
-#. Téléchargez le modèle minimal de `page HTML <_static/php/html5_minimal.html>`_.
+#. Téléchargez le modèle minimal de `page HTML <_static/php/html5_minimal.html>`__.
 
 #. Sauvegardez le fichier sous l'extension ".php"
 
 #. Ajoutez du code PHP entre balises ``<?php`` et ``?>`` pour afficher du texte dans la page
 
+   - Essayez également la syntaxe courte ``<?=`` et ``?>``
+
 #. Testez l'éxécution de votre script depuis un serveur (local ou en ligne)
 
 #. Comparez votre fichier avec la source reçue au niveau du client
 
-Voir le `résultat <_static/php/corrections/premierepagephp/>`_ attendu.
+Voir le `résultat 
+<_static/php/corrections/premierepagephp/>`__ attendu.
 
 * Comment rendre le résultat valide en HTML ?
 
 
-Un point sur l'UTF8
-===================
+Un point sur l'UTF-8
+======================
 
-Apache et UTF8
-++++++++++++++
+Apache et UTF-8
+++++++++++++++++
 
-Par défault, la configuration du serveur apache n'utilise pas UTF-8
+Il existe différente normes pour coder les accents dans les chaînes de caractère, **utf-8** est la plus récente mais les navigateurs utilisent par défaut latin1 qui est la norme historique pour les langues occidentales.
 
 .. tip::
-  Il est important de spécifier l'encodage lorsque l'on conçoit une application (caractère spéciaux et accentués) pour éviter les affichages du type Ã©
+  Si votre éditeur de texte sauvegarde vos fichiers en utf-8 mais que le navigateur de votre visiteur interprète cela comme du latin1, les accents seront mal affichés (Ã© à la place de é...).
 
-Pour spécifier à apache d'utiliser UTF-8, la première solution : 
+Plusieurs solutions pour spécifier l'encodage au navigateur, dans l'ordre de préférence :
 
-  * Les fichiers de config /etc/apache2/apache2.conf
+.. nextslide::
 
-On a pas toujours accès aux configurations
+* Configurer le serveur Web pour ajouter un en-tête HTTP. Pour apache, c'est dans /etc/apache2/apache2.conf
 
-  * les fichiers .htaccess
+  - Configuration globale : c'est dans /etc/apache2/apache2.conf
+
+    * On n'y a pas toujours accès (il faut être root)
+
+  - Configuration locale (juste votre site) : fichiers .htaccess (voir chapitre suivant)
+
+* Utiliser la fonction PHP ``header('Content-Type: text/html; charset=utf-8)``
+
+  - Cette fonction doit être appelée avant d'avoir fait la moindre sortie, sinon c'est trop tard (on ne peut pas ajouter un en-tête HTTP lorsque le transfert du contenu a déjà commencé).
+
+.. nextslide::
+
+* Utiliser la balise HTML ``<meta http-equiv="Content-Type" content="text/html; charset=utf=8" />`` dans la section ``<head></head>``
+
+  - pour en `savoir plus`__
+
+.. __: https://www.alsacreations.com/article/lire/628-balises-meta.html#httpequiv
 
 Les fichiers .htaccess
 ++++++++++++++++++++++
@@ -188,21 +246,23 @@ Permettent:
 * Sécurité (Public/Privé, ...)
 * Réécriture d'URL
 * Redirection
-* Gestion erreurs (404, 405,...)
+* Gestion erreurs (404, 403, ...)
+
+  - afficher une page personnalisée
 
 Structure .htaccess
 +++++++++++++++++++
 
 Ensemble de directives, similaire au fichier de config apache 
 
-.. code-block:: http
+.. code-block:: apache
 
   RewriteEngine on
   ErrorDocument 404 /erreur.html
 
 Dans notre cas, pour modifier l'encodage dans les en-tetes HTTP
 
-.. code-block:: http
+.. code-block:: apache
 
   AddDefaultCharset UTF-8 
 
@@ -220,13 +280,16 @@ Utilisation de la mémoire du serveur afin de stocker des informations durant l'
 
 * s'écrivent avec un identifiant précédé d'un ``$``, par exemple ``$ma_variable``,
 * ne se déclarent pas, c'est l'affectation qui détermine leur type :
+
+.. slide::
  
-   - booléen (``true``/``false``)
-   - nombre entier
-   - flottants (nombre à virgule)
-   - chaîne de caractères (entre ``"``)
-   - tableau
-   - ou même un objet (programmation orientée objet)
+  - booléen (``true``/``false``)
+  - nombre entier
+  - flottants (nombre à virgule)
+  - chaîne de caractères (entre quotes, ``'``)
+  - tableau
+  - ressource (handler de fichier, comme en C avec ``fopen()``)
+  - ou même un objet (programmation orientée objet)
    
 Exemple
 -------
@@ -234,25 +297,25 @@ Exemple
 .. code-block:: php
 
   <?php 
-   $age=21;
-   echo("Vous avez $age ans !"); 
+   $agei = 21;
+   echo "Vous avez $age ans !";
   ?>
   
-`Résultat <_static/php/test.php#affvariable>`_ HTML :
+`Résultat
+<_static/php/test.php#affvariable>`__ HTML :
   
 .. code-block:: html
     
-    Vous avez 21 ans !
+  Vous avez 21 ans !
   
 Les chaînes de caractères
 +++++++++++++++++++++++++
 
 Les chaînes de caractères :
 
-* écrites entre ``"`` ou entre ``'``
+* écrites entre ``'`` ou entre ``"``
 * concatenation avec ``.`` (attention ``+`` fait la somme)
 * peuvent interpreter la valeur d'une variable (si ``"`` est utilisé)
-
 
 NB: Beaucoup de fonctions existent pour la manipulation des strings (`PHP Manual for Strings`_)
 
@@ -261,7 +324,6 @@ NB: Beaucoup de fonctions existent pour la manipulation des strings (`PHP Manual
 Affichage de chaines
 --------------------
 
-
 La syntaxe de PHP permet de simplifier l'affichage de chaînes de caractères entre elles ou avec des variables.
 
 La syntaxe est différente suivant les délimiteurs utilisés :
@@ -269,11 +331,11 @@ La syntaxe est différente suivant les délimiteurs utilisés :
 .. code-block:: php
 
   <?php 
-   $mot1="phrase";
-   $mot2=8;
-   echo("Voici une $mot1 composée de $mot2 mots.\n");
-   echo('Voici une $mot1 composée de $mot2 mots.'."\n");
-   echo('Voici une '.$mot1.' composée de '.$mot2.' mots.'."\n");
+   $mot1 = 'phrase';
+   $mot2 = 8;
+   echo "Voici une $mot1 composée de $mot2 mots.\n";
+   echo 'Voici une $mot1 composée de $mot2 mots.'."\n";
+   echo 'Voici une '.$mot1.' composée de '.$mot2.' mots.'."\n";
   ?>
   
 .. nextslide::
@@ -284,7 +346,7 @@ La syntaxe est différente suivant les délimiteurs utilisés :
   Voici une $mot1 composée de $mot2 mots.
   Voici une phrase composée de 8 mots.
 
-NB: Le caractère ``\n`` correspond à un retour à la ligne. A ne pas confondre avec la balise ``<br />`` !
+NB : Le caractère ``\n`` correspond à un retour à la ligne en texte brut. A ne pas confondre avec la balise ``<br />`` qui est un retour à la ligne HTML !
 
 Les tableaux
 +++++++++++++
@@ -322,7 +384,9 @@ Affectation
 .. code-block:: php
 
   <?php
-   $prenoms = array ('François', 'Michel', 'Nicole', 'Véronique', 'Benoît');
+   $prenoms = array('François', 'Michel', 'Nicole', 'Véronique', 'Benoît');
+   // ou sa syntaxe courte (PHP 5.4+) :
+   $prenoms2 = ['François', 'Michel', 'Nicole', 'Véronique', 'Benoît'];
   ?>
 
 * Depuis les indices :
@@ -330,15 +394,15 @@ Affectation
 .. code-block:: php
 
   <?php
+   $prenoms = array(); // ou []
    $prenoms[0] = 'François';
    $prenoms[1] = 'Michel';
    $prenoms[2] = 'Nicole';
-   ...
   ?>
 
 .. nextslide::
 
-* Avec des indices implicites :
+* Avec des indices implicites (ajouter à la fin) :
 
 .. code-block:: php
 
@@ -359,12 +423,13 @@ Accès aux éléments
    $prenoms[0] = 'François';
    $prenoms[1] = 'Michel';
 
-   echo($prenom[1]."\n");
-   echo($prenom[0]."\n");
+   echo $prenom[1]."\n";
+   echo $prenom[0]."\n";
   ?>
 
 
-Voir le `résultat <_static/php/test.php#accestableau>`_ .
+Voir le `résultat 
+<_static/php/test.php#accestableau>`__ .
 
 Les tableaux associatifs
 ------------------------
@@ -405,7 +470,7 @@ Affectation
 .. code-block:: php
 
   <?php
-    $patronyme = array();
+    $patronyme = array(); // ou []
     $patronyme['prenom'] = 'François';
     $patronyme['nom'] = 'Dupont';
   ?>
@@ -422,7 +487,8 @@ Accès aux éléments
    echo $coordonnees['ville'];
   ?>
 
-Voir le `résultat <_static/php/test.php#accestableauassoc>`_ .
+Voir le `résultat 
+<_static/php/test.php#accestableauassoc>`__ .
   
 Conversion de type
 ++++++++++++++++++
@@ -440,28 +506,40 @@ Par exemple :
    echo $b;
   ?>  
   
-Voir le `résultat <_static/php/test.php#cast>`_ .
+Voir le `résultat 
+<_static/php/test.php#cast>`__ .
+
+.. tip::
+    Il est recommandé de privilégier aux casts les fonctions spécialisées comme `intval`__.
+.. __: http://php.net/manual/fr/function.intval.php
   
 Les structures de contrôle
 ==========================
 
 Les conditions
-++++++++++++++
++++++++++++++++++
 
 Elles permettent de définir des **conditions** lors de l'éxécution de votre script PHP :
 
-======= ==========================
+======= =========================================
 Symbole Signification
-======= ==========================
-  ==    Est égal à
+======= =========================================
+  ==    Est équivalent à
+  ===   Est strictement égal (type et valeur) à
+  !=    N'est pas équivalent à
+  !==   N'est pas strictement égal à
   >     Est supérieur à
   <     Est inférieur à
   >=    Est supérieur ou égal à
   <=    Est inférieur ou égal à
-  !=    Est différent de
-======= ==========================
+======= =========================================
 
-NB: Le ``==`` de la comparaison est à distinguer du symbole d'affectation ``=``.
+.. nextslide::
+
+.. warning::
+    ``0 == false`` est vrai mais ``0 === false`` est faux. Privilégier **===** et **!==**, sauf cas particuliers. Voir la fonction `strpos`__ pour comprendre...
+
+__ http://php.net/manual/fr/function.strpos.php
 
 Exemple : ``if ... else``
 -------------------------
@@ -471,19 +549,25 @@ Exemple : ``if ... else``
   
   <?php 
   $longueur_mdp = 6;
-  if ($longueur_mdp >= 8) { // SI
+  if ($longueur_mdp >= 8) // SI
     $save_mdp = true;
-  } elseif ($longueur_mdp >= 6){ //SINON SI
+  elseif ($longueur_mdp >= 6) // SINON SI
+  {
     $save_mdp = true;
     echo "Ce mot de passe n'est pas très sûr !\n";
-  } else { // SINON
+  }
+  else // SINON
+  {
     echo "Ce mot de passe est trop court !\n";
     $save_mdp = false;
   }
-  if($save_mdp){ echo "Mot de passe sauvegardé !"; }
+
+  if ($save_mdp)
+    echo "Mot de passe sauvegardé !";
   ?>
   
-Voir le `résultat <_static/php/test.php#mdp>`_ .
+Voir le `résultat 
+<_static/php/test.php#mdp>`__ .
 
 .. nextslide::
 
@@ -496,7 +580,12 @@ PHP tolère aussi l'écriture condensée (nommée opérateur ternaire) :
   ?>
 
 Comparée au ``if``, cette écriture permet de réduire le nombre de lignes de code, au détriment de sa lisibilité.
-   
+
+Elle est cependant pratique pour lutilisation des balises courtes :
+
+.. code-block:: php
+
+   <?= ($age >= 18) ? 'Accès autorisé' : 'Accès refusé' ?>
 
 Exemple : ``switch``
 --------------------
@@ -506,7 +595,8 @@ Exemple : ``switch``
   
   <?php couleur
     $couleur = "rouge";
-    switch ($couleur) {
+    switch ($couleur)
+    {
       case "bleu"  : $r=0;   $g=0;   $b=255; break;
       case "vert"  : $r=0;   $g=255; $b=0;   break;
       case "rouge" : $r=255; $g=0;   $b=0;   break;
@@ -515,7 +605,8 @@ Exemple : ``switch``
     echo "Valeurs RGB pour $couleur : ($r,$g,$b).";
   ?>
 
-Voir le `résultat <_static/php/test.php#switch>`_ .
+Voir le `résultat 
+<_static/php/test.php#switch>`__ .
   
 Les conditions multiples
 ++++++++++++++++++++++++
@@ -535,7 +626,8 @@ Exemple :
 .. code-block:: php
 
   <?php 
-    if($condition1 && (!$condition2 || $condition3)){
+    if($condition1 && (!$condition2 || $condition3))
+    {
       ...
     }
   ?>
@@ -564,13 +656,15 @@ Exemple :
   <?php
    $nombre_de_lignes = 1;
 
-   while ($nombre_de_lignes <= 10) {
-    echo 'Ceci est la ligne n°' . $nombre_de_lignes . "\n";
-    $nombre_de_lignes++;
+   while ($nombre_de_lignes <= 10)
+   {
+     echo 'Ceci est la ligne n°' . $nombre_de_lignes . "\n";
+     $nombre_de_lignes++;
    }
   ?>
   
-Voir le `résultat <_static/php/test.php#while>`_.
+Voir le `résultat 
+<_static/php/test.php#while>`__ .
 
 .. nextslide::  
 
@@ -589,46 +683,37 @@ Exemple :
 
   <?php
    for ($nb_lignes = 1; $nb_lignes <= 10; $nb_lignes++)
-   {
      echo 'Ceci est la ligne n°' . $nb_lignes . "\n";
-   }
   ?>
 
-Voir le `résultat <_static/php/test.php#for>`_ .
+Voir le `résultat 
+<_static/php/test.php#for>`__ .
 
 .. _boucle_foreach:
   
 La boucle ``foreach``
 ---------------------
 
-Elle permet de simplifier le parcours des tableaux, en permetant une écriture plus lisible et surtout plus générique que :
+Les tableaux ne **DOIVENT PAS** être parcourus à l'aide d'une boucle for indicée comme en C, pour la bonne raison que les éléments intermédiaires peuvent être supprimés et donc la contiguité des éléments n'est pas assurée.
 
-.. code-block:: php
+La bonne pratique est d'utiliser foreach.
 
-  <?php
-    $prenoms = array ('François', 'Michel', 'Nicole', 
-                        'Véronique', 'Benoît');
-    for ($numero = 0; $numero < 5; $numero++)
-      echo $prenoms[$numero] . "\n";
-    }
-  ?>
-
-Voir le `résultat <_static/php/test.php#pacrourstableau>`_ .
-  
 Pour les tableaux simples
 `````````````````````````
 
 .. code-block:: php
 
   <?php
-    $prenoms = array ('François', 'Michel', 'Nicole', 
-                        'Véronique', 'Benoît');
-    foreach($prenoms as $element) {
+    $prenoms = array('François', 'Michel', 'Nicole', 
+                     'Véronique', 'Benoît');
+    foreach ($prenoms as $element)
+    {
       echo $element . "\n";
     }
   ?>
 
-Voir le `résultat <_static/php/test.php#foreach>`_ .
+Voir le `résultat 
+<_static/php/test.php#foreach>`__ .
   
 Pour les tableaux clé-valeur
 ````````````````````````````
@@ -647,7 +732,8 @@ Pour les tableaux clé-valeur
     }
   ?>
 
-Voir le `résultat <_static/php/test.php#foreach2>`_.
+Voir le `résultat 
+<_static/php/test.php#foreach2>`__ .
 
 .. _exo_tableau:
 
@@ -658,7 +744,8 @@ Exercice
 #. Créez et initialisez un tableau clé-valeur dont les clés seront "prix_unitaire" et "quantite".
 #. Réalisez un affichage basique en parcourant votre tableau.
 
-Voir le `résultat <_static/php/corrections/tableau/>`_ attendu.
+Voir le `résultat 
+<_static/php/corrections/tableau/>`__ attendu.
 
 Les opérateurs
 ++++++++++++++
@@ -689,39 +776,37 @@ __ http://php.net/manual/fr/language.operators.arithmetic.php
 Opérateurs d'affectation
 ------------------------
 
-Il est possible de modifier une variable lors de son affectation :
+On peut modifier une variable "à la volée" :
 
-=============== =============== =======================================  
+=============== =============== =======================  
 Exemple         Nom             Résultat
-=============== =============== =======================================  
-$a=3            Affectation     $a vaut 3.
+=============== =============== =======================  
+$a = 3          Affectation     $a vaut 3.
 $a += 3         Addition        $a vaut $a + 3.
 $a -= 3         Soustraction    $a vaut $a - 3.
 $a \*= 3        Multiplication  $a vaut $a \* 3.
 $a /= 3         Division        $a vaut $a /3.
 $a %= 3         Modulo          $a vaut $a % 3.
-$a++            Incrémentation  $a vaut $a + 1. Equivalent à $a += 1.
-$a--            Décrémentation  $a vaut $a - 1. Equivalent à $a -= 1.
-$b .= "chaine"  Concaténation   $b vaut $b."chaine".
-=============== =============== =======================================  
+$a++            Incrémentation  Equivalent à $a += 1.
+$a--            Décrémentation  Equivalent à $a -= 1.
+$b .= 'chaine'  Concaténation   $b vaut $b.'chaine'.
+=============== =============== =======================  
 
-Opérateurs de comparaison
--------------------------
-
-Les `comparaisons`__ de variables sont facilités par des opérateurs spécifiques :
+Opérateurs de `comparaison`__
+-----------------------------
 
 ============== ================== =======================================================
 Exemple        Nom                Résultat
 ============== ================== =======================================================
-$a == $b       Egal               TRUE si $a est égal à $b
-$a === $b      Identique          TRUE si $a == $b et qu'ils sont de même type.
-$a != $b       Différent          TRUE si $a est différent de $b
-$a <> $b       Différent          TRUE si $a est différent de $b
+$a == $b       Équivalent         TRUE si $a est égal à $b
+$a===$b        Identique          TRUE si $a == $b, + même type.
+$a != $b       Non-équiv.         TRUE si $a est différent de $b
+$a <> $b       Non-équiv.         TRUE si $a est différent de $b
 $a !== $b      Différent          TRUE si $a != $b ou types différents.
-$a < $b        Plus petit que     TRUE si $a est strictement plus petit que $b.
-$a > $b        Plus grand         TRUE si $a est strictement plus grand que $b.
-$a <= $b       Inférieur ou égal  TRUE si $a est plus petit ou égal à $b.
-$a >= $b       Supérieur ou égal  TRUE si $a est plus grand ou égal à $b.
+$a < $b        Inférieur          TRUE si $a est inférieur strict à $b.
+$a > $b        Supérieur          TRUE si $a est supérieur strict à $b.
+$a <= $b       Inférieur ou égal  TRUE si $a est inférieur ou égal à $b.
+$a >= $b       Supérieur ou égal  TRUE si $a est supérieur ou égal à $b.
 ============== ================== =======================================================
   
 __ http://php.net/manual/fr/language.operators.comparison.php
@@ -737,15 +822,14 @@ La syntaxe PHP impose l'utilisation du mot-clé ``function`` :
 .. code-block:: php
 
   <?php
-    function MaFonction ($parametre1, $parametre2) {
+    function MaFonction ($parametre1, $parametre2)
+    {
       //corps de la fonction
       return $valeurRetournee;
     }
   ?>
-  
 
-Les fonctions peuvent ne rien retourner (pas d'instruction ``return``). Par défaut, c'est la valeur ``NULL`` qui est retournée.
-
+Les fonctions peuvent ne rien retourner (pas d'instruction ``return``, ou instruction explicite ``return;``). En fait, c'est la valeur ``NULL`` qui est retournée.
   
 Appeler une fonction
 ++++++++++++++++++++
@@ -753,7 +837,7 @@ Appeler une fonction
 .. code-block:: php
 
   <?php
-   MaFonction('1234', 5678);
+    MaFonction('1234', 5678);
   ?>
 
 .. note:: 
@@ -792,9 +876,9 @@ Intégrer des fichiers externes
 * PHP permet de définir des "briques de base" réutilisables
 * Il existe plusieurs fonctions d'intégration :
  
-  - ``include("page.php");`` qui permet d'intégrer le contenu de "page.php". Un message warning s'affiche si la ressource est manquante.
-  - ``require("page.php");`` qui fait la même chose mais une erreur fatale est retournée si la ressource est manquante (arrêt du script).
-  - ``include_once("page.php");`` et ``require_once("page.php");`` intègrent en plus un test pour empêcher une intégration multiple.
+  - ``include('page.php');`` qui permet d'intégrer le contenu de 'page.php'. Un message warning s'affiche si la ressource est manquante.
+  - ``require('page.php');`` qui fait la même chose mais une erreur fatale est retournée si la ressource est manquante (arrêt du script).
+  - ``include_once('page.php');`` et ``require_once('page.php');`` intègrent en plus un test pour empêcher une intégration multiple.
 
 Transmettre des données
 =======================
@@ -853,9 +937,7 @@ Les données du formulaire qui sont passées dans l'URL s'écrivent sous la form
 .. note::
 
   Le nom des paramètres correspond à la valeur de l'attribut ``@name`` définit dans chaque balise ``<input>``.
-  
   La valeur des paramètres correspond à la valeur de l'attribut ``@value`` s'il est définit, ou au texte saisi par l'utilisateur (dans un champ texte par exemple).
-  
   
 Reception des données
 +++++++++++++++++++++
@@ -867,13 +949,12 @@ Exemple (avec l'URL précédente) :
 .. code-block:: php
 
   <?php
-    $valeur = $_GET[’param1’]; // contient valeur1
+    $valeur = $_GET['param1']; // contient valeur1
   ?>
 
 .. warning::
   
-  Comme les paramètres et leurs valeurs sont intégrés dans l'URL, ils sont directement modifiables.
-  
+  Comme les paramètres et leurs valeurs sont intégrés dans l'URL, ils sont directement modifiables. 
   Il est donc très important de tester si les données reçues sont celles attendues (mauvais type, données manquantes ...).
   
 Transmettre des données dans une requête
@@ -897,14 +978,13 @@ Les valeurs transmises par la méthode Post sont stockées dans la variable ``$_
 
 .. warning::
   
-  Même si les paramètres et leurs valeurs sont transmises sans apparaître dans l'URL, il est tout de même possible d'envoyer des valeurs inattendues (par exemple, en modifiant une copie du code HTML du formulaire).
-  Il est d'autant plus important de contrôler les données reçues que les données envoyées en Post peuvent contenir des chaînes de caractères conséquentes (et pourquoi pas, du code HTML ou JavaScript !).
+  Même si les paramètres et leurs valeurs sont transmises "en caché", il est tout de même possible d'envoyer des valeurs inattendues (par exemple, en modifiant une copie du code HTML du formulaire, ou en faisant une requête HTTP manuellement via ``curl``). Il est donc tout aussi important de contrôler les données reçues.
 
 Contrôler la valeur des paramètres
 ++++++++++++++++++++++++++++++++++
 
 Lorsque des données transitent par l'URL, il faut s'assurer que les **valeurs correspondent au type attendu**.
-Dans le cas contraire, PHP permet de convertir les valeurs d'un type à un autre.
+Dans le cas contraire, il faut soit essayer de les convertir soit retourner une erreur.
 
 De plus, il est possible que certains paramètres attendus dans le code PHP soient absents de l'URL, dans ce cas
 il est possible de **tester leur présence** avec la fonction ``isset``.
@@ -916,11 +996,17 @@ Exemple :
 .. code-block:: php
 
   <?php
-  if (isset($_GET['param1']) AND isset($_GET['param2'])) {
-    $valeur1 = (int) $_GET['param1'];
-    $valeur2 = (int) $_GET['param2'];
+  // Traitement qui s'attend à recevoir deux paramètres entiers
+
+  if (isset($_GET['param1']) AND isset($_GET['param2']))
+  {
+    $valeur1 = intval($_GET['param1']);
+    $valeur2 = intval($_GET['param2']);
+
     ... // code à exécuter si tous les paramètres sont présents
-  } else {
+  }
+  else
+  {
     ...
     // code à exécuter par défaut
   }
@@ -929,21 +1015,29 @@ Exemple :
 Aller plus loin dans le contrôle des paramètres
 +++++++++++++++++++++++++++++++++++++++++++++++
 
-En plus de vérifier le type et la présence des paramètres, le traitement des chaînes de caractères doit comprendre une conversion pour **éviter que le texte puisse être interprété comme du code** HTML (ou JavaScript).
+En plus de vérifier le type et la présence des paramètres, le traitement des chaînes de caractères doit comprendre une conversion pour **éviter que le texte puisse être interprété comme du code** HTML (ou JavaScript). Voir `Faille XSS`__.
 
 Il existe des fonctions PHP conçues à cet effet : ``htmlspecialchars`` (`documentation`__) et ``htmlentities`` (`documentation`__). Elles permettent de convertir les caractères spéciaux en entités HTML. Exemple : 
 
+__ https://fr.wikipedia.org/wiki/Cross-site_scripting
 __ http://php.net/manual/fr/function.htmlspecialchars.php
 __ http://php.net/manual/fr/function.htmlentities.php
+
+.. nextslide::
 
 .. code-block:: php
   
   <?php
-  $value = ( isset($_POST['variable']) ) ?
-             htmlspecialchars($_POST['variable']) : "";
-  if((strlen($value) > 0) && (strlen($value) < 50)){
+  $value = isset($_POST['variable']) ?
+             htmlspecialchars($_POST['variable']) :
+             '';
+
+  if ((strlen($value) > 0) && (strlen($value) < 50))
+  {
     ... //
   }
+  else
+      echo 'Erreur...';
   ?>
 
 .. _exo_impots:
