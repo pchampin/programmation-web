@@ -15,7 +15,7 @@ Vous disposez d'un répertoire spécial dans votre répertoire personnel nommé 
 
 Toutes les pages Web qui s'y trouvent sont visibles à l'adresse :
 
-http://iutdoua-webetu.univ-lyon1.fr/~votrelogin
+http://iutdoua-web.univ-lyon1.fr/~votrelogin
 
 où ``votrelogin`` correspond à votre identifiant étudiant (pxxxxxxx).
 
@@ -25,14 +25,15 @@ Accéder à votre répertoire en FTP
 
 Si vous souhaitez modifier les fichiers présents dans votre espace personnel depuis l'extérieur, il est possible de se connecter au serveur de l'IUT en suivant le protocole FTP.
 
+Vous pouvez utiliser un outil comme `FileZilla`__ pour envoyer des fichiers en FTP.
+
 Les paramètres de connexion sont les suivants :
 
 * Hôte : iutdoua-samba.univ-lyon1.fr
 * Port : 990
 * Protocole : FTP - Protocole de Transfert de Fichiers
 * Chiffrement : Connexion FTP explicite sur TLS
-
-Vous pouvez utiliser un outil comme `FileZilla`__ pour envoyer des fichiers en FTP.
+* Mode d'auth. : Demander le mot de passe
 
 __ https://filezilla-project.org/
 
@@ -53,14 +54,13 @@ Les paramètres de connexion sont les suivants :
 
   Pensez à bien paramétrer un mot de passe différent pour vous connecter à vos BDD et à PhpMyAdmin.
 
-
 Utiliser un serveur local pour tester vos pages
 ===============================================
 
 Environnement de développement pour Apache, MySQL, PHP
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Il existe des logiciels permettant d'émuler le fonctionnement d'un serveur en local (i.e., sur votre machine).
+Il existe des packages regroupant les outils principaux nécessaires à la mise en place d'un serveur de développement.
 
 Suivant votre système d'exploitation :
 
@@ -87,4 +87,4 @@ http://localhost/
 
 PhpMyAdmin est accessible à l'adresse :
 
-http://localhost/phpmyadmin/
+http://localhost/phpMyAdmin/
