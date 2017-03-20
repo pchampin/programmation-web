@@ -122,7 +122,7 @@ qui propose une interface de gestion Web des BDD sous la forme de pages PHP perm
 Accéder à PhpMyAdmin
 ++++++++++++++++++++
 
-* Depuis le site Web de l'IUT  : http://iutdoua-webetu.univ-lyon1.fr/phpMyAdmin/
+* Depuis le site Web de l'IUT  : http://iutdoua-web.univ-lyon1.fr/phpMyAdmin/
    - login habituel : pxxxxxxx
    - mot de passe : code initial
    
@@ -141,7 +141,7 @@ L'objectif de cet exercice est de se familiariser avec l'interface PhpMyAdmin.
 
 Instructions :
 
-#. Créez une table nommée "films" avec les champs "id_film" (entier, clé primaire), "nom_film" (chaîne de caractères), "année_film" (entier) et "score" (nombre flottant).
+#. Créez une table nommée "films" avec les champs "id" (entier, clé primaire), "nom" (chaîne de caractères), "annee" (entier) et "score" (nombre flottant).
 #. Remplissez vos tables avec quelques données (5-10 films).
 
 Interroger une base de données
@@ -150,7 +150,7 @@ Interroger une base de données
 Se connecter à une base de donnnées
 +++++++++++++++++++++++++++++++++++
 
-Première étape nécessaire : connection
+Première étape nécessaire : connexion
 
 Connexion : processus d'authentification qui permet de s'assurer que seuls les utilisateurs autorisés peuvent accéder aux données et/ou les modifier
 
@@ -167,11 +167,11 @@ Type de connexion
 PHP propose plusieurs fonctionnalités intégrées pour se connecter à une base de données via un SGBD.
 Les évolutions successives de PHP explique l'existance de 3 exentions :
 
-* ``mysql_`` : API MySQL originele => Dépréciée depuis PHP 5.5
+* ``mysql_`` : API MySQL originelle => Dépréciée depuis PHP 5.5
 * ``mysqli_`` : API MySQL améliorée (**i** pour improved)
 * ``PDO`` : PHP Data Objects - API bdd abstraite
 
-``PDO`` constitue la concrétisation d'un effort d'unification entre les différents SGBD:
+``PDO`` constitue la concrétisation d'un effort d'unification entre les différents SGBD :
 
  * Générique (différents SGBD => même code)
  * Optimisée pour l'orienté objet
@@ -179,22 +179,21 @@ Les évolutions successives de PHP explique l'existance de 3 exentions :
 Se connecter en PHP
 -------------------
 
-Fonction de connexion :
-
 .. code-block:: php
 
   <?php
    function connectDb(){
-	$host="localhost"; // ou sql.hebergeur.com
-	$user="root";      // ou login
-	$password="";      // ou xxxxxx
-	$dbname="nom_bdd";
+	$host = 'localhost'; // ou sql.hebergeur.com
+	$user = 'root';      // ou login
+	$pwd = '';      // ou xxxxxx
+	$db= 'nom_bdd';
     try {
-	 $bdd=new PDO('mysql:host='.$host.';dbname='.$dbname.
-	              ';charset=utf8',$user,$password);
+	 $bdd = new PDO('mysql:host='.$host.';dbname='.$db.
+	                ';charset=utf8', $user, $pwd,
+                    array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 	 return $bdd;
 	} catch (Exception $e) {
-	 die('Erreur : '.$e->getMessage());
+	 exit('Erreur : '.$e->getMessage());
     }
    }
   ?>
@@ -245,12 +244,12 @@ Un exemple d'une requête de lecture complète pourrait être :
 .. code-block:: sql
 
   SELECT champ1, champ2, champ3
-  FROM table 
+  FROM ma_table
   WHERE champ1='valeur'
   AND champ2 < 20
   OR champ 3 > 0
   ORDER BY champ2 DESC, champ3 ASC
-  LIMIT 0,5
+  LIMIT 0, 5
 
 .. tip::
 
@@ -262,7 +261,7 @@ Un exemple d'une requête de lecture complète pourrait être :
 * Il est possible de sélectionner les champs de plusieurs tables. Dans ce cas, il faut écrire ``table.champ`` après le ``SELECT`` (pas obligatoire si les noms des champs diffèrent).
 * ``WHERE`` indique le début des conditions qu'il est possible de combiner avec les opérateurs ``AND`` et ``OR`` en plus des parenthèses.
 * Le tri peut se faire sur plusieurs champs, par ordre d'apparition après ``ORDER BY``. C'est l'ordre alphabétique qui s'applique sur un champs texte. 
-* La limite du nombre d'enregistrement s'écrit : ``LIMIT indice_debut, indice_fin`` ; il y aura donc ``indice_fin - indice_debut`` enregistrements sélectionnés. Si un seul indice est précisé, la requête renverra ce nombre d'enregistrements à partir du premier (**dans l'ordre définie par le tri**). 
+* La limite du nombre d'enregistrement s'écrit : ``LIMIT nb, start`` ; il y aura donc ``nb`` enregistrements sélectionnés à partir de ``start``. Si l'on omet ``start``, la requête retournera ``nb`` enregistrements à partir du premier (**dans l'ordre défini par le tri**). 
 
 Requête d'écriture
 ------------------
@@ -273,21 +272,29 @@ Exemple d'**insertion** :
 
 .. code-block:: sql
 
-  INSERT INTO table(champ1,champ2, champ3)
-  VALUES (valeur1, valeur2, valeur3)
+  INSERT INTO ma_table(champ1, champ2, champ3)
+  VALUES(valeur1, valeur2, valeur3)
+
+Ou :
+
+.. code-block:: sql
+
+  INSERT INTO ma_table
+  VALUES(valeur1, valeur2, valeur3)
+  -- Dans ce cas, toutes les colonnes doivent être
+  -- spécifiées et l'ordre doit être respecté.
+
+.. nextslide::
  
 .. warning::
 
   Les SGBD sont très sécurisés au niveau des requêtes d'insertion. Aussi, la requête se traduira systématiquement par
   un échec dans le cas d'oubli d'un des champs ou de types de paramètres incompatibles.
-  
-  Toutes les vérifications devront êtres faites côté PHP avant génération de la requête SQL.
  
 .. note::
 
   Si un champ de la table à été déclaré comme une clé primaire (identifiant) avec la propriété ``auto_increment``,
   il n'est pas nécessaire de faire apparaître ce champ ni sa valeur dans une requête d'insertion.
- 
  
 .. nextslide::
 
@@ -295,7 +302,7 @@ Exemple de **modification** :
 
 .. code-block:: sql
 
-  UPDATE table SET champ2 = valeur2, champ3 = valeur3 
+  UPDATE ma_table SET champ2 = valeur2, champ3 = valeur3 
   WHERE champ1 = valeur1
   
 .. warning:: 
@@ -314,7 +321,7 @@ Exemple de **suppression** :
 
 .. code-block:: sql
 
-  DELETE FROM table WHERE champ1=valeur1
+  DELETE FROM ma_table WHERE champ1 = valeur1
 
 .. warning::
 
@@ -361,7 +368,8 @@ Exemple générique
    $bdd = connectDb(); //connexion à la BDD
    $query = $bdd->prepare('...'); // requête SQL
    $query->execute(...); // paramètres et exécution
-   while($data = $query->fetch()) { // lecture par ligne
+   while ($data = $query->fetch()) // lecture par ligne
+   {
       ... // traitement de l'enregistrement
    } // fin des données
    
@@ -375,17 +383,16 @@ Quelques remarques :
 * Dans la requête, si on veut injecter des paramètres, il faut le spécifier par le caractère anonyme ``?`` ou un identifiant précédé par ``:``.
 * La fonction ``execute()`` exécute la requête avec les paramètres fournis sous la forme d'un tableau simple (paramètres anonymes) ou associatif (paramètres identifés). Il n'est pas nécessaire de préciser de paramètres si la requête SQL n'en comporte pas.
 * La fonction ``fetch()`` retourne un tableau associatif dont les clés correspondent aux champs sélectionnés par la requête.
-* La lecture s'arrête lorsque l'affectation de l'enregistrement échoue : il n'y a plus de données à lire.
+* Lorsqu'il n'y a plus d'entrées, l'affectation dans le ``while`` retourne faux : on sort de la boucle.
 * La fonction ``closeCursor()`` permet de libérer la ressource lorqu'on a fini les traitements sur les données retournées par le SGBD.
-
 
 .. nextslide::
 
 .. warning::
   
   Une faille connue nommée "injection SQL" peut être exploitée lorsque l'on utilise des données entrées par l'utilisateur dans des requêtes SQL.
-  Afin d'éviter que d'autres requêtes soient injectées dans les variables via PHP, il faut TOUJOURS utiliser les fonctions ``prepare()`` et ``execute()``. 
 
+  Pour s'en prémunir, il **ne faut pas** injecter les paramètres à la main avec des concaténations. À la place on les passera **TOUJOURS** via les fonctions ``prepare()`` et ``execute()``. 
 
 Requête sans paramètres
 -----------------------
@@ -395,7 +402,7 @@ Requête sans paramètres
   
   <?php
    ...
-   $query=$bdd->prepare('SELECT * from table');
+   $query = $bdd->prepare('SELECT * FROM ma_table');
    $query->execute();
    ...
   ?>
@@ -404,7 +411,7 @@ Requête sans paramètres
 
   Pour gagner du temps, il est aussi possible d'utiliser la fonction ``exec()`` qui prend en paramètre une requête, et s'applique sur l'objet BDD :
   
-  ``$query=$bdd->exec('...');``.
+  ``$query = $bdd->exec('...');``.
 
   Attention : n'utilisez la fonction ``exec()`` que si la requête ne comporte pas de paramètres (pas de variables PHP) pour éviter la faille d'injection SQL.
 
@@ -417,29 +424,29 @@ Requête avec paramètres anonymes
   
   <?php
    ...
-   $query=$bdd->prepare('SELECT champ1, champ2 
-                         FROM table
-	                 WHERE champ1 = ?  
-	                 AND champ3 <= ? 
-	                 ORDER BY champ2');
+   $query = $bdd->prepare('SELECT champ1, champ2 
+                           FROM ma_table
+	                   WHERE champ1 = ?  
+	                   AND champ3 <= ? 
+	                   ORDER BY champ2');
    $query->execute(array($valeur1, $valeur2));
    ...
   ?>
 
 
-Requête avec paramètres identifiés
-----------------------------------
+Requête avec paramètres nommés
+------------------------------
   
 .. code-block:: php
   :linenos:
   
   <?php
    ...
-   $query=$bdd->prepare('SELECT champ1, champ2 
-                         FROM table
-	                 WHERE champ1 = :valeur1  
-	                 AND champ3 <= :valeur2 
-	                 ORDER BY champ2');
+   $query = $bdd->prepare('SELECT champ1, champ2 
+                           FROM table
+	                   WHERE champ1 = :valeur1  
+	                   AND champ3 <= :valeur2 
+	                   ORDER BY champ2');
    $query->execute(array('valeur1' => $valeur1,
                          'valeur2' => $valeur2));
    ...
@@ -470,7 +477,8 @@ Trois actions sont possibles pour l'écriture : insertion, modification ou suppr
 Exemple générique
 -----------------
 
-Avec paramètres :
+Avec ou sans paramètres :
+
 
 .. code-block:: php
   :linenos:
@@ -483,7 +491,7 @@ Avec paramètres :
 
 .. nextslide::
   
-Sans paramètres :
+Raccourci (sans paramètres uniquement) :
 
 .. code-block:: php
   :linenos:
@@ -497,7 +505,6 @@ Sans paramètres :
 
   Pour effectuer chacune des opérations (ajout, modification, suppression), il suffit de choisir la bonne requête (``INSERT INTO, UPDATE SET, DELETE FROM``);
 
-  
 .. _exo_ecriture:
   
 Exercice
@@ -519,10 +526,10 @@ Un des intérêts majeurs des BDD est de pouvoir lier des données entre-elles a
 L'utilisation d'identifiants uniques (**clés primaires**) pour chaque enregistrement, permet leur réutilisation dans d'autres tables.
 On les appelle alors des **clés secondaires** (ou **clés étrangères**).
 
-Exemple, table "Films":
+Exemple, table "films":
 
 ============ =========== =========== =========== 
-ID_FILM      TITRE_FILM  ANNEE_FILM      ...
+id           titre       annee        ...
 ============ =========== =========== =========== 
   1          Titanic      1997        ...
   2          Star Wars    1977        ...
@@ -532,25 +539,25 @@ ID_FILM      TITRE_FILM  ANNEE_FILM      ...
 
 .. nextslide::
 
-Exemple, table "Acteurs":
+Exemple, table "acteurs":
 
 ============ =========== =============== =========== 
-ID_ACTEUR    NOM_ACTEUR  PRENOM_ACTEUR      ...
+id           nom         prenom          ...
 ============ =========== =============== =========== 
-  1          Di Caprio    Leonardo        ...
-  2          Winslet      Kate            ...
-  3          Gibson       Mel             ...
-  ...        ...          ...             ...
+  1          Di Caprio   Leonardo        ...
+  2          Winslet     Kate            ...
+  3          Gibson      Mel             ...
+  ...        ...         ...             ...
 ============ =========== =============== =========== 
 
-Les champs ``ID_FILM`` et ``ID_ACTEUR`` sont les clés primaires de leurs tables respectives.
+Les champs ``film.id`` et ``acteur.id`` sont les clés primaires de leurs tables respectives.
 
 .. nextslide::
 
 Exemple de table de jointure, table "Casting" :
 
 ============ ===========
-ID_FILM      ID_ACTEUR 
+film_id      acteur_id 
 ============ ===========
   1           1  
   1           2    
@@ -558,10 +565,9 @@ ID_FILM      ID_ACTEUR
   ...         ...         
 ============ ===========
 
-Ici, les champs ``ID_FILM`` et ``ID_ACTEUR`` deviennent clés étrangères et permettent de lier les tables "Acteurs" et "Films".
+Ici, les champs ``film_id`` et ``acteur_id`` deviennent clés étrangères et permettent de lier les tables "acteurs" et "films".
 
 Pour pouvoir accéder aux données présentes dans des tables jointes de la sorte, il faut utiliser les **requêtes de jointure**.
-
 
 Aller plus loin avec les requêtes SQL
 -------------------------------------
@@ -575,14 +581,14 @@ Deux écritures sont possibles après la clause ``FORM`` :
 .. code-block:: sql
 
 	SELECT * 
-	FROM table AS alias
+	FROM ma_table AS alias
  
 Ou 
 
 .. code-block:: sql
 
 	SELECT * 
-	FROM table t
+	FROM ma_table t
  
 .. note::
 
@@ -601,29 +607,32 @@ Exemple :
   SELECT * 
   FROM table1
   INNER JOIN table2
-  ON table1.ID_CHAMP1 = table2.ID_CHAMP2
+      ON table1.id_champ1 = table2.id_champ2
 
-  
 .. tip::
 
-  On peut bien sûr imbriquer plusieurs jointures lorsque plus de deux tables sont liées.
-  Pour cela, il suffit de préciser les conditions de jointures les unes après les autres (``INNER JOIN ... ON ... INNER JOIN ... ON``).
+  On peut imbriquer plusieurs jointures lorsque plus de deux tables sont liées.
+  Pour cela, on précise les conditions de jointures les unes après les autres (``INNER JOIN ... ON ... INNER JOIN ... ON``).
 
 .. _exo_jointure:
   
-Projet 1: Site de films
-=======================
+Projet v1 : Site de films
+=========================
 
-Consignes interface:
-++++++++++++++++++++
+Consignes interface :
++++++++++++++++++++++
 
 * Interface se rapprochant de la présentation ci-dessous (vous pouvez utiliser d'autres couleurs et formatages !)
 * Visualisation des films, acteurs, formulaire ajout de film
-* Uniquement du PHP, HTML et CSS
+* Uniquement du PHP (**indenté !!**), HTML et CSS
 * pas de framework, ni de moteur de templates
 * passer le valideur HTML5 et CSS3 sans erreur
 * placer les fichiers dans le répertoire public_html/PHP/projet1 du login hébergeant le projet
-* envoyer un zip du répertoire projet1 par mail à l’enseignant en mettant le binôme en CC
+* envoyer un **zip** ou **tar.gz** du répertoire projet1 par mail à l’enseignant en mettant le binôme en CC
+
+  * pas de rar !
+
+.. nextslide::
 
 .. figure:: _static/projet/interface.png
     :alt: interface-projet
