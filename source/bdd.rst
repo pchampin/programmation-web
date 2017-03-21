@@ -186,7 +186,7 @@ Se connecter en PHP
 	$host = 'localhost'; // ou sql.hebergeur.com
 	$user = 'root';      // ou login
 	$pwd = '';      // ou xxxxxx
-	$db= 'nom_bdd';
+	$db = 'nom_bdd';
     try {
 	 $bdd = new PDO('mysql:host='.$host.';dbname='.$db.
 	                ';charset=utf8', $user, $pwd,
