@@ -31,9 +31,11 @@ Redirection
 
 Les codes de statut HTTP **301** et **302** permettent de faire une redirection, respectivement permanente ou temporaire. L'URL vers laquelle rediriger se trouve dans l'en-tête HTTP ``Location``.
 
-.. note::
+.. tip::
 
   Essayez : ``curl -v http://www.google.com``
+
+.. nextslide::
 
 Nous avons vu que PHP permettait de redéfinir ou d'ajouter des en-têtes à la réponse HTTP.
 
@@ -41,12 +43,12 @@ Nous avons vu que PHP permettait de redéfinir ou d'ajouter des en-têtes à la 
 
   <?php
    // Il ne doit y avoir aucune sortie avant ces lignes
-   http_response_code(302); // temporaire ; ou 301 pour permanente
+   http_response_code(302); // temporaire ; ou 301 = permanente
    header('Location: urlDeRedirection.php?parametres');
    exit();
   ?>
 
-.. tip::
+.. note::
   
   Il est possible de rediriger vers une page via une URL relative ou une URL externe. On peut même faire une redirection vers la même page mais avec des paramètres différents !
 
@@ -149,8 +151,6 @@ Il est possible, dans les formulaires HTML, de définir un champ de type fichier
 
 Le formulaire devra simplement comporter l'attribut d'encodage indiquant l'envoi de fichier(s).
 
-Exemple :
-
 .. code-block:: html
 
   <form action="traitement.php" method="post"
@@ -175,10 +175,8 @@ Les fichiers envoyés depuis un formulaires sont stockées dans une variable dif
 
 Les fichiers sont stockés sous la forme d'un tableau à deux dimensions. L'accès fichier par fichier se fait en utilisant la valeur de l'attribut ``name`` définit dans le formulaire.
 
-Exemple : 
-
 ================================= ==================================================
-Variable Signification             Signification
+Variable                          Signification
 ================================= ==================================================
  $_FILES['fichier']['name']        Nom du fichier envoyé
  $_FILES['fichier']['type']        Type du fichier (ex: image/png)
@@ -190,7 +188,7 @@ Variable Signification             Signification
 Vérifier le fichier reçu
 ------------------------
 
-Généralement, côté serveur, le type de fichier attendu ainsi que sa taille limite sont établis à priori.
+Généralement, côté serveur, le type de fichier attendu ainsi que sa taille limite sont connus à priori.
 Exemple de script PHP permettant d'effectuer toutes ces vérifications :
 
 .. code-block:: php
@@ -198,23 +196,26 @@ Exemple de script PHP permettant d'effectuer toutes ces vérifications :
   <?php
    if (isset($_FILES['fichier']) &&
        $_FILES['fichier']['error'] == 0 &&
-
-       // à vérifier côté serveur, puisque le <input type="hidden" /> est modifiable par le client 
-       // (il ne sert qu'à la pré-validation par le navigateur)
-       $_FILES['fichier']['size'] <= 1048576)
+       $_FILES['fichier']['size'] <= 1 * 1024 * 1024)
    {
      $infosfichier = pathinfo($_FILES['fichier']['name']);
      $ext_upload = $infosfichier['extension'];
-     $ext_autorisees = array('jpg', 'jpeg', 'gif', 'png');
-     if (in_array($ext_upload, $ext_autorisees))
+     if (in_array($ext_upload, array('jpg', 'gif', 'png')))
      {
        move_uploaded_file(
          $_FILES['fichier']['tmp_name'],
-         'destination/' . basename($_FILES['fichier']['name'])
+         'uploads/'.basename($_FILES['fichier']['name'])
        );
      }
    }
   ?>
+
+.. nextslide::
+
+.. warning::
+
+  La taille du fichier est à vérifier côté serveur, puisque le ``<input type="hidden" />`` est modifiable par le client 
+  (il ne sert qu'à la pré-validation par le navigateur)
 
 .. note::
 
@@ -319,6 +320,8 @@ Contrairement aux cookies, les variables de session sont stockées côté serveu
 .. note::
     L'identifiant est stocké en cookie, il est donc accessible à l'utilisateur. Cependant, il est aléatoire et suffisemment grand pour être considéré indevinable par un éventuel imposteur. Attention cependant à ne pas se le faire voler (ordinateur non verrouillé, réseau Wi-Fi non crypté comme McDo ou Eduspot)...
 
+.. nextslide::
+
 Fonctionnement des sessions :
 
 #. Création d'une session.
@@ -341,22 +344,19 @@ Les variables de session s'instancient comme des champs du tableau associatif ``
   <?php
     session_start();
     ...
-    $_SESSION['champ1'] = 'Valeur1';
-    $_SESSION['champ2'] = valeur2;
+    $_SESSION['champ1'] = 'chaine';
+    $_SESSION['champ2'] = 42;
   ?>
   
 .. warning::
 
-  La fonction ``session_start()``  doit être appellée sur chacune des pages avant toute écriture de code HTML.
+  ``session_start()``  doit être appellée avant toute sortie.
   
 Utilisation des variables de session
 ------------------------------------
 
 Toutes les variables de session qui ont prélablement été intitialisées dans des pages consultées par le client sont accessibles sur les autres pages.
 Il suffit de faire appel à la fonction de démarrage de la session.
-
-Exemple :
-
 
 .. code-block:: php
 
@@ -375,7 +375,7 @@ Fermeture d'une session
 
 La variable ``$_SESSION`` est automatiquement détruite après un délai d'expiration, ou à la fermeture du client.
 
-Dans certains cas, il est nécessaire de fermer la session depuis le code (c'est le cas par exemple d'un bouton "Déconnexion" pour des pages à accès restreints).
+Dans certains cas, il est nécessaire de fermer la session depuis le code (c'est le cas par exemple d'un bouton "Déconnexion" pour des pages à accès restreint).
 
 La fermeture de la session s'effectue comme suit :
 
@@ -405,6 +405,8 @@ Parmi les variables superglobales, on retrouve :
 * ``$_ENV`` : variables d'environnement du serveur
 * ``$_SESSION`` : variables de session
 * ``$_COOKIE`` : valeurs des cookies enregistrés sur le client
+
+.. nextslide::
 
 .. note::
 
@@ -477,6 +479,8 @@ La fonction ``fseek()`` ne fonctionne qu'avec le mode d'écriture 'r+' ou 'w'. D
 __ http://php.net/manual/fr/function.fseek.php
 __ http://php.net/manual/fr/function.fputs.php
 
+.. nextslide::
+
 Exemple d'écriture au début du fichier :
 
 .. code-block:: php
@@ -491,21 +495,73 @@ Exemple d'écriture au début du fichier :
    }
   ?>
 
-.. Projet Fin :
-   ============
+Bonnes pratiques
+================
+
+Guard Clauses
++++++++++++++
+
+.. code-block:: php
+
+  <?php
+    // Peu lisible...
+    function check($input)
+    {
+      if (condition1($input))
+      {
+        if (condition2($input))
+          return calcul($input);
+        else
+          return 2;
+      }
+      else
+        return 1;
+    }
+  ?>
+
+.. nextslide::
+
+.. code-block:: php
+
+  <?php
+    // Plus lisible !
+    function check($input)
+    {
+      if (!condition1($input))
+        return 1;
+      if (!condition2($input))
+        return 2;
+      return calcul($input);
+    }
+  ?>
+
+`En savoir plus`__
+
+... (`et si la valeur de retour est la même`__) ...
+
+__ https://refactoring.com/catalog/replaceNestedConditionalWithGuardClauses.html
+__ https://refactoring.com/catalog/consolidateConditionalExpression.html
+
+Projet
+======
+
+v2.0
+++++
    
-   On veut permettre de voter pour un film en autorisant le vote uniquement aux utilisateurs connectés du site. On considère que les votes sont binaires, on vote ou non pour un film.
+On veut permettre aux utilisateurs loggés de voter pour un film.
    
-   1. a. Ajoutez une table User à la base de données:
-     
-     Utilisateur (UserID, Login, Pass, Nom, Mail)
-   
-   Les types de données des colonnes sont : UserID int(11), Login varchar(20), Pass varchar(255), Nom varchar(35), Mail varchar(35). 
-   
-     b. Implémentez un système de connection (une page Inscription, une page Connection)
-   
-     c. Vous utiliserez les sessions pour stocker les informaations de connection
-   
-   2. Ajouter une table Vote (MovieID#, UserID#).
-   
-   3. Ajouter une page permettant à un utilisateur connecté de voter pour un film
+1. Ajoutez une table User à la base de données:
+  
+   * user (id, login, pwd, email).
+
+   * Implémentez un système de connexion (une page Inscription, une page Connexion)
+
+   * Vous utiliserez les sessions pour stocker les informations de connexion
+
+2. Ajouter une table Vote (table d'association : movie_id, user_id).
+
+   * Ajouter une page permettant à un utilisateur loggé de voter pour un film
+
+   * Ajouter le nombre de votes dans le détail d'un film
+
+#. Bonus : hash du mot de passe, vérif syntaxe e-mail...
