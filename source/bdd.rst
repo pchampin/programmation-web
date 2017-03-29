@@ -616,11 +616,11 @@ Exemple :
 
 .. _exo_jointure:
   
-Projet v1 : Site de films
-=========================
+Projet : site de films
+======================
 
-Consignes interface :
-+++++++++++++++++++++
+v1.0
+++++
 
 * Interface se rapprochant de la présentation ci-dessous (vous pouvez utiliser d'autres couleurs et formatages !)
 * Visualisation des films, acteurs, formulaire ajout de film
