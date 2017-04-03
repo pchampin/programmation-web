@@ -14,10 +14,10 @@ Programmation Web
    intro
    php
    bdd
+   advanced
    obj
    mvc
    patterns
-   advanced
    frameworks
 
 .. toctree::
@@ -28,10 +28,11 @@ Programmation Web
 
 .. rubric:: Remerciements
 
-Ce support a été préparé par `Michael Mrissa`_ et `Pierre De Vettor`_, très largement inspiré des supports d'Isabelle Gonçalves, de `Maxime Guériau`_ et de `Pierre-Antoine Champin`_ .
+Ce support a été préparé par `Léo Le Taro`_, forké des supports de `Michael Mrissa`_ et `Pierre De Vettor`_, eux mêmes très largement inspirés des supports d'Isabelle Gonçalves, de `Maxime Guériau`_ et de `Pierre-Antoine Champin`_ .
 
-.. include:: credits.rst.inc
+.. .. include:: credits.rst.inc
 
+.. _Léo Le Taro: https://www.leo-letaro.fr
 .. _Maxime Guériau: http://liris.cnrs.fr/~mgueriau/
 .. _Pierre De Vettor: http://liris.cnrs.fr/~pdevetto/
 .. _Michael Mrissa: http://liris.cnrs.fr/~mmrissa/

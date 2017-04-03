@@ -8,7 +8,7 @@ Organisation du cours
 ======================
 
 Plan des séances
-++++++++++++++++
++++++++++++++++++++++
 
 .. rst-class:: small
 
@@ -18,19 +18,19 @@ Plan des séances
   
   * Séance 3 et 4 : 4h
     
-    * Bases de données / Object / Projet v1
+    * Bases de données / PHP Avancé Projet v1
 
   * Séance 5 et 6: 4h
 
-    * Design pattern 1 (MVC, MVVM, etc...)
+    * Objet
   
   * Séance 7 et 8 : 4h
     
-    * Design patterns 2 (Autres designs patterns)
-  
+    * Design pattern 1 (MVC, MVVM, etc...)
+
   * Séance 9 et 10 : 4h
     
-    * PHP Avancé (Sessions, ...) / Sécurité (injection SQL, XSS)
+    * Design patterns 2 (Autres designs patterns, Dependency Injection)
   
   * Séance 11 et 12 : 4h
     
@@ -165,7 +165,7 @@ Les Verbes HTTP
 
 .. rst-class:: small
   
-  NB: Une application qui respecte cette sémantique est appellée RESTful 
+  NB : Une application qui respecte cette sémantique est appellée RESTful 
 
   * http://mbaron.developpez.com/soa/rest/
   * http://ruben.verborgh.org/blog/2012/09/27/the-object-resource-impedance-mismatch/
@@ -175,7 +175,7 @@ Exemple d'une requête
 
 .. code-block:: http
 
-  GET http://www.univ-lyon1.fr HTTP/1.1
+  GET / HTTP/1.1
   User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64) 
   			Gecko/20100101 Firefox/40.0
   Accept: text/html
@@ -222,13 +222,13 @@ Construction de réponse
 
   [PROTOCOLE] [CODE] [SIGNIFICATION] 
   /* En-tetes */
-  [TYPE1]:[VALEUR1]
-  [TYPE2]:[VALEUR2]
+  [ENTETE1]: [VALEUR1]
+  [ENTETE2]: [VALEUR2]
   ...
   /*Ligne vide*/
 
-  /* Corps de la requête */
-  [BODY]
+  /* Contenu de la requête */
+  [CONTENU]
 
 Exemple de réponse
 ++++++++++++++++++
@@ -236,23 +236,35 @@ Exemple de réponse
 .. code-block:: http
 
   HTTP/1.1 200 OK 
-  Content-Type:text/html
-  Content-Length:1245 
-  Last-Modified:Tue, 04 Aug 2015 10:25:13 GMT
+  Content-Type: text/html
+  Content-Length: 1245 
+  Last-Modified: Tue, 04 Aug 2015 10:25:13 GMT
 
-  <html><body> Corps du document ...
+  <html><body> Corps du document ... </body><html>
 
-Exercice
-++++++++++++++++++
+Navigateur : outils de développement
+++++++++++++++++++++++++++++++++++++
 
 Il est possible de voir le détail des requêtes dans le navigateur
 
-#. Ouvrez une page web
-#. Ouvrez l'interface développeur "Network" de votre navigateur
-  
+* Ouvrez une page web
+
+* Ouvrez l'interface développeur "Network" de votre navigateur
+
   * Firefox : Ctrl + Maj + Q
+
   * Chrome : Ctrl + Maj + I
+
   * IE: Outils > Outils de développement
+
   * Safari : Ctrl + Alt + I
 
-#. Actualisez la page (F5) et observez les différentes requêtes effectuées par le navigateur
+* Actualisez la page (F5) et observez les différentes requêtes effectuées par le navigateur
+
+.. nextslide::
+
+* Ouvrez un terminal
+
+* Tapez :code:`curl -v http://teaching.leo-letaro.fr`
+
+  * Comment ajouter des en-têtes à la requête ?
